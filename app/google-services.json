@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "540292382616",
+    "project_id": "covid-map-7d597",
+    "storage_bucket": "covid-map-7d597.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:540292382616:android:1e155def4e4d6f2241f5ed",
+        "android_client_info": {
+          "package_name": "com.marlonncarvalhosa.covidmap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "540292382616-at7e9bs2320n6ui820og0gvrdbl2vv4m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.marlonncarvalhosa.covidmap",
+            "certificate_hash": "d2215ef8cdd32029b0f9c90b48e2d2092ddca1cd"
+          }
+        },
+        {
+          "client_id": "540292382616-p6l1t1qo2uqegvsh8qnodg2jngj169q9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYBYsrgM3nvKWXmCGwG4hejvUuaIvwvAs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "540292382616-p6l1t1qo2uqegvsh8qnodg2jngj169q9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
