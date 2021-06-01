@@ -13,29 +13,45 @@
         android:layout_height="match_parent"
         tools:context=".views.MapsActivity" />
 
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/btn_profile"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_margin="8dp"
-        android:backgroundTint="@color/white"
-        android:src="@drawable/ic_circle_person_pin_24"
+    <TextView
+        android:id="@+id/tv_teste"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        map:layout_constraintTop_toTopOf="parent"
+        map:layout_constraintStart_toStartOf="parent"
+        android:textSize="30sp"
         map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintTop_toTopOf="parent"  />
+        map:layout_constraintBottom_toBottomOf="parent"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/btn_add_case"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_margin="8dp"
-        android:backgroundTint="@color/white"
-        android:scaleType="center"
-        android:src="@drawable/ic_sick_black_24dp"
-        map:fabSize="normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        map:fab_labelStyle="@style/LabelStyle"
+        map:fab_labelsPosition="left"
+        map:fab_addButtonColorNormal="@color/teal_700"
         map:layout_constraintBottom_toBottomOf="parent"
-        map:layout_constraintEnd_toEndOf="parent"
-        map:maxImageSize="28dp"
-        tools:ignore="ContentDescription" />
+        map:layout_constraintEnd_toEndOf="parent">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fb_quiz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            map:fab_colorNormal="#fff"
+            map:fab_icon="@drawable/ic_inventory_black_24dp"
+            map:fab_size="normal"
+            map:fab_title="Questionário" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fb_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            map:fab_colorNormal="#fff"
+            map:fab_icon="@drawable/ic_person_black_24dp"
+            map:fab_labelStyle="@style/LabelStyle"
+            map:fab_size="mini"
+            map:fab_title="Perfil"/>
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
