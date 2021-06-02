@@ -2,7 +2,9 @@ package com.marlonncarvalhosa.covidmap
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
@@ -11,21 +13,33 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.TileOverlayOptions
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.maps.android.heatmaps.Gradient
+import com.google.maps.android.heatmaps.HeatmapTileProvider
+import com.google.maps.android.heatmaps.WeightedLatLng
 import com.marlonncarvalhosa.covidmap.databinding.ActivityMapsBinding
+import com.marlonncarvalhosa.covidmap.utils.Db
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_maps.*
+import kotlin.random.Random
 
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
+    private var TAG = "MAPSACTIVITY"
     private lateinit var firebaseAuth: FirebaseAuth
     private val LOCATION_PERMISSION_REQUEST = 1
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
@@ -33,13 +47,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding: ActivityMapsBinding
     private lateinit var locationRequest: LocationRequest
     private lateinit var locationCallback: LocationCallback
-    private var user = FirebaseAuth.getInstance().currentUser
+    private var googleSignClient: GoogleSignInClient? = null
+    private var dataMap = ArrayList<WeightedLatLng>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        getSignInGoogle()
         firebaseAuth = FirebaseAuth.getInstance()
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -48,42 +63,105 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
-        authenticator()
+
+        fb_profile.setOnClickListener {
+            openProfile()
+        }
+
+        fb_quiz.setOnClickListener {
+            openQuiz()
+        }
 
     }
 
-    private fun authenticator() {
-        fb_profile.setOnClickListener {
-            user = FirebaseAuth.getInstance().currentUser
+   private fun openProfile() {
+        if (FirebaseAuth.getInstance().currentUser != null) {
+            val builder = AlertDialog.Builder(this)
+            val view = View.inflate(this, R.layout.dialog_profile, null)
+            val messageView = view.findViewById<TextView>(R.id.tv_name_profile)
+            val civ_profile = view.findViewById<CircleImageView>(R.id.civ_profile)
 
-            if (firebaseAuth.currentUser != null) {
-                val builder = AlertDialog.Builder(this)
-                val view = View.inflate(this, R.layout.dialog_profile, null)
-                val messageView = view.findViewById<TextView>(R.id.tv_name_profile)
-                val civ_profile = view.findViewById<CircleImageView>(R.id.civ_profile)
 
-                builder.setView(view)
-                Picasso.get().load(user?.photoUrl).fit().centerCrop()
-                    .placeholder(R.drawable.ic_account_circle_black_24dp__1_).into(civ_profile)
-                messageView.text = user?.displayName.toString()
+            builder.setView(view)
 
-                val dialog = builder.create()
-                dialog.show()
-                dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
-                view.findViewById<ImageButton>(R.id.iv_close_dialog)
-                    .setOnClickListener { dialog.dismiss() }
-            } else {
-                val dialog = DialogLogin()
-                dialog.show(supportFragmentManager, "DialogLogin")
+            val dialog = builder.create()
+
+            dialog.show()
+            dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+            val nome = FirebaseAuth.getInstance().currentUser?.displayName
+            val photo = FirebaseAuth.getInstance().currentUser?.photoUrl
+
+            messageView.text = nome
+            Picasso.get().load(photo).fit().centerCrop()
+                .placeholder(R.drawable.ic_account_circle_black_24dp__1_).into(civ_profile)
+
+            view.findViewById<ImageButton>(R.id.iv_close_dialog).setOnClickListener {
+                dialog.dismiss()
             }
+            view.findViewById<ImageButton>(R.id.iv_exit_app).setOnClickListener {
+                messageView.text = R.string.nome_do_usuario.toString()
+                Picasso.get().load(R.drawable.ic_account_circle_black_24dp__1_).fit().centerCrop().into(civ_profile)
+
+                signOutGoogle()
+                dialog.dismiss()
+            }
+        } else {
+            authenticator()
         }
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray
-    ) {
+    private fun openQuiz() {
+        if (firebaseAuth.currentUser != null) {
+            val fb = Db()
+
+
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                return
+            }
+            fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
+                if (location != null) {
+                    val arr: Array<Double> = arrayOf(200.0, 150.0, 100.0, 50.0)
+                    val nextValues = Random.nextInt(1, 4)
+                    fb.postLocation(arr[nextValues],location.latitude.toString(),location.longitude.toString())
+                }
+            }
+
+
+        } else {
+            authenticator()
+        }
+    }
+
+    fun getSignInGoogle() {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        googleSignClient = GoogleSignIn.getClient(this, gso)
+    }
+
+    private fun signOutGoogle() {
+        googleSignClient?.signOut()?.addOnCompleteListener(this, OnCompleteListener<Void?> {
+            FirebaseAuth.getInstance().signOut()
+            Toast.makeText(this, "Sign Out realizado!", Toast.LENGTH_SHORT).show()
+        })
+    }
+
+    private fun authenticator() {
+        val dialog = DialogLogin()
+        dialog.show(supportFragmentManager, "DialogLogin")
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == LOCATION_PERMISSION_REQUEST) {
             if (grantResults.contains(PackageManager.PERMISSION_GRANTED)) {
@@ -116,9 +194,64 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
-        mMap.uiSettings.isMyLocationButtonEnabled = true
-        getLocationAccess()
+
+        val db = FirebaseFirestore.getInstance()
+
+        db.collection("locations")
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+
+                    val lat = document.data["lat"].toString().toDouble()
+                    val lon = document.data["lon"].toString().toDouble()
+                    val density = document.data["intensity"].toString().toDouble()
+
+                    // optional: remove edge cases like 0 population density values
+                    if (density != 0.0) {
+                        val weightedLatLng = WeightedLatLng(LatLng(lat, lon), density)
+                        dataMap.add(weightedLatLng)
+                    }
+                    Log.d(TAG, "${document.id} => ${document.data["id_user"]}")
+                }
+
+                mMap = googleMap
+                mMap.setMaxZoomPreference(15f)
+                mMap.uiSettings.isMyLocationButtonEnabled = true
+
+                Log.d(TAG, "${dataMap.toArray()}")
+
+                if(dataMap.isEmpty()) {
+                    getLocationAccess()
+                } else {
+                    val colors = intArrayOf(
+                        Color.GREEN,  // green(0-50)
+                        Color.YELLOW,  // yellow(51-100)
+                        Color.rgb(255, 165, 0),  //Orange(101-150)
+                        Color.RED,  //red(151-200)
+                    )
+
+                    val startPoints = floatArrayOf(
+                        0.25f, 0.5f, 0.75f, 1.0f
+                    )
+
+                    val gradient = Gradient(colors, startPoints)
+
+                    val heatMapProvider = HeatmapTileProvider.Builder()
+                        .weightedData(dataMap) // load our weighted data
+                        .radius(50) // optional, in pixels, can be anything between 20 and 50
+                        .gradient(gradient)
+                        .build()
+
+                    mMap.addTileOverlay(TileOverlayOptions().tileProvider(heatMapProvider))
+
+                    getLocationAccess()
+                }
+
+            }
+            .addOnFailureListener { exception ->
+                Log.w(TAG, "Error getting documents: ", exception)
+            }
+
     }
 
     private fun getLocationAccess() {
@@ -171,5 +304,33 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             locationCallback,
             null
         )
+    }
+
+    private fun generateHeatMapData() {
+        val db = FirebaseFirestore.getInstance()
+
+        db.collection("locations")
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+
+                    val lat = document.data["lat"].toString().toDouble()
+                    val lon = document.data["lon"].toString().toDouble()
+                    val density = document.data["intensity"].toString().toDouble()
+
+                    // optional: remove edge cases like 0 population density values
+                    if (density != 0.0) {
+                        val weightedLatLng = WeightedLatLng(LatLng(lat, lon), density)
+                        dataMap.add(weightedLatLng)
+                    }
+                    Log.d(TAG, "${document.id} => ${document.data["id_user"]}")
+                }
+                return@addOnSuccessListener
+            }
+            .addOnFailureListener { exception ->
+                Log.w(TAG, "Error getting documents: ", exception)
+                return@addOnFailureListener
+            }
+
     }
 }
