@@ -16,9 +16,10 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 
-class DialogLogin: DialogFragment() {
+@Suppress("DEPRECATION")
+class DialogLogin : DialogFragment() {
 
-    var googleSignClient : GoogleSignInClient? = null
+    var googleSignClient: GoogleSignInClient? = null
     val RC_SIGN_IN = 1000
 
     override fun onCreateView(
@@ -27,15 +28,12 @@ class DialogLogin: DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val rootView: View = inflater.inflate(R.layout.dialog_login, container, false)
-
-        //Codigos
-
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
 
-        googleSignClient = GoogleSignIn.getClient(rootView.context,gso)
+        googleSignClient = GoogleSignIn.getClient(rootView.context, gso)
 
         val signInIntent = googleSignClient?.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
@@ -43,7 +41,7 @@ class DialogLogin: DialogFragment() {
         return rootView
     }
 
-    fun firebaseAuthWithGoogle(acct : GoogleSignInAccount?) {
+    fun firebaseAuthWithGoogle(acct: GoogleSignInAccount?) {
         val credencial = GoogleAuthProvider.getCredential(acct?.idToken, null)
         FirebaseAuth.getInstance().signInWithCredential(credencial).addOnCompleteListener { task ->
             if (task.isSuccessful) {
@@ -58,7 +56,7 @@ class DialogLogin: DialogFragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(requestCode == RC_SIGN_IN){
+        if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 val account = task.getResult(ApiException::class.java)
@@ -68,5 +66,4 @@ class DialogLogin: DialogFragment() {
             }
         }
     }
-
 }

@@ -1,36 +1,28 @@
 package com.marlonncarvalhosa.covidmap
 
 import android.Manifest
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.widget.LinearLayout
+import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
 import com.marlonncarvalhosa.covidmap.databinding.ActivityMapsBinding
 import com.squareup.picasso.Picasso
+import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_maps.*
-import kotlinx.android.synthetic.main.activity_profile_sheet_dialog.*
+
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -45,11 +37,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        firebaseAuth = FirebaseAuth.getInstance()
-
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        firebaseAuth = FirebaseAuth.getInstance()
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
@@ -57,46 +48,34 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
-        sheetDialog()
+        authenticator()
 
     }
 
-    private fun sheetDialog(){
+    private fun authenticator() {
         fb_profile.setOnClickListener {
-
             user = FirebaseAuth.getInstance().currentUser
 
-            if(firebaseAuth.currentUser != null) {
+            if (firebaseAuth.currentUser != null) {
+                val builder = AlertDialog.Builder(this)
+                val view = View.inflate(this, R.layout.dialog_profile, null)
+                val messageView = view.findViewById<TextView>(R.id.tv_name_profile)
+                val civ_profile = view.findViewById<CircleImageView>(R.id.civ_profile)
 
-                user = FirebaseAuth.getInstance().getCurrentUser();
+                builder.setView(view)
+                Picasso.get().load(user?.photoUrl).fit().centerCrop()
+                    .placeholder(R.drawable.ic_account_circle_black_24dp__1_).into(civ_profile)
+                messageView.text = user?.displayName.toString()
 
-                val bottomSheetDialog = BottomSheetDialog(this, R.style.BottomSheetDialogTheme);
-                val bottomSheetView = LayoutInflater.from(applicationContext).inflate(R.layout.activity_profile_sheet_dialog,
-                    findViewById<ConstraintLayout>(R.id.bottomSheetContainer)
-                )
-
-                Log.d("USER", user?.photoUrl.toString())
-                Log.d("USER", user?.displayName.toString())
-                Log.d("USER", user?.email.toString())
-                Log.d("USER", user?.uid.toString())
-
-                var teste = user?.displayName
-                tv_teste.text = teste
-                //Toast.makeText(this, teste, Toast.LENGTH_LONG).show()
-
-                //Picasso.get().load(firebaseAuth.currentUser!!.photoUrl).fit().centerCrop().into(civ_profile_pic)
-
-//                sign_in_button.setOnClickListener {
-//                    bottomSheetDialog.dismiss()
-//                }
-
-                bottomSheetDialog.setContentView(bottomSheetView)
-                bottomSheetDialog.show()
+                val dialog = builder.create()
+                dialog.show()
+                dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+                view.findViewById<ImageButton>(R.id.iv_close_dialog)
+                    .setOnClickListener { dialog.dismiss() }
             } else {
                 val dialog = DialogLogin()
                 dialog.show(supportFragmentManager, "DialogLogin")
             }
-
         }
     }
 
@@ -125,7 +104,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLong, 15f))
                     }
                 }
-
             } else {
                 Toast.makeText(
                     this,

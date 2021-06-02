@@ -13,23 +13,13 @@
         android:layout_height="match_parent"
         tools:context=".views.MapsActivity" />
 
-    <TextView
-        android:id="@+id/tv_teste"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        map:layout_constraintTop_toTopOf="parent"
-        map:layout_constraintStart_toStartOf="parent"
-        android:textSize="30sp"
-        map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintBottom_toBottomOf="parent"/>
-
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/btn_add_case"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        map:fab_addButtonColorNormal="@color/teal_700"
         map:fab_labelStyle="@style/LabelStyle"
         map:fab_labelsPosition="left"
-        map:fab_addButtonColorNormal="@color/teal_700"
         map:layout_constraintBottom_toBottomOf="parent"
         map:layout_constraintEnd_toEndOf="parent">
 
@@ -50,7 +40,7 @@
             map:fab_icon="@drawable/ic_person_black_24dp"
             map:fab_labelStyle="@style/LabelStyle"
             map:fab_size="mini"
-            map:fab_title="Perfil"/>
+            map:fab_title="Perfil" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
