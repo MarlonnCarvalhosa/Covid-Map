@@ -119,7 +119,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         if (firebaseAuth.currentUser != null) {
             val fb = Db()
 
-
             if (ActivityCompat.checkSelfPermission(
                     this,
                     Manifest.permission.ACCESS_FINE_LOCATION
@@ -141,8 +140,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     )
                 }
             }
-
-
         } else {
             authenticator()
         }
@@ -258,12 +255,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
                     getLocationAccess()
                 }
-
             }
             .addOnFailureListener { exception ->
                 Log.w(TAG, "Error getting documents: ", exception)
             }
-
     }
 
     private fun getLocationAccess() {
