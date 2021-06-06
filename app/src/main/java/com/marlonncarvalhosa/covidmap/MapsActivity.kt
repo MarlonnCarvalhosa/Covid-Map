@@ -72,15 +72,18 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             openQuiz()
         }
 
+        ib_my_location.setOnClickListener {
+            getLocationAccess()
+        }
+
     }
 
-   private fun openProfile() {
+    private fun openProfile() {
         if (FirebaseAuth.getInstance().currentUser != null) {
             val builder = AlertDialog.Builder(this)
             val view = View.inflate(this, R.layout.dialog_profile, null)
             val messageView = view.findViewById<TextView>(R.id.tv_name_profile)
             val civ_profile = view.findViewById<CircleImageView>(R.id.civ_profile)
-
 
             builder.setView(view)
 
@@ -101,7 +104,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
             view.findViewById<ImageButton>(R.id.iv_exit_app).setOnClickListener {
                 messageView.text = R.string.nome_do_usuario.toString()
-                Picasso.get().load(R.drawable.ic_account_circle_black_24dp__1_).fit().centerCrop().into(civ_profile)
+                Picasso.get().load(R.drawable.ic_account_circle_black_24dp__1_).fit().centerCrop()
+                    .into(civ_profile)
 
                 signOutGoogle()
                 dialog.dismiss()
@@ -130,7 +134,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 if (location != null) {
                     val arr: Array<Double> = arrayOf(200.0, 150.0, 100.0, 50.0)
                     val nextValues = Random.nextInt(1, 4)
-                    fb.postLocation(arr[nextValues],location.latitude.toString(),location.longitude.toString())
+                    fb.postLocation(
+                        arr[nextValues],
+                        location.latitude.toString(),
+                        location.longitude.toString()
+                    )
                 }
             }
 
@@ -161,7 +169,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         dialog.show(supportFragmentManager, "DialogLogin")
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == LOCATION_PERMISSION_REQUEST) {
             if (grantResults.contains(PackageManager.PERMISSION_GRANTED)) {
@@ -216,11 +228,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
                 mMap = googleMap
                 mMap.setMaxZoomPreference(15f)
-                mMap.uiSettings.isMyLocationButtonEnabled = true
+                mMap.uiSettings.isMyLocationButtonEnabled = false
 
                 Log.d(TAG, "${dataMap.toArray()}")
 
-                if(dataMap.isEmpty()) {
+                if (dataMap.isEmpty()) {
                     getLocationAccess()
                 } else {
                     val colors = intArrayOf(

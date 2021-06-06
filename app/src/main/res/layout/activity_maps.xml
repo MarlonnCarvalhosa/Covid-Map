@@ -44,4 +44,14 @@
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
+    <ImageButton
+        android:id="@+id/ib_my_location"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:backgroundTint="@color/whiteTransparent"
+        android:layout_margin="8dp"
+        android:src="@drawable/ic_baseline_my_location_24"
+        map:layout_constraintEnd_toEndOf="parent"
+        map:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
