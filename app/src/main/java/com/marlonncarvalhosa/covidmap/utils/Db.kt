@@ -73,22 +73,4 @@ class Db {
                 return@addOnFailureListener
             }
     }
-
-    fun updateMap(idList: String, nomeDaLista: String, mercado: String) {
-        val item = hashMapOf<String, Any>()
-        item["nomeDaLista"] = nomeDaLista
-        item["nomeDoMercado"] = mercado
-
-        db.collection(mAuth?.uid.toString())
-            .document(idList)
-            .update(item)
-            .addOnSuccessListener {
-                Log.d("UPDATE_FIREBASE_LISTA", "OnSuccess Update:")
-                return@addOnSuccessListener
-            }
-            .addOnFailureListener {
-                    e -> Log.w("UPDATE_FIREBASE_LISTA", "OnFailure Update: ", e)
-                return@addOnFailureListener
-            }
-    }
 }

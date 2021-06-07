@@ -74,6 +74,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         ib_my_location.setOnClickListener {
             getLocationAccess()
+            onMapReady(mMap)
         }
 
     }
@@ -311,33 +312,5 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             locationCallback,
             null
         )
-    }
-
-    private fun generateHeatMapData() {
-        val db = FirebaseFirestore.getInstance()
-
-        db.collection("locations")
-            .get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
-
-                    val lat = document.data["lat"].toString().toDouble()
-                    val lon = document.data["lon"].toString().toDouble()
-                    val density = document.data["intensity"].toString().toDouble()
-
-                    // optional: remove edge cases like 0 population density values
-                    if (density != 0.0) {
-                        val weightedLatLng = WeightedLatLng(LatLng(lat, lon), density)
-                        dataMap.add(weightedLatLng)
-                    }
-                    Log.d(TAG, "${document.id} => ${document.data["id_user"]}")
-                }
-                return@addOnSuccessListener
-            }
-            .addOnFailureListener { exception ->
-                Log.w(TAG, "Error getting documents: ", exception)
-                return@addOnFailureListener
-            }
-
     }
 }
