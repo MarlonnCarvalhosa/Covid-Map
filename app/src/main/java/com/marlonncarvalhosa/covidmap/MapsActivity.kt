@@ -36,7 +36,6 @@ import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_maps.*
 import kotlin.random.Random
 
-
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private var TAG = "MAPSACTIVITY"
@@ -76,7 +75,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             getLocationAccess()
             onMapReady(mMap)
         }
-
     }
 
     private fun openProfile() {
@@ -239,7 +237,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         Color.rgb(255, 165, 0),  //Orange(101-150)
                         Color.RED,  //red(151-200)
                     )
-
                     val startPoints = floatArrayOf(
                         0.25f, 0.5f, 0.75f, 1.0f
                     )
