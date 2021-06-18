@@ -25,7 +25,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Orientações sobre o COVID-19 Coronavírus"
+                android:text="@string/orienta_es_sobre_o_covid_19_coronav_rus"
                 android:textColor="#3A833D"
                 android:textSize="17sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -58,7 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:text="Como está a sua saúde neste momento?"
+                android:text="@string/como_est_a_sua_sa_de_neste_momento"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -73,11 +73,10 @@
         android:id="@+id/cv_transferir"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
         android:backgroundTint="@color/gray"
         app:cardCornerRadius="8dp"
+        android:layout_margin="16dp"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintDimensionRatio="3"
         app:layout_constraintEnd_toStartOf="@id/cv_recarga"
         app:layout_constraintStart_toStartOf="parent"
@@ -89,11 +88,13 @@
 
             <ImageView
                 android:id="@+id/iv_transferir"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:src="@drawable/ic_baseline_mood_24"
+                app:layout_constraintDimensionRatio="0.6"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintEnd_toStartOf="@id/tv_transferir"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/tv_transferir"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -101,8 +102,9 @@
                 android:id="@+id/tv_transferir"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Bem"
+                android:text="@string/bem"
                 android:textColor="@color/green"
+                android:textSize="19sp"
                 app:layout_constraintBottom_toBottomOf="@+id/iv_transferir"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/iv_transferir"
@@ -116,10 +118,9 @@
         android:id="@+id/cv_recarga"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="16dp"
         android:backgroundTint="@color/gray"
         app:cardCornerRadius="8dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="@id/cv_transferir"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cv_transferir"
@@ -131,11 +132,13 @@
 
             <ImageView
                 android:id="@+id/iv_recarga"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintHorizontal_chainStyle="packed"
                 android:src="@drawable/ic_baseline_mood_bad_24"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/tv_recarga"
+                app:layout_constraintDimensionRatio="0.6"
+                app:layout_constraintEnd_toStartOf="@id/tv_recarga"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -143,11 +146,12 @@
                 android:id="@+id/tv_recarga"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mal"
+                android:text="@string/mal"
                 android:textColor="@color/red"
-                app:layout_constraintStart_toEndOf="@+id/iv_recarga"
+                android:textSize="19sp"
                 app:layout_constraintBottom_toBottomOf="@+id/iv_recarga"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iv_recarga"
                 app:layout_constraintTop_toTopOf="@+id/iv_recarga" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

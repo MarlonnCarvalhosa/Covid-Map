@@ -4,4 +4,8 @@
     <string name="nome_do_usuario">Nome do usuário</string>
     <string name="historico">Histórico</string>
     <string name="map_id">22e2e7206aecac52</string>
+    <string name="orienta_es_sobre_o_covid_19_coronav_rus">Orientações sobre o COVID-19 Coronavírus</string>
+    <string name="como_est_a_sua_sa_de_neste_momento">Como está a sua saúde neste momento?</string>
+    <string name="bem">Bem</string>
+    <string name="mal">Mal</string>
 </resources>

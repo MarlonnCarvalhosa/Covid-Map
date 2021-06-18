@@ -50,6 +50,7 @@ class DialogLogin : DialogFragment() {
                 dialog?.dismiss()
             } else {
                 Toast.makeText(context, "Algo de errado no login", Toast.LENGTH_LONG).show()
+                dialog?.dismiss()
             }
         }
     }

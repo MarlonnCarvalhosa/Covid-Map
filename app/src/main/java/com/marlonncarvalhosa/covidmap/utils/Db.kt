@@ -23,7 +23,6 @@ class Db {
         sintomas.add("Dor de cabeça")
         sintomas.add("Sem sintomas")
 
-
         quiz["timestamp"] = Timestamp.now()
         //Pergunta se estar bem ou não
         quiz["question1"] = true
@@ -43,8 +42,8 @@ class Db {
                 createAwser(quiz, it.id)
                 return@addOnSuccessListener
             }
-            .addOnFailureListener {
-                    e -> Log.w("CREATE_LOCATIONQUIZ", "OnFailure Create: ", e)
+            .addOnFailureListener { e ->
+                Log.w("CREATE_LOCATIONQUIZ", "OnFailure Create: ", e)
                 return@addOnFailureListener
             }
     }
