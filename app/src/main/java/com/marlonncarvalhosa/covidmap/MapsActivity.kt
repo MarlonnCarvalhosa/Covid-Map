@@ -13,7 +13,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
+import com.getbase.floatingactionbutton.FloatingActionButton
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -31,6 +33,7 @@ import com.google.maps.android.heatmaps.Gradient
 import com.google.maps.android.heatmaps.HeatmapTileProvider
 import com.google.maps.android.heatmaps.WeightedLatLng
 import com.marlonncarvalhosa.covidmap.databinding.ActivityMapsBinding
+import com.marlonncarvalhosa.covidmap.dialog.DialogLogin
 import com.marlonncarvalhosa.covidmap.utils.Db
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
@@ -72,6 +75,17 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             openQuiz()
         }
 
+        val fab = findViewById<FloatingActionButton>(R.id.fb_stats)
+        fab.setOnClickListener {
+            val intent = Intent(this, BrasilStatusCovidActivity::class.java)
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                this, fab, fab.transitionName)
+
+            startActivity(intent, options.toBundle())
+        }
+
+
+
         ib_my_location.setOnClickListener {
             getLocationAccess()
             onMapReady(mMap)
@@ -89,6 +103,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
             val dialog = builder.create()
 
+            dialog.window?.attributes?.windowAnimations = R.style.SlidingDialogAnimation
             dialog.show()
             dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
@@ -110,10 +125,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 signOutGoogle()
                 dialog.dismiss()
             }
-            civ_profile.setOnClickListener {
-                val intent = Intent(this, BrasilStatusCovidActivity::class.java)
-                startActivity(intent)
-            }
+
         } else {
             authenticator()
         }

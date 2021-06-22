@@ -1,4 +1,4 @@
-package com.marlonncarvalhosa.covidmap
+package com.marlonncarvalhosa.covidmap.dialog
 
 import android.content.Intent
 import android.os.Bundle
@@ -15,6 +15,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.marlonncarvalhosa.covidmap.R
 
 @Suppress("DEPRECATION")
 class DialogLogin : DialogFragment() {
