@@ -1,6 +1,7 @@
 package com.marlonncarvalhosa.covidmap
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
@@ -108,6 +109,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
                 signOutGoogle()
                 dialog.dismiss()
+            }
+            civ_profile.setOnClickListener {
+                val intent = Intent(this, BrasilStatusCovidActivity::class.java)
+                startActivity(intent)
             }
         } else {
             authenticator()

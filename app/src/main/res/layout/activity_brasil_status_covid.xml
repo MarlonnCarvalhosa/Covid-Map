@@ -4,17 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".BrasilStatusCovidActivity">
 
     <org.eazegraph.lib.charts.PieChart
         android:id="@+id/piechart"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:padding="8dp"
-        app:egLegendHeight="0dp"
-        app:egLegendTextSize="0sp"
+        app:egUseInnerPadding="true"
+        app:egAnimationTime="3000"
+        app:egLegendTextSize="20sp"
         app:egUsePieRotation="true"
-        app:egValueTextSize="0sp" />
+        app:egValueTextSize="20sp" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cv_confirmados"
