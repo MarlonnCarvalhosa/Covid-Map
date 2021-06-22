@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:padding="8dp"
+        app:egHighlightStrength="2"
         app:egUseInnerPadding="true"
         app:egAnimationTime="3000"
         app:egLegendTextSize="20sp"
