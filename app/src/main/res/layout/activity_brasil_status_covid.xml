@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:transitionName="shared_element_to_compose"
-    tools:context=".BrasilStatusCovidActivity">
+    tools:context=".view.BrasilStatusCovidActivity">
 
     <org.eazegraph.lib.charts.PieChart
         android:id="@+id/piechart"

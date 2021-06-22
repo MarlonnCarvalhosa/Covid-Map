@@ -1,4 +1,4 @@
-package com.marlonncarvalhosa.covidmap
+package com.marlonncarvalhosa.covidmap.view
 
 import android.Manifest
 import android.content.Intent
@@ -32,6 +32,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.maps.android.heatmaps.Gradient
 import com.google.maps.android.heatmaps.HeatmapTileProvider
 import com.google.maps.android.heatmaps.WeightedLatLng
+import com.marlonncarvalhosa.covidmap.R
 import com.marlonncarvalhosa.covidmap.databinding.ActivityMapsBinding
 import com.marlonncarvalhosa.covidmap.dialog.DialogLogin
 import com.marlonncarvalhosa.covidmap.utils.Db
@@ -71,9 +72,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             openProfile()
         }
 
-        fb_quiz.setOnClickListener {
-            openQuiz()
-        }
+        openQuiz()
 
         val fab = findViewById<FloatingActionButton>(R.id.fb_stats)
         fab.setOnClickListener {
@@ -133,29 +132,38 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun openQuiz() {
         if (firebaseAuth.currentUser != null) {
-            val fb = Db()
+            val fabQuiz = findViewById<FloatingActionButton>(R.id.fb_quiz)
+            fabQuiz.setOnClickListener {
+                val intent = Intent(this, QuizActivity::class.java)
+                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    this, fabQuiz, fabQuiz.transitionName)
 
-            if (ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                return
+                startActivity(intent, options.toBundle())
             }
-            fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
-                if (location != null) {
-                    val arr: Array<Double> = arrayOf(200.0, 150.0, 100.0, 50.0)
-                    val nextValues = Random.nextInt(1, 4)
-                    fb.postLocation(
-                        arr[nextValues],
-                        location.latitude.toString(),
-                        location.longitude.toString()
-                    )
-                }
-            }
+
+//            val fb = Db()
+//
+//            if (ActivityCompat.checkSelfPermission(
+//                    this,
+//                    Manifest.permission.ACCESS_FINE_LOCATION
+//                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+//                    this,
+//                    Manifest.permission.ACCESS_COARSE_LOCATION
+//                ) != PackageManager.PERMISSION_GRANTED
+//            ) {
+//                return
+//            }
+//            fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
+//                if (location != null) {
+//                    val arr: Array<Double> = arrayOf(200.0, 150.0, 100.0, 50.0)
+//                    val nextValues = Random.nextInt(1, 4)
+//                    fb.postLocation(
+//                        arr[nextValues],
+//                        location.latitude.toString(),
+//                        location.longitude.toString()
+//                    )
+//                }
+//            }
         } else {
             authenticator()
         }

@@ -1,4 +1,4 @@
-package com.marlonncarvalhosa.covidmap
+package com.marlonncarvalhosa.covidmap.view
 
 import android.os.Bundle
 import android.view.Window
@@ -8,6 +8,7 @@ import com.google.android.material.color.MaterialColors
 import com.google.android.material.transition.platform.MaterialArcMotion
 import com.google.android.material.transition.platform.MaterialContainerTransform
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
+import com.marlonncarvalhosa.covidmap.R
 import com.marlonncarvalhosa.covidmap.api.CountryService
 import com.marlonncarvalhosa.covidmap.api.RetrofitClient
 import com.marlonncarvalhosa.covidmap.api.CountryModel
@@ -29,7 +30,6 @@ class BrasilStatusCovidActivity : AppCompatActivity() {
         window.sharedElementEnterTransition = buildTransitions()
         window.sharedElementExitTransition = buildTransitions()
         window.sharedElementReenterTransition = buildTransitions()
-        buildTransitions()
 
         super.onCreate(savedInstanceState)
 
@@ -40,7 +40,7 @@ class BrasilStatusCovidActivity : AppCompatActivity() {
         val response = call.enqueue(object : Callback<List<CountryModel>>{
             override fun onResponse(call: Call<List<CountryModel>>, response: Response<List<CountryModel>>) {
                 response.body()?.forEachIndexed { index, countryModel ->
-                    if (response.body()!![index].country.equals("Brazil")){
+                    if (response.body()!![index].country == "Brazil"){
                         tv_numero_confirmados.text = NumberFormat.getInstance().format(Integer.parseInt(response.body()!![index].cases))
                         tv_numero_ativos.text = NumberFormat.getInstance().format(Integer.parseInt(response.body()!![index].active))
                         tv_numero_recuperados.text = NumberFormat.getInstance().format(Integer.parseInt(response.body()!![index].recovered))
@@ -51,10 +51,18 @@ class BrasilStatusCovidActivity : AppCompatActivity() {
                         tv_numero_mortes_hoje.text = NumberFormat.getInstance().format(Integer.parseInt(response.body()!![index].todayDeaths))
                         tv_numero_teste.text = NumberFormat.getInstance().format(Integer.parseInt(response.body()!![index].tests))
 
-                        pieChart.addPieSlice(PieModel("Confirmados", response.body()!![index].cases.toFloat(), resources.getColor(R.color.yellow)))
-                        pieChart.addPieSlice(PieModel("Ativos", response.body()!![index].active.toFloat(), resources.getColor(R.color.blue)))
-                        pieChart.addPieSlice(PieModel("Recuperados", response.body()!![index].recovered.toFloat(), resources.getColor(R.color.green)))
-                        pieChart.addPieSlice(PieModel("Mortes", response.body()!![index].deaths.toFloat(), resources.getColor(R.color.red)))
+                        pieChart.addPieSlice(PieModel("Confirmados", response.body()!![index].cases.toFloat(), resources.getColor(
+                            R.color.yellow
+                        )))
+                        pieChart.addPieSlice(PieModel("Ativos", response.body()!![index].active.toFloat(), resources.getColor(
+                            R.color.blue
+                        )))
+                        pieChart.addPieSlice(PieModel("Recuperados", response.body()!![index].recovered.toFloat(), resources.getColor(
+                            R.color.green
+                        )))
+                        pieChart.addPieSlice(PieModel("Mortes", response.body()!![index].deaths.toFloat(), resources.getColor(
+                            R.color.red
+                        )))
                         pieChart.startAnimation()
 
                     }
@@ -72,8 +80,10 @@ class BrasilStatusCovidActivity : AppCompatActivity() {
     private fun buildTransitions(): MaterialContainerTransform {
         return MaterialContainerTransform().apply {
             addTarget(R.id.container)
-            setAllContainerColors(MaterialColors.getColor(findViewById(R.id.container), R.attr.colorSurface))
-            duration = 400
+            setAllContainerColors(MaterialColors.getColor(findViewById(R.id.container),
+                R.attr.colorSurface
+            ))
+            duration = 600
             pathMotion = MaterialArcMotion()
             interpolator = FastOutSlowInInterpolator()
             fadeMode = MaterialContainerTransform.FADE_MODE_IN
