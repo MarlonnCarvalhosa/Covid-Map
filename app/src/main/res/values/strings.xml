@@ -8,4 +8,8 @@
     <string name="como_est_a_sua_sa_de_neste_momento">Como está a sua saúde neste momento?</string>
     <string name="bem">Bem</string>
     <string name="mal">Mal</string>
+    <string name="confirmados">Confirmados</string>
+    <string name="recuperados">Recuperados</string>
+    <string name="mortes">Mortes</string>
+    <string name="ativos">Ativos</string>
 </resources>

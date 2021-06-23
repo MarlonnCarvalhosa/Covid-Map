@@ -5,35 +5,181 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/lightGray"
     android:transitionName="shared_element_to_compose"
     tools:context=".view.BrasilStatusCovidActivity">
 
-    <org.eazegraph.lib.charts.PieChart
-        android:id="@+id/piechart"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:padding="8dp"
-        app:egAnimationTime="3000"
-        app:egHighlightStrength="2"
-        app:egLegendTextSize="20sp"
-        app:egUseInnerPadding="true"
-        app:egUsePieRotation="true"
-        app:egValueTextSize="20sp" />
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cv_confirmados"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_pie"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        app:cardElevation="5dp"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="10dp"
+        app:cardPreventCornerOverlap="false"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="16:5"
-        app:layout_constraintEnd_toStartOf="@+id/cv_ativos"
-        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintDimensionRatio="16:9"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/piechart"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <org.eazegraph.lib.charts.PieChart
+                android:id="@+id/piechart"
+                android:layout_width="150dp"
+                android:layout_height="200dp"
+                android:layout_margin="8dp"
+                app:egAnimationTime="3000"
+                app:egHighlightStrength="2"
+                app:egLegendHeight="0dp"
+                app:egUseInnerPadding="true"
+                app:egUsePieRotation="true"
+                app:egValueTextSize="0sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tv_brasil"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+
+            <TextView
+                android:id="@+id/tv_brasil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="sans-serif-condensed-medium"
+                android:text="Status do Covid-19\nno Brasil"
+                android:textAlignment="textEnd"
+                android:textColor="@color/black"
+                android:textSize="23sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/piechart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toEndOf="@+id/piechart"
+                app:layout_constraintTop_toTopOf="@+id/piechart"
+                app:layout_constraintVertical_bias="0" />
+
+            <View
+                android:id="@+id/v_yellow"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:background="@color/yellow"
+                app:layout_constraintBottom_toTopOf="@+id/v_green"
+                app:layout_constraintEnd_toEndOf="@+id/tv_brasil"
+                app:layout_constraintHorizontal_bias="0.15"
+                app:layout_constraintStart_toStartOf="@+id/tv_brasil"
+                app:layout_constraintTop_toBottomOf="@+id/tv_brasil"
+                app:layout_constraintVertical_bias="0.5"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/confirmados"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/v_yellow"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toEndOf="@+id/v_yellow"
+                app:layout_constraintTop_toTopOf="@+id/v_yellow" />
+
+            <View
+                android:id="@+id/v_green"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/green"
+                app:layout_constraintBottom_toTopOf="@+id/v_red"
+                app:layout_constraintEnd_toEndOf="@+id/v_yellow"
+                app:layout_constraintHorizontal_bias="0.1"
+                app:layout_constraintStart_toStartOf="@+id/v_yellow"
+                app:layout_constraintTop_toBottomOf="@+id/v_yellow" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/recuperados"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/v_green"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toEndOf="@+id/v_green"
+                app:layout_constraintTop_toTopOf="@+id/v_green" />
+
+            <View
+                android:id="@+id/v_red"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/red"
+                app:layout_constraintBottom_toTopOf="@+id/v_blue"
+                app:layout_constraintEnd_toEndOf="@+id/v_green"
+                app:layout_constraintHorizontal_bias="0.1"
+                app:layout_constraintStart_toStartOf="@+id/v_green"
+                app:layout_constraintTop_toBottomOf="@+id/v_green" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/mortes"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/v_red"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toEndOf="@+id/v_red"
+                app:layout_constraintTop_toTopOf="@+id/v_red" />
+
+            <View
+                android:id="@+id/v_blue"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/blue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/v_red"
+                app:layout_constraintHorizontal_bias="0.1"
+                app:layout_constraintStart_toStartOf="@+id/v_red"
+                app:layout_constraintTop_toBottomOf="@+id/v_red"
+                app:layout_constraintVertical_bias="0" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/ativos"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/v_blue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toEndOf="@+id/v_blue"
+                app:layout_constraintTop_toTopOf="@+id/v_blue" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_data"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="10dp"
+        app:cardPreventCornerOverlap="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="16:12.2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cv_pie"
         app:layout_constraintVertical_bias="0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,210 +187,151 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tv_confirmados"
+                android:id="@+id/tv_dados"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Confirmados"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_margin="16dp"
+                android:text="Dados do covid 19"/>
+
+            <View
+                android:id="@+id/v_yellow_dados"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="24dp"
+                android:background="@color/yellow"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintEnd_toStartOf="@+id/tv_numero_confirmados"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="@+id/tv_dados"
+                app:layout_constraintTop_toBottomOf="@+id/tv_dados"
+                app:layout_constraintVertical_bias="0"/>
 
             <TextView
                 android:id="@+id/tv_numero_confirmados"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="00000"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintTop_toTopOf="@+id/v_yellow_dados"
+                app:layout_constraintBottom_toBottomOf="@+id/v_yellow_dados"
+                app:layout_constraintStart_toEndOf="@+id/v_yellow_dados"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_confirmados" />
+                android:text="000000"/>
 
-            <TextView
-                android:id="@+id/tv_numero_confirmados_hoje"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="00000"
+            <View
+                android:id="@+id/v_line_yellow"
+                android:layout_width="match_parent"
+                android:layout_height="0.575dp"
+                android:background="@color/black"
+                app:layout_constraintTop_toBottomOf="@+id/v_yellow_dados"
+                app:layout_constraintStart_toEndOf="@+id/v_yellow_dados"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_numero_confirmados" />
+                android:layout_margin="16dp"/>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cv_ativos"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="16dp"
-        app:cardElevation="5dp"
-        app:layout_constraintBottom_toBottomOf="@+id/cv_confirmados"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toEndOf="@+id/cv_confirmados"
-        app:layout_constraintTop_toTopOf="@+id/cv_confirmados">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/tv_ativos"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ativos"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_numero_ativos"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="00000"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_ativos" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cv_recuperados"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        app:cardElevation="5dp"
-        app:layout_constraintDimensionRatio="16:5"
-        app:layout_constraintEnd_toStartOf="@+id/cv_mortes"
-        app:layout_constraintHorizontal_bias="1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cv_confirmados"
-        app:layout_constraintVertical_bias="0">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/tv_recuperados"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Recuperados"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <View
+                android:id="@+id/v_green_dados"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="24dp"
+                android:background="@color/green"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintEnd_toStartOf="@+id/tv_numero_recuperados"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="@+id/v_yellow_dados"
+                app:layout_constraintTop_toBottomOf="@+id/v_line_yellow"
+                app:layout_constraintVertical_bias="0"/>
 
             <TextView
                 android:id="@+id/tv_numero_recuperados"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="00000"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintTop_toTopOf="@+id/v_green_dados"
+                app:layout_constraintBottom_toBottomOf="@+id/v_green_dados"
+                app:layout_constraintStart_toEndOf="@+id/v_green_dados"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_recuperados" />
+                android:text="000000"/>
 
-            <TextView
-                android:id="@+id/tv_numero_recuperados_hoje"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="00000"
+            <View
+                android:id="@+id/v_line_green"
+                android:layout_width="match_parent"
+                android:layout_height="0.575dp"
+                android:background="@color/black"
+                app:layout_constraintTop_toBottomOf="@+id/v_green_dados"
+                app:layout_constraintStart_toEndOf="@+id/v_green_dados"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_numero_recuperados" />
+                android:layout_margin="16dp"/>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cv_mortes"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="16dp"
-        app:cardElevation="5dp"
-        app:layout_constraintBottom_toBottomOf="@+id/cv_recuperados"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toEndOf="@+id/cv_recuperados"
-        app:layout_constraintTop_toTopOf="@+id/cv_recuperados">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/tv_mortes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mortes"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <View
+                android:id="@+id/v_red_dados"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="24dp"
+                android:background="@color/red"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintEnd_toStartOf="@+id/tv_numero_mortes"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="@+id/v_green_dados"
+                app:layout_constraintTop_toBottomOf="@+id/v_line_green"
+                app:layout_constraintVertical_bias="0"/>
 
             <TextView
                 android:id="@+id/tv_numero_mortes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="00000"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintTop_toTopOf="@+id/v_red_dados"
+                app:layout_constraintBottom_toBottomOf="@+id/v_red_dados"
+                app:layout_constraintStart_toEndOf="@+id/v_red_dados"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_mortes" />
+                android:text="000000"/>
+
+            <View
+                android:id="@+id/v_line_red"
+                android:layout_width="match_parent"
+                android:layout_height="0.575dp"
+                android:background="@color/black"
+                app:layout_constraintTop_toBottomOf="@+id/v_red_dados"
+                app:layout_constraintStart_toEndOf="@+id/v_red_dados"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_margin="16dp"/>
+
+            <View
+                android:id="@+id/v_blue_dados"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="24dp"
+                android:background="@color/blue"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintEnd_toStartOf="@+id/tv_numero_ativos"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="@+id/v_red_dados"
+                app:layout_constraintTop_toBottomOf="@+id/v_line_red"
+                app:layout_constraintVertical_bias="0"/>
 
             <TextView
-                android:id="@+id/tv_numero_mortes_hoje"
+                android:id="@+id/tv_numero_ativos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="00000"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintTop_toTopOf="@+id/v_blue_dados"
+                app:layout_constraintBottom_toBottomOf="@+id/v_blue_dados"
+                app:layout_constraintStart_toEndOf="@+id/v_blue_dados"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_numero_mortes" />
+                android:text="000000"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.575dp"
+                android:background="@color/black"
+                app:layout_constraintTop_toBottomOf="@+id/v_blue_dados"
+                app:layout_constraintStart_toEndOf="@+id/v_blue_dados"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_margin="16dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cv_testes"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        app:cardElevation="5dp"
-        app:layout_constraintDimensionRatio="16:5"
-        app:layout_constraintEnd_toEndOf="@+id/cv_recuperados"
-        app:layout_constraintHorizontal_bias="1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cv_recuperados"
-        app:layout_constraintVertical_bias="0">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/tv_testes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Testes"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_numero_teste"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="00000"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_testes" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
