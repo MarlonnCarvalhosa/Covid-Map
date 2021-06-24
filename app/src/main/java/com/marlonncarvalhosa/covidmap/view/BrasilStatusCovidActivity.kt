@@ -11,7 +11,7 @@ import com.google.android.material.transition.platform.MaterialContainerTransfor
 import com.marlonncarvalhosa.covidmap.R
 import com.marlonncarvalhosa.covidmap.api.CountryService
 import com.marlonncarvalhosa.covidmap.api.RetrofitClient
-import com.marlonncarvalhosa.covidmap.api.CountryModel
+import com.marlonncarvalhosa.covidmap.model.CountryModel
 import kotlinx.android.synthetic.main.activity_brasil_status_covid.*
 import org.eazegraph.lib.charts.PieChart
 import org.eazegraph.lib.models.PieModel
@@ -45,11 +45,7 @@ class BrasilStatusCovidActivity : AppCompatActivity() {
                         tv_numero_ativos.text = NumberFormat.getInstance().format(Integer.parseInt(response.body()!![index].active))
                         tv_numero_recuperados.text = NumberFormat.getInstance().format(Integer.parseInt(response.body()!![index].recovered))
                         tv_numero_mortes.text = NumberFormat.getInstance().format(Integer.parseInt(response.body()!![index].deaths))
-
-                        tv_numero_confirmados_hoje.text = NumberFormat.getInstance().format(Integer.parseInt(response.body()!![index].todayCases))
-                        tv_numero_recuperados_hoje.text = NumberFormat.getInstance().format(Integer.parseInt(response.body()!![index].todayRecovered))
-                        tv_numero_mortes_hoje.text = NumberFormat.getInstance().format(Integer.parseInt(response.body()!![index].todayDeaths))
-                        tv_numero_teste.text = NumberFormat.getInstance().format(Integer.parseInt(response.body()!![index].tests))
+                        tv_numero_populacao.text = NumberFormat.getInstance().format(Integer.parseInt(response.body()!![index].populacao))
 
                         pieChart.addPieSlice(PieModel("Confirmados", response.body()!![index].cases.toFloat(), resources.getColor(
                             R.color.yellow

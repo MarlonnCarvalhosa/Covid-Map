@@ -1,4 +1,4 @@
-package com.marlonncarvalhosa.covidmap.api
+package com.marlonncarvalhosa.covidmap.model
 
 import com.google.gson.annotations.SerializedName
 
@@ -33,4 +33,7 @@ class CountryModel {
 
     @SerializedName("tests")
     var tests: String = ""
+
+    @SerializedName("populacao")
+    var populacao: String = ""
 }
