@@ -45,7 +45,7 @@ class BrasilStatusCovidActivity : AppCompatActivity() {
                         tv_numero_ativos.text = NumberFormat.getInstance().format(Integer.parseInt(response.body()!![index].active))
                         tv_numero_recuperados.text = NumberFormat.getInstance().format(Integer.parseInt(response.body()!![index].recovered))
                         tv_numero_mortes.text = NumberFormat.getInstance().format(Integer.parseInt(response.body()!![index].deaths))
-                        tv_numero_populacao.text = NumberFormat.getInstance().format(Integer.parseInt(response.body()!![index].populacao))
+                        tv_numero_populacao.text = NumberFormat.getInstance().format(Integer.parseInt(response.body()!![index].population))
 
                         pieChart.addPieSlice(PieModel("Confirmados", response.body()!![index].cases.toFloat(), resources.getColor(
                             R.color.yellow

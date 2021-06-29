@@ -15,4 +15,8 @@
     <color name="blue">#008EFF</color>
     <color name="yellow">#DCC70C</color>
     <color name="transparent">#00CD1010</color>
+    <color name="primary_purple">#612f74</color>
+    <color name="light_purple">#905ba3</color>
+    <color name="dark_purple">#340348</color>
 </resources>
+

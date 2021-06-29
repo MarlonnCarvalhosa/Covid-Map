@@ -6,10 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.marlonncarvalhosa.covidmap.R
-import kotlinx.android.synthetic.main.fragment_start_quiz.*
 
-
-class StartQuizFragment: Fragment() {
+class StartQuizFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,

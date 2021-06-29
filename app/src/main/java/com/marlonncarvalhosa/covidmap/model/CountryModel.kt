@@ -34,6 +34,6 @@ class CountryModel {
     @SerializedName("tests")
     var tests: String = ""
 
-    @SerializedName("populacao")
-    var populacao: String = ""
+    @SerializedName("population")
+    var population: String = ""
 }

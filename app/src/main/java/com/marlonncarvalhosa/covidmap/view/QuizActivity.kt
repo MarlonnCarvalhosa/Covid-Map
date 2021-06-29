@@ -1,4 +1,5 @@
 package com.marlonncarvalhosa.covidmap.view
+
 import android.os.Bundle
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +11,7 @@ import com.google.android.material.transition.platform.MaterialContainerTransfor
 import com.marlonncarvalhosa.covidmap.R
 import com.marlonncarvalhosa.covidmap.view.fragment.StartQuizFragment
 
-class QuizActivity : AppCompatActivity(){
+class QuizActivity : AppCompatActivity() {
 
     private val manager = supportFragmentManager
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +28,7 @@ class QuizActivity : AppCompatActivity(){
         showFragment()
     }
 
-    private fun showFragment(){
+    private fun showFragment() {
         val transaction = manager.beginTransaction()
         val fragment = StartQuizFragment()
         transaction.replace(R.id.quiz, fragment)
@@ -37,7 +38,12 @@ class QuizActivity : AppCompatActivity(){
     private fun buildTransitions(): MaterialContainerTransform {
         return MaterialContainerTransform().apply {
             addTarget(R.id.containerQuiz)
-            setAllContainerColors(MaterialColors.getColor(findViewById(R.id.containerQuiz), R.attr.colorSurface))
+            setAllContainerColors(
+                MaterialColors.getColor(
+                    findViewById(R.id.containerQuiz),
+                    R.attr.colorSurface
+                )
+            )
             duration = 600
             pathMotion = MaterialArcMotion()
             interpolator = FastOutSlowInInterpolator()

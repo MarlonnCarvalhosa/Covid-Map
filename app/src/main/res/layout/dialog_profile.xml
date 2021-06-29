@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/bg_linear_layout"
-            android:backgroundTint="@color/teal_700"
+            android:backgroundTint="@color/primary_purple"
             android:elevation="10dp"
             android:paddingBottom="16dp">
 
@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:background="@drawable/ripple_effect"
-                android:backgroundTint="@color/teal_700"
+                android:backgroundTint="@color/primary_purple"
                 android:src="@drawable/ic_baseline_close_24"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:background="@drawable/ripple_effect"
-                android:backgroundTint="@color/teal_700"
+                android:backgroundTint="@color/primary_purple"
                 android:src="@drawable/ic_logout_black_24dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
