@@ -35,11 +35,9 @@ import com.google.maps.android.heatmaps.WeightedLatLng
 import com.marlonncarvalhosa.covidmap.R
 import com.marlonncarvalhosa.covidmap.databinding.ActivityMapsBinding
 import com.marlonncarvalhosa.covidmap.dialog.DialogLogin
-import com.marlonncarvalhosa.covidmap.utils.Db
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_maps.*
-import kotlin.random.Random
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -82,8 +80,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
             startActivity(intent, options.toBundle())
         }
-
-
 
         ib_my_location.setOnClickListener {
             getLocationAccess()
@@ -141,7 +137,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 startActivity(intent, options.toBundle())
             }
 
-//            val fb = Db()
+//            val fb = FirebaseRepo()
 //
 //            if (ActivityCompat.checkSelfPermission(
 //                    this,

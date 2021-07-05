@@ -4,37 +4,35 @@ import android.util.Log
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.marlonncarvalhosa.covidmap.model.QuizModel
 
+class FirebaseRepo {
 
-class Db {
-
-    var db = FirebaseFirestore.getInstance()
+    var firestore = FirebaseFirestore.getInstance()
     private var mAuth = FirebaseAuth.getInstance().currentUser
 
-    fun postLocation(intensity: Double, let: String, lon: String) {
+    fun postQuiz(intensity: Double, let: String, lon: String, quiz: QuizModel) {
 
-        val item = createLocation(intensity, let, lon)
-
-        //documento do quiz
-        val quiz = hashMapOf<String, Any>()
-        //Array com os sintomas selecionados
-        val sintomas = arrayListOf<String>()
-
-        sintomas.add("Dor de cabeça")
-        sintomas.add("Sem sintomas")
-
-        quiz["timestamp"] = Timestamp.now()
-        //Pergunta se estar bem ou não
-        quiz["question1"] = true
-        //Se estivar mal pergunta os sitomas e marca eles
-        quiz["question2"] = sintomas
-        //Pergunta se esteve contato com alguem com covid-19
-        quiz["question3"] = false
-
+        val item = hashMapOf<String, Any>()
+        item["Localização"] = createLocation(intensity, let, lon)
+        item["positivoCovid"] = quiz.positivoCovid
+        item["timeStamp"] = quiz.timeStamp
+        item["febre"] = quiz.sintomasPrimarios.febre
+        item["arrepiosTremore"] = quiz.sintomasPrimarios.arrepiosTremore
+        item["tosse"] = quiz.sintomasPrimarios.tosse
+        item["faltaDeAr"] = quiz.sintomasPrimarios.faltaDeAr
+        item["faltaPaladarOfato"] = quiz.sintomasPrimarios.faltaPaladarOfato
+        item["congrecaoNasal"] = quiz.sintomasSecundarios.congrecaoNasal
+        item["escorrendo"] = quiz.sintomasSecundarios.escorrendo
+        item["dorCorpo"] = quiz.sintomasSecundarios.dorCorpo
+        item["dorCabeca"] = quiz.sintomasSecundarios.dorCabeca
+        item["fadigaIncomum"] = quiz.sintomasSecundarios.fadigaIncomum
+        item["vermelhidaoDosOlhos"] = quiz.sintomasSecundarios.vermelhidaoDosOlhos
+        item["nauseasVomitos"] = quiz.sintomasSecundarios.nauseasVomitos
 
         Log.i("NOTIFY_CREATE_FIREBASE", "CRIANDO NEWLIST")
 
-        db.collection("locations")
+        firestore.collection("locations")
             .add(item)
             .addOnSuccessListener {
                 Log.d("CREATE_FIREBASE", "OnSuccess Created Location Quiz")
@@ -59,8 +57,8 @@ class Db {
         return item
     }
 
-    private fun createAwser(quiz: HashMap<String, Any>, id: String) {
-        db.collection("locations")
+    private fun createAwser(quiz: QuizModel, id: String) {
+        firestore.collection("locations")
             .document(id)
             .collection("quiz")
             .add(quiz)
