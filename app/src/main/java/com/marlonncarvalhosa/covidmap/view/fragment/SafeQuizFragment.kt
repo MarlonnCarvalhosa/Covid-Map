@@ -15,6 +15,7 @@ class SafeQuizFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         return inflater.inflate(R.layout.fragment_start_quiz, container, false)
     }
 }

@@ -6,61 +6,31 @@
     android:background="@color/lightGray">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/cv_covid_positive"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:background="@color/white"
         app:cardCornerRadius="10dp"
         app:cardElevation="3dp"
-        app:layout_constraintDimensionRatio="16:2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/orienta_es_sobre_o_covid_19_coronav_rus"
-                android:textColor="@color/primary_purple"
-                android:textSize="17sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="16dp"
-        android:background="@color/white"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="3dp"
-        app:layout_constraintDimensionRatio="16:2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:text="@string/como_est_a_sua_sa_de_neste_momento"
+                android:padding="8dp"
+                android:text="Você testou positivo para COVID-19\n nos últimos 14 dias?"
                 android:textColor="@color/black"
                 android:textSize="16sp"
+                android:textAlignment="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -70,89 +40,89 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_saude_bem"
+        android:id="@+id/cv_covid_yes"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="16dp"
         android:backgroundTint="@color/gray"
         app:cardCornerRadius="8dp"
         app:layout_constraintDimensionRatio="3"
-        app:layout_constraintEnd_toStartOf="@id/cv_saude_mal"
+        app:layout_constraintEnd_toStartOf="@id/cv_covid_no"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cardView2">
+        app:layout_constraintTop_toBottomOf="@id/cv_covid_positive">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/iv_transferir"
+                android:id="@+id/iv_covid_yes"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:src="@drawable/ic_baseline_mood_24"
+                android:src="@drawable/ic_baseline_check_circle_outline_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="0.6"
-                app:layout_constraintEnd_toStartOf="@id/tv_transferir"
+                app:layout_constraintEnd_toStartOf="@id/tv_covid_yes"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_transferir"
+                android:id="@+id/tv_covid_yes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/bem"
+                android:text="@string/sim"
                 android:textColor="@color/green"
                 android:textSize="19sp"
-                app:layout_constraintBottom_toBottomOf="@+id/iv_transferir"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_covid_yes"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/iv_transferir"
-                app:layout_constraintTop_toTopOf="@+id/iv_transferir" />
+                app:layout_constraintStart_toEndOf="@+id/iv_covid_yes"
+                app:layout_constraintTop_toTopOf="@+id/iv_covid_yes" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_saude_mal"
+        android:id="@+id/cv_covid_no"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="16dp"
         android:backgroundTint="@color/gray"
         app:cardCornerRadius="8dp"
-        app:layout_constraintBottom_toBottomOf="@id/cv_saude_bem"
+        app:layout_constraintBottom_toBottomOf="@id/cv_covid_yes"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cv_saude_bem"
-        app:layout_constraintTop_toTopOf="@id/cv_saude_bem">
+        app:layout_constraintStart_toEndOf="@+id/cv_covid_yes"
+        app:layout_constraintTop_toTopOf="@id/cv_covid_yes">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/iv_recarga"
+                android:id="@+id/iv_no_covid"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:src="@drawable/ic_baseline_mood_bad_24"
+                android:src="@drawable/ic_cancel_red_24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="0.6"
-                app:layout_constraintEnd_toStartOf="@id/tv_recarga"
+                app:layout_constraintEnd_toStartOf="@id/tv_no_covid"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_recarga"
+                android:id="@+id/tv_no_covid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/mal"
+                android:text="@string/nao"
                 android:textColor="@color/red"
                 android:textSize="19sp"
-                app:layout_constraintBottom_toBottomOf="@+id/iv_recarga"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_no_covid"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/iv_recarga"
-                app:layout_constraintTop_toTopOf="@+id/iv_recarga" />
+                app:layout_constraintStart_toEndOf="@+id/iv_no_covid"
+                app:layout_constraintTop_toTopOf="@+id/iv_no_covid" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

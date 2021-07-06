@@ -12,4 +12,6 @@
     <string name="recuperados">Recuperados</string>
     <string name="mortes">Mortes</string>
     <string name="ativos">Ativos</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
 </resources>

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.marlonncarvalhosa.covidmap.R
 
-class StartQuizFragment : Fragment() {
+class FirstSymptomSessionFragment: Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -15,7 +15,6 @@ class StartQuizFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        return inflater.inflate(R.layout.fragment_start_quiz, container, false)
+        return inflater.inflate(R.layout.fragment_first_symptom_session, container, false)
     }
-
 }

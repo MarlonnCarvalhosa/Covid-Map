@@ -44,7 +44,7 @@ class QuizActivity : AppCompatActivity() {
                     R.attr.colorSurface
                 )
             )
-            duration = 600
+            duration = 500
             pathMotion = MaterialArcMotion()
             interpolator = FastOutSlowInInterpolator()
             fadeMode = MaterialContainerTransform.FADE_MODE_IN

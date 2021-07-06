@@ -35,9 +35,15 @@ import com.google.maps.android.heatmaps.WeightedLatLng
 import com.marlonncarvalhosa.covidmap.R
 import com.marlonncarvalhosa.covidmap.databinding.ActivityMapsBinding
 import com.marlonncarvalhosa.covidmap.dialog.DialogLogin
+import com.marlonncarvalhosa.covidmap.model.QuizModel
+import com.marlonncarvalhosa.covidmap.utils.FirebaseRepo
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_maps.*
+import kotlinx.android.synthetic.main.activity_quiz.*
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.random.Random.Default.nextInt
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -137,29 +143,18 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 startActivity(intent, options.toBundle())
             }
 
-//            val fb = FirebaseRepo()
-//
-//            if (ActivityCompat.checkSelfPermission(
-//                    this,
-//                    Manifest.permission.ACCESS_FINE_LOCATION
-//                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-//                    this,
-//                    Manifest.permission.ACCESS_COARSE_LOCATION
-//                ) != PackageManager.PERMISSION_GRANTED
-//            ) {
-//                return
-//            }
-//            fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
-//                if (location != null) {
-//                    val arr: Array<Double> = arrayOf(200.0, 150.0, 100.0, 50.0)
-//                    val nextValues = Random.nextInt(1, 4)
-//                    fb.postLocation(
-//                        arr[nextValues],
-//                        location.latitude.toString(),
-//                        location.longitude.toString()
-//                    )
-//                }
-//            }
+            val fb = FirebaseRepo()
+
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                return
+            }
         } else {
             authenticator()
         }
