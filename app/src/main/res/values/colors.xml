@@ -18,5 +18,6 @@
     <color name="primary_purple">#612f74</color>
     <color name="light_purple">#905ba3</color>
     <color name="dark_purple">#340348</color>
+    <color name="transparent_purple">#ECDEF1</color>
 </resources>
 

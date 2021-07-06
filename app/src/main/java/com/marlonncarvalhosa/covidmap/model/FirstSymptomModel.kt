@@ -1,6 +1,6 @@
 package com.marlonncarvalhosa.covidmap.model
 
-data class SintomasPrimarios(
+data class FirstSymptomModel(
     var febre: Boolean = false,
     var arrepiosTremore: Boolean = false,
     var tosse: Boolean = false,

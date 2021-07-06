@@ -1,6 +1,6 @@
 package com.marlonncarvalhosa.covidmap.model
 
-data class SintomasSecundarios(
+data class SecondSymptomModel(
     var dorGarganta: Boolean = false,
     var congrecaoNasal: Boolean = false,
     var escorrendo: Boolean = false,

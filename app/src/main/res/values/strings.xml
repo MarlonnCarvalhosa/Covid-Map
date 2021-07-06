@@ -14,4 +14,10 @@
     <string name="ativos">Ativos</string>
     <string name="sim">Sim</string>
     <string name="nao">Não</string>
+    <string name="contatonoultimos14dias">Você manteve contato próximo com uma pessoa positiva para COVID-19 nos últimos 14 dias?</string>
+    <string name="sintomas_que_se_desenvolveram">Indique sintomas que se desenvolveram nas últimas 24 horas e que não são de uma condição crônica ou conhecida</string>
+    <string name="febre">Febre</string>
+    <string name="tosse">Tosse</string>
+    <string name="voltar">Voltar</string>
+    <string name="avancar">Avançar</string>
 </resources>

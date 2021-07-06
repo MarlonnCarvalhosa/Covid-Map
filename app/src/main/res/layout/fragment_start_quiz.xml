@@ -20,7 +20,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            >
 
             <TextView
                 android:layout_width="wrap_content"
@@ -87,28 +88,28 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/iv_transferir"
+                android:id="@+id/iv_saude_bem"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:src="@drawable/ic_baseline_mood_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="0.6"
-                app:layout_constraintEnd_toStartOf="@id/tv_transferir"
+                app:layout_constraintEnd_toStartOf="@id/tv_saude_bem"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_transferir"
+                android:id="@+id/tv_saude_bem"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/bem"
                 android:textColor="@color/green"
                 android:textSize="19sp"
-                app:layout_constraintBottom_toBottomOf="@+id/iv_transferir"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_saude_bem"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/iv_transferir"
-                app:layout_constraintTop_toTopOf="@+id/iv_transferir" />
+                app:layout_constraintStart_toEndOf="@+id/iv_saude_bem"
+                app:layout_constraintTop_toTopOf="@+id/iv_saude_bem" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -131,28 +132,28 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/iv_recarga"
+                android:id="@+id/iv_mal_saude"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:src="@drawable/ic_baseline_mood_bad_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="0.6"
-                app:layout_constraintEnd_toStartOf="@id/tv_recarga"
+                app:layout_constraintEnd_toStartOf="@id/tv_mal_saude"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_recarga"
+                android:id="@+id/tv_mal_saude"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/mal"
                 android:textColor="@color/red"
                 android:textSize="19sp"
-                app:layout_constraintBottom_toBottomOf="@+id/iv_recarga"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_mal_saude"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/iv_recarga"
-                app:layout_constraintTop_toTopOf="@+id/iv_recarga" />
+                app:layout_constraintStart_toEndOf="@+id/iv_mal_saude"
+                app:layout_constraintTop_toTopOf="@+id/iv_mal_saude" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
