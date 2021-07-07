@@ -156,7 +156,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 return
             }
         } else {
-            authenticator()
+            //authenticator()
         }
     }
 

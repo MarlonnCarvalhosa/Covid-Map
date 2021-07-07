@@ -22,4 +22,7 @@
     <string name="avancar">Avançar</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dor_de_garganta">Dor de garganta</string>
+    <string name="dores_no_corpo">Dores no corpo</string>
+    <string name="sem_sintomas">Sem sintomas</string>
 </resources>

@@ -226,7 +226,7 @@
                 android:id="@+id/tv_sem_sintomas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nenhum desses\nsintomas"
+                android:text="Sem sintomas"
                 android:textColor="@color/primary_purple"
                 android:textSize="19sp"
                 android:textAlignment="center"
