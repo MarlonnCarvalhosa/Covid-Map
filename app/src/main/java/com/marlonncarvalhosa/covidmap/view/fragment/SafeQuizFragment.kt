@@ -7,15 +7,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.marlonncarvalhosa.covidmap.R
 
-
-class SafeQuizFragment: Fragment() {
+class SafeQuizFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val root = inflater.inflate(R.layout.fragment_safe_quiz, container, false)
 
-        return inflater.inflate(R.layout.fragment_start_quiz, container, false)
+        return root
     }
 }

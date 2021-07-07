@@ -31,7 +31,7 @@ class QuizActivity : AppCompatActivity() {
     private fun showFragment() {
         val transaction = manager.beginTransaction()
         val fragment = StartQuizFragment()
-        transaction.replace(R.id.quiz, fragment)
+        transaction.replace(R.id.quiz_container, fragment)
         transaction.commit()
     }
 
