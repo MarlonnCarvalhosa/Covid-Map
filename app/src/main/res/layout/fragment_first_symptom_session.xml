@@ -44,6 +44,7 @@
         android:id="@+id/cv_covid_yes"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:clickable="true"
         android:layout_margin="16dp"
         android:backgroundTint="@color/gray"
         app:cardCornerRadius="8dp"
@@ -51,9 +52,11 @@
         app:layout_constraintEnd_toStartOf="@id/cv_covid_no"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cv_covid_positive">
+        app:layout_constraintTop_toBottomOf="@id/cv_covid_positive"
+        android:focusable="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/teste"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

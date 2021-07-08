@@ -14,20 +14,20 @@ class ThirdSymptomSessionFragment: Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val root = inflater.inflate(R.layout.fragment_third_symptom_session, container, false)
+    ): View {
+        val view: View = inflater.inflate(R.layout.fragment_third_symptom_session, container, false)
 
-        root.findViewById<CardView>(R.id.cv_third_next).setOnClickListener {
+        view.findViewById<CardView>(R.id.cv_third_next).setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.quiz_container, StartQuizFragment())
                 .addToBackStack("third")
                 .commit()
         }
 
-        root.findViewById<CardView>(R.id.cv_third_back).setOnClickListener {
+        view.findViewById<CardView>(R.id.cv_third_back).setOnClickListener {
             parentFragmentManager.popBackStack("second", 1)
         }
 
-        return root
+        return view
     }
 }

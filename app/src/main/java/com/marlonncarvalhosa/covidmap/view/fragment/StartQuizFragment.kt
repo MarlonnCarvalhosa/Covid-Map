@@ -14,23 +14,23 @@ class StartQuizFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val root = inflater.inflate(R.layout.fragment_start_quiz, container, false)
+    ): View {
+        val view: View = inflater.inflate(R.layout.fragment_start_quiz, container, false)
 
-        root.findViewById<CardView>(R.id.cv_saude_bem).setOnClickListener {
+        view.findViewById<CardView>(R.id.cv_saude_bem).setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.quiz_container, SafeQuizFragment())
                 .disallowAddToBackStack()
                 .commit()
         }
 
-        root.findViewById<CardView>(R.id.cv_saude_mal).setOnClickListener {
+        view.findViewById<CardView>(R.id.cv_saude_mal).setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.quiz_container, FirstSymptomSessionFragment())
                 .addToBackStack("start")
                 .commit()
         }
 
-        return root
+        return view
     }
 }

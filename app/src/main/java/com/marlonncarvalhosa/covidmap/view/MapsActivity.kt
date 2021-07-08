@@ -35,15 +35,10 @@ import com.google.maps.android.heatmaps.WeightedLatLng
 import com.marlonncarvalhosa.covidmap.R
 import com.marlonncarvalhosa.covidmap.databinding.ActivityMapsBinding
 import com.marlonncarvalhosa.covidmap.dialog.DialogLogin
-import com.marlonncarvalhosa.covidmap.model.QuizModel
 import com.marlonncarvalhosa.covidmap.utils.FirebaseRepo
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_maps.*
-import kotlinx.android.synthetic.main.activity_quiz.*
-import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.random.Random.Default.nextInt
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -156,7 +151,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 return
             }
         } else {
-            //authenticator()
+            authenticator()
         }
     }
 
