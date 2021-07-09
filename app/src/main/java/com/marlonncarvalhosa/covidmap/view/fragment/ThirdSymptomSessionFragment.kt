@@ -32,8 +32,8 @@ class ThirdSymptomSessionFragment : Fragment(), View.OnClickListener {
         setClickListeners()
         binding?.cvThirdFinish?.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .replace(R.id.quiz_container, StartQuizFragment())
-                .addToBackStack("third")
+                .replace(R.id.quiz_container, HighRiskFragment())
+                .disallowAddToBackStack()
                 .commit()
         }
         binding?.cvThirdBack?.setOnClickListener { parentFragmentManager.popBackStack("second", 1) }
@@ -99,7 +99,6 @@ class ThirdSymptomSessionFragment : Fragment(), View.OnClickListener {
         binding?.buttonSymptomNauseaVomito?.setOnClickListener(this)
         binding?.buttonNegativeSymptomThirdSession?.setOnClickListener(this)
     }
-
 
     override fun onDestroy() {
         super.onDestroy()

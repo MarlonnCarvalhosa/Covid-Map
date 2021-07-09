@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.marlonncarvalhosa.covidmap.R
 
-class SafeQuizFragment : Fragment() {
+class LowRiskFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,

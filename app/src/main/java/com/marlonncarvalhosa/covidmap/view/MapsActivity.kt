@@ -264,8 +264,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
                     getLocationAccess()
                 }
-            }
-            .addOnFailureListener { exception ->
+            }.addOnFailureListener { exception ->
                 Log.w(TAG, "Error getting documents: ", exception)
             }
     }
