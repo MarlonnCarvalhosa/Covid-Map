@@ -46,6 +46,14 @@ class FirstSymptomSessionFragment: Fragment(), View.OnClickListener {
                 Log.d("teste", "negative click")
                 Toast.makeText(context, "negative click", Toast.LENGTH_LONG).show()
             }
+            binding?.buttonPositiveContactCovid?.id -> {
+                Log.d("teste", "positive contact click")
+                Toast.makeText(context, "positive contact click", Toast.LENGTH_LONG).show()
+            }
+            binding?.buttonNegativeContactCovid?.id -> {
+                Log.d("teste", "negative contact click")
+                Toast.makeText(context, "negative contact click", Toast.LENGTH_LONG).show()
+            }
             else -> {
             }
         }
@@ -53,6 +61,8 @@ class FirstSymptomSessionFragment: Fragment(), View.OnClickListener {
     private fun setClickListeners() {
         binding?.buttonPositiveCovid?.setOnClickListener(this)
         binding?.buttonNegativeCovid?.setOnClickListener(this)
+        binding?.buttonPositiveContactCovid?.setOnClickListener(this)
+        binding?.buttonNegativeContactCovid?.setOnClickListener(this)
     }
 
     override fun onDestroy() {
