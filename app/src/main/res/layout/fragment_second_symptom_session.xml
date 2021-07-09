@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cv_positive_covid"
+        android:id="@+id/cv_last_symptom_covid"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
@@ -39,24 +39,24 @@
     </com.google.android.material.card.MaterialCardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_febre"
+        android:id="@+id/button_symptom_febre"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="16dp"
         android:backgroundTint="@color/transparent_purple"
         app:cardCornerRadius="8dp"
         app:layout_constraintDimensionRatio="3"
-        app:layout_constraintEnd_toStartOf="@id/cv_tosse"
+        app:layout_constraintEnd_toStartOf="@id/button_symptom_tosse"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cv_positive_covid">
+        app:layout_constraintTop_toBottomOf="@id/cv_last_symptom_covid">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tv_febre"
+                android:id="@+id/tv_symptom_febre"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/febre"
@@ -73,23 +73,23 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_tosse"
+        android:id="@+id/button_symptom_tosse"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="16dp"
         android:backgroundTint="@color/transparent_purple"
         app:cardCornerRadius="8dp"
-        app:layout_constraintBottom_toBottomOf="@id/cv_febre"
+        app:layout_constraintBottom_toBottomOf="@id/button_symptom_febre"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cv_febre"
-        app:layout_constraintTop_toTopOf="@id/cv_febre">
+        app:layout_constraintStart_toEndOf="@+id/button_symptom_febre"
+        app:layout_constraintTop_toTopOf="@id/button_symptom_febre">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tv_tosse"
+                android:id="@+id/tv_symptom_tosse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tosse"
@@ -105,7 +105,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_arrepios_tremores"
+        android:id="@+id/button_symptom_arrepios_tremores"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginHorizontal="16dp"
@@ -113,17 +113,17 @@
         android:backgroundTint="@color/transparent_purple"
         app:cardCornerRadius="8dp"
         app:layout_constraintDimensionRatio="3"
-        app:layout_constraintEnd_toStartOf="@id/cv_falta_ar"
+        app:layout_constraintEnd_toStartOf="@id/button_symptom_falta_ar"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cv_febre">
+        app:layout_constraintTop_toBottomOf="@id/button_symptom_febre">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tv_arrepios_tremores"
+                android:id="@+id/tv_symptom_arrepios_tremores"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Arrepios ou\nTremores"
@@ -140,23 +140,23 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_falta_ar"
+        android:id="@+id/button_symptom_falta_ar"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="16dp"
         android:backgroundTint="@color/transparent_purple"
         app:cardCornerRadius="8dp"
-        app:layout_constraintBottom_toBottomOf="@id/cv_arrepios_tremores"
+        app:layout_constraintBottom_toBottomOf="@id/button_symptom_arrepios_tremores"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cv_arrepios_tremores"
-        app:layout_constraintTop_toTopOf="@id/cv_arrepios_tremores">
+        app:layout_constraintStart_toEndOf="@+id/button_symptom_arrepios_tremores"
+        app:layout_constraintTop_toTopOf="@id/button_symptom_arrepios_tremores">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tv_falta_ar"
+                android:id="@+id/tv_symptom_falta_ar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Falta de ar"
@@ -172,7 +172,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_paladar_ofato"
+        android:id="@+id/button_symptom_paladar_ofato"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginHorizontal="16dp"
@@ -180,17 +180,17 @@
         android:backgroundTint="@color/transparent_purple"
         app:cardCornerRadius="8dp"
         app:layout_constraintDimensionRatio="3"
-        app:layout_constraintEnd_toStartOf="@id/cv_sem_sintomas"
+        app:layout_constraintEnd_toStartOf="@id/button_negative_last_symptom"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cv_arrepios_tremores">
+        app:layout_constraintTop_toBottomOf="@id/button_symptom_arrepios_tremores">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tv_paladar_ofato"
+                android:id="@+id/tv_symptom_paladar_ofato"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Falta de paladar\nou ofato"
@@ -207,23 +207,23 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_sem_sintomas"
+        android:id="@+id/button_negative_last_symptom"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="16dp"
         android:backgroundTint="@color/transparent_purple"
         app:cardCornerRadius="8dp"
-        app:layout_constraintBottom_toBottomOf="@id/cv_paladar_ofato"
+        app:layout_constraintBottom_toBottomOf="@id/button_symptom_paladar_ofato"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cv_paladar_ofato"
-        app:layout_constraintTop_toTopOf="@id/cv_paladar_ofato">
+        app:layout_constraintStart_toEndOf="@+id/button_symptom_paladar_ofato"
+        app:layout_constraintTop_toTopOf="@id/button_symptom_paladar_ofato">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tv_sem_sintomas"
+                android:id="@+id/tv_negative_symptom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sem sintomas"
@@ -252,7 +252,7 @@
         app:layout_constraintEnd_toStartOf="@id/cv_second_next"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cv_paladar_ofato"
+        app:layout_constraintTop_toBottomOf="@id/button_symptom_paladar_ofato"
         app:layout_constraintVertical_bias="1">
 
         <androidx.constraintlayout.widget.ConstraintLayout

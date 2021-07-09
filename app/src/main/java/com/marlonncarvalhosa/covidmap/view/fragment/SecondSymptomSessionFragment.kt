@@ -1,9 +1,11 @@
 package com.marlonncarvalhosa.covidmap.view.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.marlonncarvalhosa.covidmap.R
@@ -36,10 +38,43 @@ class SecondSymptomSessionFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        TODO("Not yet implemented")
+        when (v?.id) {
+            binding?.buttonSymptomFebre?.id -> {
+                Log.d("teste", "click febre")
+                Toast.makeText(context, "click febre", Toast.LENGTH_SHORT).show()
+            }
+            binding?.buttonSymptomTosse?.id -> {
+                Log.d("teste", "click tosse")
+                Toast.makeText(context, "click tosse", Toast.LENGTH_SHORT).show()
+            }
+            binding?.buttonSymptomArrepiosTremores?.id -> {
+                Log.d("teste", "click arrepios/tremores")
+                Toast.makeText(context, "click arrepios/tremores", Toast.LENGTH_SHORT).show()
+            }
+            binding?.buttonSymptomFaltaAr?.id -> {
+                Log.d("teste", "click falda de ar")
+                Toast.makeText(context, "click falda de ar", Toast.LENGTH_SHORT).show()
+            }
+            binding?.buttonSymptomPaladarOfato?.id -> {
+                Log.d("teste", "click sem paladar/ofato")
+                Toast.makeText(context, "click sem paladar/ofato", Toast.LENGTH_SHORT).show()
+            }
+            binding?.buttonNegativeLastSymptom?.id -> {
+                Log.d("teste", "click sem sintomas")
+                Toast.makeText(context, "click sem sintomas", Toast.LENGTH_SHORT).show()
+            }
+            else -> {
+            }
+        }
     }
 
     private fun setClickListeners() {
+        binding?.buttonSymptomFebre?.setOnClickListener(this)
+        binding?.buttonSymptomTosse?.setOnClickListener(this)
+        binding?.buttonSymptomArrepiosTremores?.setOnClickListener(this)
+        binding?.buttonSymptomFaltaAr?.setOnClickListener(this)
+        binding?.buttonSymptomPaladarOfato?.setOnClickListener(this)
+        binding?.buttonNegativeLastSymptom?.setOnClickListener(this)
     }
 
     override fun onDestroy() {

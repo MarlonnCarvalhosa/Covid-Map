@@ -6,7 +6,7 @@
     android:background="@color/lightGray">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_positive_covid"
+        android:id="@+id/cv_last_symptom_covid"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
@@ -52,7 +52,7 @@
         app:layout_constraintEnd_toStartOf="@id/button_negative_covid"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cv_positive_covid"
+        app:layout_constraintTop_toBottomOf="@id/cv_last_symptom_covid"
         android:focusable="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
