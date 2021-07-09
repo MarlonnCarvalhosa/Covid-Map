@@ -4,33 +4,45 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.marlonncarvalhosa.covidmap.R
+import com.marlonncarvalhosa.covidmap.databinding.FragmentStartQuizBinding
 
 class StartQuizFragment : Fragment() {
+
+    // inicializar como null para utilizar o null safety e garantir que a aplicação não vá quebrar caso alguma view seja nula
+    private var binding: FragmentStartQuizBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        val view: View = inflater.inflate(R.layout.fragment_start_quiz, container, false)
+    ): ConstraintLayout? {
+        binding = FragmentStartQuizBinding.inflate(layoutInflater)
+        return binding?.root
+    }
 
-        view.findViewById<CardView>(R.id.cv_saude_bem).setOnClickListener {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding?.cvSaudeBem?.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.quiz_container, SafeQuizFragment())
                 .disallowAddToBackStack()
                 .commit()
         }
 
-        view.findViewById<CardView>(R.id.cv_saude_mal).setOnClickListener {
+        binding?.cvSaudeMal?.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.quiz_container, FirstSymptomSessionFragment())
                 .addToBackStack("start")
                 .commit()
         }
-
-        return view
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
+    }
+
 }

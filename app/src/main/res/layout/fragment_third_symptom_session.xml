@@ -39,14 +39,14 @@
     </com.google.android.material.card.MaterialCardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_dor_garganta"
+        android:id="@+id/button_symptom_dor_garganta"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="16dp"
         android:backgroundTint="@color/transparent_purple"
         app:cardCornerRadius="8dp"
         app:layout_constraintDimensionRatio="3"
-        app:layout_constraintEnd_toStartOf="@id/cv_nariz_escorrendo"
+        app:layout_constraintEnd_toStartOf="@id/button_symptom_nariz_escorrendo"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cv_last_symptom_covid">
@@ -56,7 +56,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tv_dor_garganta"
+                android:id="@+id/tv_symptom_dor_garganta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/dor_de_garganta"
@@ -73,23 +73,23 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_nariz_escorrendo"
+        android:id="@+id/button_symptom_nariz_escorrendo"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="16dp"
         android:backgroundTint="@color/transparent_purple"
         app:cardCornerRadius="8dp"
-        app:layout_constraintBottom_toBottomOf="@id/cv_dor_garganta"
+        app:layout_constraintBottom_toBottomOf="@id/button_symptom_dor_garganta"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cv_dor_garganta"
-        app:layout_constraintTop_toTopOf="@id/cv_dor_garganta">
+        app:layout_constraintStart_toEndOf="@+id/button_symptom_dor_garganta"
+        app:layout_constraintTop_toTopOf="@id/button_symptom_dor_garganta">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tv_nariz_escorrendo"
+                android:id="@+id/tv_symptom_nariz_escorrendo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nariz escorrendo / congestão nasal"
@@ -106,7 +106,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_diarreia"
+        android:id="@+id/button_symptom_diarreia"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginHorizontal="16dp"
@@ -114,17 +114,17 @@
         android:backgroundTint="@color/transparent_purple"
         app:cardCornerRadius="8dp"
         app:layout_constraintDimensionRatio="3"
-        app:layout_constraintEnd_toStartOf="@id/cv_dor_corpo"
+        app:layout_constraintEnd_toStartOf="@id/button_symptom_dor_corpo"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cv_dor_garganta">
+        app:layout_constraintTop_toBottomOf="@id/button_symptom_dor_garganta">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tv_diarreia"
+                android:id="@+id/tv_symptom_diarreia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Diarréia"
@@ -141,23 +141,23 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_dor_corpo"
+        android:id="@+id/button_symptom_dor_corpo"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="16dp"
         android:backgroundTint="@color/transparent_purple"
         app:cardCornerRadius="8dp"
-        app:layout_constraintBottom_toBottomOf="@id/cv_diarreia"
+        app:layout_constraintBottom_toBottomOf="@id/button_symptom_diarreia"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cv_diarreia"
-        app:layout_constraintTop_toTopOf="@id/cv_diarreia">
+        app:layout_constraintStart_toEndOf="@+id/button_symptom_diarreia"
+        app:layout_constraintTop_toTopOf="@id/button_symptom_diarreia">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tv_dor_corpo"
+                android:id="@+id/tv_symptom_dor_corpo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/dores_no_corpo"
@@ -173,7 +173,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_fadiga"
+        android:id="@+id/button_symptom_fadiga"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginHorizontal="16dp"
@@ -181,17 +181,17 @@
         android:backgroundTint="@color/transparent_purple"
         app:cardCornerRadius="8dp"
         app:layout_constraintDimensionRatio="3"
-        app:layout_constraintEnd_toStartOf="@id/cv_dor_cabeca"
+        app:layout_constraintEnd_toStartOf="@id/button_symptom_dor_cabeca"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cv_diarreia">
+        app:layout_constraintTop_toBottomOf="@id/button_symptom_diarreia">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tv_fadiga"
+                android:id="@+id/tv_symptom_fadiga"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Fadiga incomum"
@@ -208,23 +208,23 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_dor_cabeca"
+        android:id="@+id/button_symptom_dor_cabeca"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="16dp"
         android:backgroundTint="@color/transparent_purple"
         app:cardCornerRadius="8dp"
-        app:layout_constraintBottom_toBottomOf="@id/cv_fadiga"
+        app:layout_constraintBottom_toBottomOf="@id/button_symptom_fadiga"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cv_fadiga"
-        app:layout_constraintTop_toTopOf="@id/cv_fadiga">
+        app:layout_constraintStart_toEndOf="@+id/button_symptom_fadiga"
+        app:layout_constraintTop_toTopOf="@id/button_symptom_fadiga">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tv_dor_cabeca"
+                android:id="@+id/tv_symptom_dor_cabeca"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Dor de cabeça"
@@ -241,7 +241,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_vermelhidao_olhos"
+        android:id="@+id/button_symptom_vermelhidao_olhos"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginHorizontal="16dp"
@@ -249,17 +249,17 @@
         android:backgroundTint="@color/transparent_purple"
         app:cardCornerRadius="8dp"
         app:layout_constraintDimensionRatio="3"
-        app:layout_constraintEnd_toStartOf="@id/cv_nauseas_vomitos"
+        app:layout_constraintEnd_toStartOf="@id/button_symptom_nausea_vomito"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cv_fadiga">
+        app:layout_constraintTop_toBottomOf="@id/button_symptom_fadiga">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tv_vermelhidao_olhos"
+                android:id="@+id/tv_symptom_vermelhidao_olhos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Vermelhidão dos olhos"
@@ -276,23 +276,23 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_nauseas_vomitos"
+        android:id="@+id/button_symptom_nausea_vomito"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="16dp"
         android:backgroundTint="@color/transparent_purple"
         app:cardCornerRadius="8dp"
-        app:layout_constraintBottom_toBottomOf="@id/cv_vermelhidao_olhos"
+        app:layout_constraintBottom_toBottomOf="@id/button_symptom_vermelhidao_olhos"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cv_vermelhidao_olhos"
-        app:layout_constraintTop_toTopOf="@id/cv_vermelhidao_olhos">
+        app:layout_constraintStart_toEndOf="@+id/button_symptom_vermelhidao_olhos"
+        app:layout_constraintTop_toTopOf="@id/button_symptom_vermelhidao_olhos">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tv_nauseas_vomitos"
+                android:id="@+id/tv_symptom_nausea_vomito"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Náusea ou vômito"
@@ -309,7 +309,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_sem_sintomas_third"
+        android:id="@+id/button_negative_symptom_third_session"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginHorizontal="16dp"
@@ -317,17 +317,17 @@
         android:backgroundTint="@color/transparent_purple"
         app:cardCornerRadius="8dp"
         app:layout_constraintDimensionRatio="3"
-        app:layout_constraintEnd_toStartOf="@id/cv_nauseas_vomitos"
+        app:layout_constraintEnd_toStartOf="@id/button_symptom_nausea_vomito"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cv_vermelhidao_olhos">
+        app:layout_constraintTop_toBottomOf="@id/button_symptom_vermelhidao_olhos">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tv_sem_sintomas_third"
+                android:id="@+id/tv_negative_symptom_third_session"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/sem_sintomas"
@@ -353,10 +353,10 @@
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="3.5"
-        app:layout_constraintEnd_toStartOf="@id/cv_third_next"
+        app:layout_constraintEnd_toStartOf="@id/cv_third_finish"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cv_sem_sintomas_third"
+        app:layout_constraintTop_toBottomOf="@id/button_negative_symptom_third_session"
         app:layout_constraintVertical_bias="1">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -382,7 +382,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_third_next"
+        android:id="@+id/cv_third_finish"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="16dp"
@@ -398,10 +398,10 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tv_third_next"
+                android:id="@+id/tv_third_finish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/avancar"
+                android:text="@string/finalizar"
                 android:textColor="@color/white"
                 android:textSize="21sp"
                 app:layout_constraintBottom_toBottomOf="parent"
