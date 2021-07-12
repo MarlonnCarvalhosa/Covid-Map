@@ -17,18 +17,18 @@ class FirebaseRepo {
         item["Localização"] = createLocation(intensity, let, lon)
         item["positivoCovid"] = quiz.positivoCovid
         item["timeStamp"] = quiz.timeStamp
-        item["febre"] = quiz.firstSymptomModel.febre
-        item["arrepiosTremore"] = quiz.firstSymptomModel.arrepiosTremore
-        item["tosse"] = quiz.firstSymptomModel.tosse
-        item["faltaDeAr"] = quiz.firstSymptomModel.faltaDeAr
-        item["faltaPaladarOfato"] = quiz.firstSymptomModel.faltaPaladarOfato
-        item["congrecaoNasal"] = quiz.secondSymptomModel.congrecaoNasal
-        item["escorrendo"] = quiz.secondSymptomModel.escorrendo
-        item["dorCorpo"] = quiz.secondSymptomModel.dorCorpo
-        item["dorCabeca"] = quiz.secondSymptomModel.dorCabeca
-        item["fadigaIncomum"] = quiz.secondSymptomModel.fadigaIncomum
-        item["vermelhidaoDosOlhos"] = quiz.secondSymptomModel.vermelhidaoDosOlhos
-        item["nauseasVomitos"] = quiz.secondSymptomModel.nauseasVomitos
+        item["febre"] = quiz.secondSymptomModel.febre
+        item["arrepiosTremore"] = quiz.secondSymptomModel.arrepiosTremore
+        item["tosse"] = quiz.secondSymptomModel.tosse
+        item["faltaDeAr"] = quiz.secondSymptomModel.faltaDeAr
+        item["faltaPaladarOfato"] = quiz.secondSymptomModel.faltaPaladarOfato
+        item["congrecaoNasal"] = quiz.thirdSymptomModel.congestaoNasal
+        item["escorrendo"] = quiz.thirdSymptomModel.diarreia
+        item["dorCorpo"] = quiz.thirdSymptomModel.dorCorpo
+        item["dorCabeca"] = quiz.thirdSymptomModel.dorCabeca
+        item["fadigaIncomum"] = quiz.thirdSymptomModel.fadigaIncomum
+        item["vermelhidaoDosOlhos"] = quiz.thirdSymptomModel.vermelhidaoDosOlhos
+        item["nauseasVomitos"] = quiz.thirdSymptomModel.nauseasVomitos
 
         Log.i("NOTIFY_CREATE_FIREBASE", "CRIANDO NEWLIST")
 

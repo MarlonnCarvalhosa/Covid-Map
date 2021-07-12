@@ -27,7 +27,7 @@ class StartQuizFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding?.cvSaudeBem?.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .replace(R.id.quiz_container, LowRiskFragment())
+                .replace(R.id.quiz_container, LowRiskContaminatedFragment())
                 .disallowAddToBackStack()
                 .commit()
         }

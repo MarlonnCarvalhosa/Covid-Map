@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="secondSessionSymptom">
+        <item>Febre</item>
+        <item>Arrepios ou tremores</item>
+        <item>Tosse</item>
+        <item>Falta de ar</item>
+        <item>Perda de paladar/ofato</item>
+        <item>Nenhum desses sintomas</item>
+    </string-array>
+
+    <string-array name="thirdSessionSymptom">
+        <item>Dor de garganta</item>
+        <item>Congestão nasal</item>
+        <item>Diarréia</item>
+        <item>Dores no corpo</item>
+        <item>Dor de cabeça</item>
+        <item>Fadiga incomum</item>
+        <item>Vermelhidão nos olhos</item>
+        <item>Náusea ou vomito</item>
+        <item>Nenhum desses sintomas</item>
+    </string-array>
+</resources>
