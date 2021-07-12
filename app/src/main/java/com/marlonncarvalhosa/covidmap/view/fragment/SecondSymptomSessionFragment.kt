@@ -12,6 +12,7 @@ import com.marlonncarvalhosa.covidmap.adapter.SecondSymptomAdapter
 import com.marlonncarvalhosa.covidmap.databinding.FragmentSecondSymptomSessionBinding
 import kotlinx.android.synthetic.main.fragment_second_symptom_session.*
 
+
 class SecondSymptomSessionFragment : Fragment() {
 
     // inicializar como null para utilizar o null safety e garantir que a aplicação não vá quebrar caso alguma view seja nula
@@ -31,7 +32,7 @@ class SecondSymptomSessionFragment : Fragment() {
 
         val symptomName: Array<String> = resources.getStringArray(R.array.secondSessionSymptom)
 
-        val secondSymptomAdapter = SecondSymptomAdapter(symptomName)
+        val secondSymptomAdapter = SecondSymptomAdapter(symptomName, requireContext())
         val gridLayout = GridLayoutManager(context, 2)
         rv_second_symptom.layoutManager = gridLayout
         rv_second_symptom.adapter = secondSymptomAdapter
