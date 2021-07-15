@@ -4,7 +4,7 @@ import com.marlonncarvalhosa.covidmap.model.CountryModel
 import retrofit2.Call
 import retrofit2.http.GET
 
-interface CountryService {
+interface ApiService {
 
     @GET("countries")
     fun list(): Call<List<CountryModel>>

@@ -9,7 +9,7 @@ import com.google.android.material.transition.platform.MaterialArcMotion
 import com.google.android.material.transition.platform.MaterialContainerTransform
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
 import com.marlonncarvalhosa.covidmap.R
-import com.marlonncarvalhosa.covidmap.api.CountryService
+import com.marlonncarvalhosa.covidmap.api.ApiService
 import com.marlonncarvalhosa.covidmap.api.RetrofitClient
 import com.marlonncarvalhosa.covidmap.model.CountryModel
 import kotlinx.android.synthetic.main.activity_brasil_status_covid.*
@@ -34,7 +34,7 @@ class BrasilStatusCovidActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val pieChart = findViewById<PieChart>(R.id.piechart)
-        val remote = RetrofitClient.createService(CountryService::class.java)
+        val remote = RetrofitClient.createService(ApiService::class.java)
         val call: Call<List<CountryModel>> = remote.list()
 
         val response = call.enqueue(object : Callback<List<CountryModel>>{

@@ -14,7 +14,7 @@ class LowRiskContaminatedFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_safe_quiz, container, false)
+        val root = inflater.inflate(R.layout.fragment_low_risk_contaminated, container, false)
 
         return root
     }
