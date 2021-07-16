@@ -12,16 +12,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.marlonncarvalhosa.covidmap.R
 import kotlinx.android.synthetic.main.item_symptom.view.*
 
-class SecondSymptomAdapter(val secondSymptomName: Array<String>, private var context: Context):
+class SecondSymptomAdapter(val secondSymptomName: Array<String>, private var context: Context) :
     RecyclerView.Adapter<SecondSymptomAdapter.ViewHolder>() {
 
     private var selectedItem = -1
 
-    class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val symptomName: TextView = itemView.findViewById(R.id.tv_symptom)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SecondSymptomAdapter.ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): SecondSymptomAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_symptom, parent, false)
         return ViewHolder(view)
     }
@@ -29,16 +32,26 @@ class SecondSymptomAdapter(val secondSymptomName: Array<String>, private var con
     override fun onBindViewHolder(holder: SecondSymptomAdapter.ViewHolder, position: Int) {
         holder.symptomName.text = secondSymptomName[position]
 
+        val list = mutableListOf<Int>()
+
         holder.itemView.button_symptom.setOnClickListener {
             selectedItem = position
+            list.add(selectedItem)
+
+            holder.itemView.button_symptom.backgroundTintList = context.let {
+                ContextCompat.getColorStateList(context, R.color.primary_purple)
+            }
+            holder.itemView.tv_symptom.setTextColor(Color.WHITE)
+
             notifyItemChanged(position)
+            Log.d("Posição", "$list")
         }
 
-        if (selectedItem == position) {
+        if (list.contains(position)) {
             holder.itemView.button_symptom.backgroundTintList = context.let {
-                ContextCompat.getColorStateList(context, R.color.primary_purple) }
+                ContextCompat.getColorStateList(context, R.color.transparent_purple)
+            }
             holder.itemView.tv_symptom.setTextColor(Color.WHITE)
-            Log.d("Posição", "${selectedItem}")
         }
 
     }
