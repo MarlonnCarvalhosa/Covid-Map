@@ -39,7 +39,7 @@ class SecondSymptomAdapter(val secondSymptomName: Array<String>, private var con
             list.add(selectedItem)
 
             holder.itemView.button_symptom.backgroundTintList = context.let {
-                ContextCompat.getColorStateList(context, R.color.primary_purple)
+                ContextCompat.getColorStateList(context, R.color.primary_red)
             }
             holder.itemView.tv_symptom.setTextColor(Color.WHITE)
 
@@ -49,7 +49,7 @@ class SecondSymptomAdapter(val secondSymptomName: Array<String>, private var con
 
         if (list.contains(position)) {
             holder.itemView.button_symptom.backgroundTintList = context.let {
-                ContextCompat.getColorStateList(context, R.color.transparent_purple)
+                ContextCompat.getColorStateList(context, R.color.transparent_red)
             }
             holder.itemView.tv_symptom.setTextColor(Color.WHITE)
         }
