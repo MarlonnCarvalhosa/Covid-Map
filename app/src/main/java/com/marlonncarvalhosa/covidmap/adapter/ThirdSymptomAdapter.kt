@@ -19,7 +19,7 @@ class ThirdSymptomAdapter(
     lateinit var binding: ItemSymptomBinding
     inner class ViewHolder(binding: ItemSymptomBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(thirdSymptomName: ThirdSymptomModel) {
-            binding.txtSymptomName.text = thirdSymptomName.toString()
+            binding.materialCheckBox.text = thirdSymptomName.toString()
         }
     }
 
