@@ -15,7 +15,7 @@ class SecondSymptomAdapter(
     lateinit var binding: ItemSymptomBinding
     inner class ViewHolder(binding: ItemSymptomBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(secondSymptomModel: SecondSymptomModel, position: Int) {
-            binding.materialCheckBox.text = secondSymptomModel.sintomas
+            binding.materialCheckBox.text = secondSymptomModel.secondSymptomName
         }
     }
 

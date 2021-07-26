@@ -5,10 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.marlonncarvalhosa.covidmap.R
@@ -16,7 +14,6 @@ import com.marlonncarvalhosa.covidmap.adapter.SecondSymptomAdapter
 import com.marlonncarvalhosa.covidmap.databinding.FragmentSecondSymptomSessionBinding
 import com.marlonncarvalhosa.covidmap.model.QuizModel
 import com.marlonncarvalhosa.covidmap.model.SecondSymptomModel
-import kotlinx.android.synthetic.main.fragment_second_symptom_session.*
 
 
 class SecondSymptomSessionFragment : Fragment(R.layout.fragment_second_symptom_session) {
@@ -57,13 +54,13 @@ class SecondSymptomSessionFragment : Fragment(R.layout.fragment_second_symptom_s
     }
 
     private fun onSymtomSelectedListener(secondSymptomModel: SecondSymptomModel) {
-        symptom[secondSymptomModel.sintomas] = true
+        symptom[secondSymptomModel.secondSymptomName] = true
         Log.d("teste", Gson().toJson(symptom))
         //atualizar o firebase
     }
 
     private fun onSymptomDesselectedListener(secondSymptomModel: SecondSymptomModel) {
-        symptom.remove(secondSymptomModel.sintomas)
+        symptom.remove(secondSymptomModel.secondSymptomName)
         Log.d("teste", Gson().toJson(symptom))
         //atualizar o firebase
     }
@@ -74,7 +71,12 @@ class SecondSymptomSessionFragment : Fragment(R.layout.fragment_second_symptom_s
     }
 
     private fun symptoms() : List<SecondSymptomModel> {
-        return listOf(SecondSymptomModel("Febre"), SecondSymptomModel("Dor de garganta"))
+        return listOf(SecondSymptomModel("Febre"),
+            SecondSymptomModel("Arrepios ou tremores"),
+            SecondSymptomModel("Tosse"),
+            SecondSymptomModel("Falta de ar"),
+            SecondSymptomModel("Perda de paladar/ofato"),
+            SecondSymptomModel("Nenhum desses sintomas"))
         //colocar os sintomas
     }
 

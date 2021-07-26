@@ -7,7 +7,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 class RetrofitClient private constructor(){
 
     companion object {
-
         private lateinit var retrofit: Retrofit
         private val baseUrl = "https://disease.sh/v3/covid-19/"
 
