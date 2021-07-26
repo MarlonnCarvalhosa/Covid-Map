@@ -14,6 +14,7 @@ import com.google.gson.Gson
 import com.marlonncarvalhosa.covidmap.R
 import com.marlonncarvalhosa.covidmap.adapter.SecondSymptomAdapter
 import com.marlonncarvalhosa.covidmap.databinding.FragmentSecondSymptomSessionBinding
+import com.marlonncarvalhosa.covidmap.model.QuizModel
 import com.marlonncarvalhosa.covidmap.model.SecondSymptomModel
 import kotlinx.android.synthetic.main.fragment_second_symptom_session.*
 
@@ -22,6 +23,7 @@ class SecondSymptomSessionFragment : Fragment(R.layout.fragment_second_symptom_s
     private var binding: FragmentSecondSymptomSessionBinding? = null
     private val symptomAdapter by lazy { SecondSymptomAdapter(::onSymtomSelectedListener, ::onSymptomDesselectedListener) }
     private val symptom: HashMap<String,Boolean> = HashMap()
+    private var quiz : QuizModel? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,17 +36,21 @@ class SecondSymptomSessionFragment : Fragment(R.layout.fragment_second_symptom_s
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        quiz = arguments?.getSerializable("quiz") as? QuizModel
+        Log.d("teste", Gson().toJson(quiz))
         binding?.rvSecondSymptom?.apply {
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             adapter = symptomAdapter
         }
 
         binding?.cvSecondNext?.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.quiz_container, ThirdSymptomSessionFragment.newInstance(symptom))
-                .addToBackStack("second")
-                .commit()
+            quiz?.let {
+                it.synthoms = symptom
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.quiz_container, ThirdSymptomSessionFragment.newInstance(it))
+                    .addToBackStack("second")
+                    .commit()
+            }
         }
         binding?.cvSecondBack?.setOnClickListener { parentFragmentManager.popBackStack("first", 1) }
         symptomAdapter.updateSymptom(symptoms())
@@ -70,5 +76,15 @@ class SecondSymptomSessionFragment : Fragment(R.layout.fragment_second_symptom_s
     private fun symptoms() : List<SecondSymptomModel> {
         return listOf(SecondSymptomModel("Febre"), SecondSymptomModel("Dor de garganta"))
         //colocar os sintomas
+    }
+
+    companion object {
+        fun newInstance(quiz : QuizModel) : SecondSymptomSessionFragment {
+            val args = Bundle()
+            args.putSerializable("quiz", quiz)
+            val fragment = SecondSymptomSessionFragment()
+            fragment.arguments = args
+            return fragment
+        }
     }
 }

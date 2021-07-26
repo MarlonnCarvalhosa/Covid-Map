@@ -15,6 +15,7 @@ import com.marlonncarvalhosa.covidmap.adapter.SecondSymptomAdapter
 import com.marlonncarvalhosa.covidmap.adapter.ThirdSymptomAdapter
 import com.marlonncarvalhosa.covidmap.databinding.FragmentSecondSymptomSessionBinding
 import com.marlonncarvalhosa.covidmap.databinding.FragmentThirdSymptomSessionBinding
+import com.marlonncarvalhosa.covidmap.model.QuizModel
 import com.marlonncarvalhosa.covidmap.model.SecondSymptomModel
 import kotlinx.android.synthetic.main.fragment_third_symptom_session.*
 
@@ -22,7 +23,7 @@ class ThirdSymptomSessionFragment : Fragment(R.layout.fragment_third_symptom_ses
     private var binding: FragmentThirdSymptomSessionBinding? = null
     private val symptomAdapter by lazy { SecondSymptomAdapter(::onSymtomSelectedListener, ::onSymptomDesselectedListener) }
     private val symptom: MutableList<SecondSymptomModel> = ArrayList()
-    private var sintomas : HashMap<*, *>? = null
+    private var quiz : QuizModel? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,9 +36,9 @@ class ThirdSymptomSessionFragment : Fragment(R.layout.fragment_third_symptom_ses
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        sintomas = arguments?.getSerializable("sintomas") as HashMap<*, *>
+        quiz = arguments?.getSerializable("quiz") as? QuizModel
 
-        Log.d("teste", Gson().toJson(sintomas))
+        Log.d("teste", Gson().toJson(quiz))
         binding?.rvThirdSymptom?.apply {
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             adapter = symptomAdapter
@@ -66,9 +67,9 @@ class ThirdSymptomSessionFragment : Fragment(R.layout.fragment_third_symptom_ses
     }
 
     companion object {
-    fun newInstance(sintomas : HashMap<String, Boolean>): ThirdSymptomSessionFragment {
+    fun newInstance(quiz : QuizModel): ThirdSymptomSessionFragment {
         val args = Bundle()
-        args.putSerializable("sintomas", sintomas)
+        args.putSerializable("quiz", quiz)
         val fragment = ThirdSymptomSessionFragment()
         fragment.arguments = args
         return fragment
