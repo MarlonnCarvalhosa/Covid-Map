@@ -8,7 +8,7 @@ import com.marlonncarvalhosa.covidmap.model.QuizModel
 
 class FirebaseRepo {
 
-    var firestore = FirebaseFirestore.getInstance()
+/*    var firestore = FirebaseFirestore.getInstance()
     private var mAuth = FirebaseAuth.getInstance().currentUser
 
     fun postQuiz(intensity: Double, let: String, lon: String, quiz: QuizModel) {
@@ -69,5 +69,5 @@ class FirebaseRepo {
                 Log.w("CREATE_QUIZ", "OnFailure Create: ", e)
                 return@addOnFailureListener
             }
-    }
+    }*/
 }

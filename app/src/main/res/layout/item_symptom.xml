@@ -11,16 +11,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:text="Febre"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/txt_symptom_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Teste"
-        android:layout_marginStart="2dp"
-        app:layout_constraintBottom_toBottomOf="@id/materialCheckBox"
-        app:layout_constraintStart_toEndOf="@+id/materialCheckBox"
-        app:layout_constraintTop_toTopOf="@id/materialCheckBox"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

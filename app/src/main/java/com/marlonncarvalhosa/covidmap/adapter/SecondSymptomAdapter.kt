@@ -14,8 +14,8 @@ class SecondSymptomAdapter(
     private var secondSymptomModel: List<SecondSymptomModel> = ArrayList()
     lateinit var binding: ItemSymptomBinding
     inner class ViewHolder(binding: ItemSymptomBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(secondSymptomModel: SecondSymptomModel) {
-            binding.txtSymptomName.text = secondSymptomModel.toString()
+        fun bind(secondSymptomModel: SecondSymptomModel, position: Int) {
+            binding.materialCheckBox.text = secondSymptomModel.sintomas
         }
     }
 
@@ -26,7 +26,7 @@ class SecondSymptomAdapter(
 
     override fun onBindViewHolder(holder: SecondSymptomAdapter.ViewHolder, position: Int) {
         val secondSymptomModel = secondSymptomModel[position]
-        holder.bind(secondSymptomModel)
+        holder.bind(secondSymptomModel, position)
         binding.materialCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
             when(isChecked) {
                 true -> onSymtomSelectedListener(secondSymptomModel)
