@@ -1,63 +1,46 @@
 package com.marlonncarvalhosa.covidmap.adapter
 
-import android.content.Context
-import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.marlonncarvalhosa.covidmap.R
-import kotlinx.android.synthetic.main.item_symptom.view.*
+import com.marlonncarvalhosa.covidmap.databinding.ItemSymptomBinding
+import com.marlonncarvalhosa.covidmap.model.SecondSymptomModel
 
-class SecondSymptomAdapter(val secondSymptomName: Array<String>, private var context: Context) :
-    RecyclerView.Adapter<SecondSymptomAdapter.ViewHolder>() {
+class SecondSymptomAdapter(
+    private val onSymtomSelectedListener : (SecondSymptomModel) -> Unit,
+    private val onSymptomDesselectedListener: (SecondSymptomModel) -> Unit )
+    : RecyclerView.Adapter<SecondSymptomAdapter.ViewHolder>() {
 
-    private var selectedItem = -1
-
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val symptomName: TextView = itemView.findViewById(R.id.tv_symptom)
+    private var secondSymptomModel: List<SecondSymptomModel> = ArrayList()
+    lateinit var binding: ItemSymptomBinding
+    inner class ViewHolder(binding: ItemSymptomBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(secondSymptomModel: SecondSymptomModel) {
+            binding.txtSymptomName.text = secondSymptomModel.toString()
+        }
     }
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): SecondSymptomAdapter.ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_symptom, parent, false)
-        return ViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SecondSymptomAdapter.ViewHolder {
+        binding = ItemSymptomBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return  ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: SecondSymptomAdapter.ViewHolder, position: Int) {
-        holder.symptomName.text = secondSymptomName[position]
-
-        val list = mutableListOf<Int>()
-
-        holder.itemView.button_symptom.setOnClickListener {
-            selectedItem = position
-            list.add(selectedItem)
-
-            holder.itemView.button_symptom.backgroundTintList = context.let {
-                ContextCompat.getColorStateList(context, R.color.primary_red)
+        val secondSymptomModel = secondSymptomModel[position]
+        holder.bind(secondSymptomModel)
+        binding.materialCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
+            when(isChecked) {
+                true -> onSymtomSelectedListener(secondSymptomModel)
+                false -> onSymptomDesselectedListener(secondSymptomModel)
             }
-            holder.itemView.tv_symptom.setTextColor(Color.WHITE)
-
-            notifyItemChanged(position)
-            Log.d("Posição", "$list")
         }
-
-        if (list.contains(position)) {
-            holder.itemView.button_symptom.backgroundTintList = context.let {
-                ContextCompat.getColorStateList(context, R.color.transparent_red)
-            }
-            holder.itemView.tv_symptom.setTextColor(Color.WHITE)
-        }
-
     }
 
-    override fun getItemCount(): Int {
-        return secondSymptomName.size
+    override fun getItemCount(): Int = secondSymptomModel.size
+
+
+    fun updateSymptom(secondSymptomModel: List<SecondSymptomModel>) {
+        this.secondSymptomModel = secondSymptomModel
+        notifyDataSetChanged()
     }
 
 }

@@ -9,8 +9,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import com.marlonncarvalhosa.covidmap.databinding.FragmentHighRiskContaminatedBinding
 
-
-class HighRiskContaminatedFragment : Fragment(){
+class HighRiskContaminatedFragment : Fragment() {
 
     private var binding: FragmentHighRiskContaminatedBinding? = null
 
@@ -20,12 +19,12 @@ class HighRiskContaminatedFragment : Fragment(){
         savedInstanceState: Bundle?
     ): ConstraintLayout? {
         binding = FragmentHighRiskContaminatedBinding.inflate(layoutInflater)
-        call()
-        startWhatsapp()
+        openCall()
+        openWhatsapp()
         return binding?.root
     }
 
-    private fun call() {
+    private fun openCall() {
         binding?.cvCall?.setOnClickListener {
             val uri: Uri = Uri.parse("tel:$136")
             val intent = Intent(Intent.ACTION_DIAL, uri)
@@ -33,7 +32,7 @@ class HighRiskContaminatedFragment : Fragment(){
         }
     }
 
-    private fun startWhatsapp(){
+    private fun openWhatsapp() {
         binding?.cvWpp?.setOnClickListener {
             val uriWpp: Uri = Uri.parse("https://api.whatsapp.com/send?phone=556199380031&text=oi&source=&data=")
             val intentWpp = Intent(Intent.ACTION_VIEW, uriWpp)
