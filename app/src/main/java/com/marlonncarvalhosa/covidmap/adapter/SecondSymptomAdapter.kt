@@ -8,7 +8,7 @@ import com.marlonncarvalhosa.covidmap.model.SecondSymptomModel
 
 class SecondSymptomAdapter(
     private val onSymtomSelectedListener : (SecondSymptomModel) -> Unit,
-    private val onSymptomDesselectedListener: (SecondSymptomModel) -> Unit )
+    private val onSymptomDesselectedListener: (SecondSymptomModel) -> Unit,)
     : RecyclerView.Adapter<SecondSymptomAdapter.ViewHolder>() {
 
     private var secondSymptomModel: List<SecondSymptomModel> = ArrayList()

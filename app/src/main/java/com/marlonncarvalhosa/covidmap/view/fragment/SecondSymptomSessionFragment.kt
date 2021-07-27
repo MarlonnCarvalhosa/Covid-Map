@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.marlonncarvalhosa.covidmap.R
@@ -14,7 +15,6 @@ import com.marlonncarvalhosa.covidmap.adapter.SecondSymptomAdapter
 import com.marlonncarvalhosa.covidmap.databinding.FragmentSecondSymptomSessionBinding
 import com.marlonncarvalhosa.covidmap.model.QuizModel
 import com.marlonncarvalhosa.covidmap.model.SecondSymptomModel
-
 
 class SecondSymptomSessionFragment : Fragment(R.layout.fragment_second_symptom_session) {
     private var binding: FragmentSecondSymptomSessionBinding? = null
@@ -37,12 +37,14 @@ class SecondSymptomSessionFragment : Fragment(R.layout.fragment_second_symptom_s
         Log.d("teste", Gson().toJson(quiz))
         binding?.rvSecondSymptom?.apply {
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            val gridLayout = GridLayoutManager(context, 2)
+            binding?.rvSecondSymptom!!.layoutManager = gridLayout
             adapter = symptomAdapter
         }
 
         binding?.cvSecondNext?.setOnClickListener {
             quiz?.let {
-                it.synthoms = symptom
+                it.secondSynthoms = symptom
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.quiz_container, ThirdSymptomSessionFragment.newInstance(it))
                     .addToBackStack("second")
@@ -77,7 +79,6 @@ class SecondSymptomSessionFragment : Fragment(R.layout.fragment_second_symptom_s
             SecondSymptomModel("Falta de ar"),
             SecondSymptomModel("Perda de paladar/ofato"),
             SecondSymptomModel("Nenhum desses sintomas"))
-        //colocar os sintomas
     }
 
     companion object {

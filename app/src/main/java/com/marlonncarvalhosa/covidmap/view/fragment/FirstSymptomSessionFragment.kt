@@ -64,6 +64,7 @@ class FirstSymptomSessionFragment: Fragment(), View.OnClickListener {
             }
         }
     }
+
     private fun setClickListeners() {
         binding?.buttonPositiveCovid?.setOnClickListener(this)
         binding?.buttonNegativeCovid?.setOnClickListener(this)

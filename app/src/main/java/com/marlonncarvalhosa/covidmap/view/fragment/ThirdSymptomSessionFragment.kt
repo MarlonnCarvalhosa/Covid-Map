@@ -1,10 +1,11 @@
-package com.marlonncarvalhosa.covidmap.view.fragment
+ package com.marlonncarvalhosa.covidmap.view.fragment
 
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,8 +19,9 @@ import com.marlonncarvalhosa.covidmap.model.ThirdSymptomModel
 class ThirdSymptomSessionFragment : Fragment(R.layout.fragment_third_symptom_session){
     private var binding: FragmentThirdSymptomSessionBinding? = null
     private val symptomAdapter by lazy { ThirdSymptomAdapter(::onThirdSymtomSelectedListener, ::onThirdSymptomDesselectedListener) }
-    private val symptom: HashMap<String,Boolean> = HashMap()
-    private var quiz : QuizModel? = null
+    private val symptom: HashMap<String, Boolean> = HashMap()
+    private val thirdSymptom: HashMap<String, Boolean> = HashMap()
+    private var quiz: QuizModel? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,12 +44,28 @@ class ThirdSymptomSessionFragment : Fragment(R.layout.fragment_third_symptom_ses
 
         binding?.cvThirdFinish?.setOnClickListener {
             quiz?.let {
-                it.synthoms = symptom
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.quiz_container, HighRiskContaminatedFragment())
-                    .disallowAddToBackStack()
-                    .commit()
+                it.thirdSynthoms = thirdSymptom
+                Log.d("QUIZ", Gson().toJson(quiz))
+                if ((quiz?.contatoComInfectado == true) or (quiz?.positivoCovid == true)) {
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.quiz_container, HighRiskContaminatedFragment())
+                        .disallowAddToBackStack()
+                        .commit()
+                } else if (symptom.isNotEmpty()) {
+                    Toast.makeText(context, "Primeiro else if", Toast.LENGTH_SHORT).show()
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.quiz_container, HighRiskContaminatedFragment())
+                        .disallowAddToBackStack()
+                        .commit()
+                } else if (symptom.size > 2) {
+                    Toast.makeText(context, "Segundo else if", Toast.LENGTH_SHORT).show()
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.quiz_container, HighRiskContaminatedFragment())
+                        .disallowAddToBackStack()
+                        .commit()
+                }
             }
+
         }
         binding?.cvThirdBack?.setOnClickListener { parentFragmentManager.popBackStack("second", 1) }
         symptomAdapter.updateThirdSymptom(symptoms())
@@ -55,14 +73,14 @@ class ThirdSymptomSessionFragment : Fragment(R.layout.fragment_third_symptom_ses
     }
 
     private fun onThirdSymtomSelectedListener(thirdSymptomModel: ThirdSymptomModel) {
-        symptom[thirdSymptomModel.thirdSymptomName] = true
-        Log.d("teste", Gson().toJson(symptom))
+        thirdSymptom[thirdSymptomModel.thirdSymptomName] = true
+        Log.d("teste", Gson().toJson(thirdSymptom))
         //atualizar o firebase
     }
 
     private fun onThirdSymptomDesselectedListener(thirdSymptomModel: ThirdSymptomModel) {
-        symptom.remove(thirdSymptomModel.thirdSymptomName)
-        Log.d("teste", Gson().toJson(symptom))
+        thirdSymptom.remove(thirdSymptomModel.thirdSymptomName)
+        Log.d("teste", Gson().toJson(thirdSymptom))
         //atualizar o firebase
     }
 
@@ -81,16 +99,15 @@ class ThirdSymptomSessionFragment : Fragment(R.layout.fragment_third_symptom_ses
             ThirdSymptomModel("Vermelhidão nos olhos"),
             ThirdSymptomModel("Náusea ou vomito"),
             ThirdSymptomModel("Nenhum desses sintomas"))
-        //colocar os sintomas
     }
 
     companion object {
-    fun newInstance(quiz : QuizModel): ThirdSymptomSessionFragment {
-        val args = Bundle()
-        args.putSerializable("quiz", quiz)
-        val fragment = ThirdSymptomSessionFragment()
-        fragment.arguments = args
-        return fragment
-    }
+        fun newInstance(quiz: QuizModel): ThirdSymptomSessionFragment {
+            val args = Bundle()
+            args.putSerializable("quiz", quiz)
+            val fragment = ThirdSymptomSessionFragment()
+            fragment.arguments = args
+            return fragment
+        }
     }
 }
