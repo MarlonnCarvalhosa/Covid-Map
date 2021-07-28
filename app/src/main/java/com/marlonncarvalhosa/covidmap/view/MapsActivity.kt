@@ -115,7 +115,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
             view.findViewById<ImageButton>(R.id.iv_exit_app).setOnClickListener {
                 messageView.text = R.string.nome_do_usuario.toString()
-                Picasso.get().load(R.drawable.ic_account_circle_black_24dp__1_).fit().centerCrop()
+                Picasso.get().load(R.drawable.ic_person).fit().centerCrop()
                     .into(civ_profile)
 
                 signOutGoogle()

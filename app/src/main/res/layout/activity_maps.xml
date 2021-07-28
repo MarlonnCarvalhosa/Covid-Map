@@ -18,6 +18,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         map:fab_addButtonColorNormal="@color/primary_red"
+        map:fab_addButtonColorPressed="@color/light_red"
+        android:backgroundTint="@color/light_red"
         map:fab_labelStyle="@style/LabelStyle"
         map:fab_labelsPosition="left"
         map:layout_constraintBottom_toBottomOf="parent"
@@ -28,6 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             map:fab_colorNormal="#fff"
+            map:fab_addButtonColorPressed="@color/light_red"
             android:transitionName="quizTransition"
             map:fab_icon="@drawable/ic_inventory_black_24dp"
             map:fab_size="normal"
@@ -36,6 +39,7 @@
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fb_stats"
             android:layout_width="wrap_content"
+            map:fab_addButtonColorPressed="@color/light_red"
             android:transitionName="shared_element_to_compose"
             android:layout_height="wrap_content"
             map:fab_colorNormal="#fff"
@@ -46,6 +50,7 @@
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fb_profile"
+            map:fab_addButtonColorPressed="@color/light_red"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             map:fab_colorNormal="#fff"
