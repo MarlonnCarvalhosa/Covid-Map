@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -49,21 +48,14 @@ class ThirdSymptomSessionFragment : Fragment(R.layout.fragment_third_symptom_ses
             quiz?.let {
                 it.thirdSynthoms = thirdSymptom
                 Log.d("QUIZ", Gson().toJson(quiz))
-                if ((quiz?.contatoComInfectado == true) or (quiz?.positivoCovid == true)) {
+                if ((quiz?.contatoComInfectado == true) or (quiz?.positivoCovid == true) || (quiz?.secondSynthoms?.size!! >= 1) || thirdSymptom.size >= 2) {
                     parentFragmentManager.beginTransaction()
                         .replace(R.id.quiz_container, HighRiskContaminatedFragment())
                         .disallowAddToBackStack()
                         .commit()
-                } else if (symptom.isNotEmpty()) {
-                    Toast.makeText(context, "Primeiro else if", Toast.LENGTH_SHORT).show()
+                } else {
                     parentFragmentManager.beginTransaction()
-                        .replace(R.id.quiz_container, HighRiskContaminatedFragment())
-                        .disallowAddToBackStack()
-                        .commit()
-                } else if (symptom.size > 2) {
-                    Toast.makeText(context, "Segundo else if", Toast.LENGTH_SHORT).show()
-                    parentFragmentManager.beginTransaction()
-                        .replace(R.id.quiz_container, HighRiskContaminatedFragment())
+                        .replace(R.id.quiz_container, LowRiskContaminatedFragment())
                         .disallowAddToBackStack()
                         .commit()
                 }
