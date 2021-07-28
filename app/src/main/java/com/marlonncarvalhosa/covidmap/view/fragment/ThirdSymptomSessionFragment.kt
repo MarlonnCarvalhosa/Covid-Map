@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.marlonncarvalhosa.covidmap.R
@@ -35,10 +36,12 @@ class ThirdSymptomSessionFragment : Fragment(R.layout.fragment_third_symptom_ses
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         quiz = arguments?.getSerializable("quiz") as? QuizModel
-
         Log.d("teste", Gson().toJson(quiz))
+
         binding?.rvThirdSymptom?.apply {
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            val gridLayout = GridLayoutManager(context, 2)
+            binding?.rvThirdSymptom!!.layoutManager = gridLayout
             adapter = symptomAdapter
         }
 
@@ -65,7 +68,6 @@ class ThirdSymptomSessionFragment : Fragment(R.layout.fragment_third_symptom_ses
                         .commit()
                 }
             }
-
         }
         binding?.cvThirdBack?.setOnClickListener { parentFragmentManager.popBackStack("second", 1) }
         symptomAdapter.updateThirdSymptom(symptoms())
