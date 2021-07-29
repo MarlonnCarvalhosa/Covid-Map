@@ -48,7 +48,8 @@ class ThirdSymptomSessionFragment : Fragment(R.layout.fragment_third_symptom_ses
             quiz?.let {
                 it.thirdSynthoms = thirdSymptom
                 Log.d("QUIZ", Gson().toJson(quiz))
-                if ((quiz?.contatoComInfectado == true) or (quiz?.positivoCovid == true) || (quiz?.secondSynthoms?.size!! >= 1) || thirdSymptom.size >= 2) {
+                if ((quiz?.contatoComInfectado == true) or (quiz?.positivoCovid == true) ||
+                    (quiz?.secondSynthoms?.size!! >= 1) || (thirdSymptom.size >= 2)) {
                     parentFragmentManager.beginTransaction()
                         .replace(R.id.quiz_container, HighRiskContaminatedFragment())
                         .disallowAddToBackStack()
