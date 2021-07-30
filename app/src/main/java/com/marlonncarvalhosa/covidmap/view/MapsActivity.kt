@@ -39,6 +39,7 @@ import com.marlonncarvalhosa.covidmap.utils.FirebaseRepo
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_maps.*
+import kotlin.random.Random
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -108,7 +109,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
             messageView.text = nome
             Picasso.get().load(photo).fit().centerCrop()
-                .placeholder(R.drawable.ic_account_circle_black_24dp__1_).into(civ_profile)
+                .placeholder(R.drawable.ic_person).into(civ_profile)
 
             view.findViewById<ImageButton>(R.id.iv_close_dialog).setOnClickListener {
                 dialog.dismiss()
@@ -135,10 +136,21 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                     this, fabQuiz, fabQuiz.transitionName)
 
+                val fb = FirebaseRepo()
+                fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
+                    if (location != null) {
+                        val arr: Array<Double> = arrayOf(200.0, 150.0, 100.0, 50.0)
+                        val nextValues = Random.nextInt(1, 4)
+                        fb.postLocation(
+                            arr[nextValues],
+                            location.latitude.toString(),
+                            location.longitude.toString()
+                        )
+                    }
+                }
+
                 startActivity(intent, options.toBundle())
             }
-
-            val fb = FirebaseRepo()
 
             if (ActivityCompat.checkSelfPermission(
                     this,
