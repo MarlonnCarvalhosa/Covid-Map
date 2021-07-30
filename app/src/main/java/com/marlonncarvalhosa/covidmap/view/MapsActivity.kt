@@ -53,6 +53,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var locationCallback: LocationCallback
     private var googleSignClient: GoogleSignInClient? = null
     private var dataMap = ArrayList<WeightedLatLng>()
+    val firestore = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -226,9 +227,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
 
-        val db = FirebaseFirestore.getInstance()
-
-        db.collection("locations")
+        firestore.collection("locations")
             .get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {

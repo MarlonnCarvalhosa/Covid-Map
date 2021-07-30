@@ -7,5 +7,7 @@ data class QuizModel(
     var contatoComInfectado: Boolean = false,
     var secondSynthoms: HashMap<String, Boolean>?,
     var thirdSynthoms: HashMap<String, Boolean>?,
-    var possibleInfected: Boolean = false
+    var possibleInfected: Boolean = false,
+    var latitude: String = "",
+    var logitude: String = ""
 ) : Serializable

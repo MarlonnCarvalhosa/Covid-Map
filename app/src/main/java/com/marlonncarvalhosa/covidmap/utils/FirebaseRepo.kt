@@ -1,21 +1,18 @@
 package com.marlonncarvalhosa.covidmap.utils
 
-import android.os.Bundle
 import android.util.Log
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.marlonncarvalhosa.covidmap.model.QuizModel
-import com.marlonncarvalhosa.covidmap.view.fragment.ThirdSymptomSessionFragment
 
 class FirebaseRepo {
 
     var firestore = FirebaseFirestore.getInstance()
     private var mAuth = FirebaseAuth.getInstance().currentUser
 
-    fun postLocation(intensity: Double, let: String, lon: String) {
+    fun postLocation(intensity: Double, lat: String, lon: String) {
 
-        val item = createLocation(intensity, let, lon)
+        val item = createLocation(intensity, lat, lon)
 
         //documento do quiz
         val quiz = hashMapOf<String, Any>()
