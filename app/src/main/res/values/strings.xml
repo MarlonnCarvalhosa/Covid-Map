@@ -18,7 +18,6 @@
     <string name="sintomas_que_se_desenvolveram">Indique sintomas que se desenvolveram nas últimas 24 horas e que não são de uma condição crônica ou conhecida</string>
     <string name="febre">Febre</string>
     <string name="tosse">Tosse</string>
-    <string name="voltar">Voltar</string>
     <string name="avancar">Avançar</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -40,4 +39,6 @@
     <string name="basta_clicar_no_bot_o_abaixo_para_ligar_diretamente_ou_para_abrir_o_whatsapp_n_ncaso_seja_necess_rio_ir_at_uma_unidade_de_atendimento_proteja_se_com">Basta clicar no botão abaixo para ligar diretamente ou para abrir o Whatsapp.\n\nCaso seja necessário ir até uma unidade de atendimento, proteja-se com:</string>
     <string name="antes_de_procurar_uma_unidade_de_atendimento_hospitalar_ligue_para_a_central_de_atendimento_do_disque_sa_de_ou_entre_no_whatsapp_do_minist_rio_da_sa_de_onde_poder_tirar_d_vidas_sobre_a_doen_a">Antes de procurar uma unidade de atendimento hospitalar ligue para a central de atendimento do Disque Saúde ou entre no WhatsApp do Ministério da Saúde, onde poderá tirar dúvidas sobre a doença.</string>
     <string name="baseado_no_perfil_informado_em_suas_respostas_prov_vel_que_o_seu_caso_se_enquadre_como_caso_suspeito_ou_prov_vel_da_doen_a_coronav_rus_2019_covid_19_essa_avalia_o_tem_car_ter_informativo_e_n_o_considerada_como_um_diagn_stico">Baseado no perfil informado em suas respostas, é provável que o seu caso se enquadre como caso suspeito ou provável da doença Coronavírus 2019 (COVID-19). Essa avaliação tem caráter informativo e não é considerada como um diagnóstico.</string>
+    <string name="voltar">Voltar</string>
+    <string name="avan_ar">Avançar</string>
 </resources>

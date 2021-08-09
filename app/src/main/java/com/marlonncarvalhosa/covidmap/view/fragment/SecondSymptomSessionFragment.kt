@@ -42,7 +42,7 @@ class SecondSymptomSessionFragment : Fragment(R.layout.fragment_second_symptom_s
             adapter = symptomAdapter
         }
 
-        binding?.cvSecondNext?.setOnClickListener {
+        binding?.buttonThirdFinish?.setOnClickListener {
             quiz?.let {
                 it.secondSynthoms = symptom
                 parentFragmentManager.beginTransaction()
@@ -51,7 +51,7 @@ class SecondSymptomSessionFragment : Fragment(R.layout.fragment_second_symptom_s
                     .commit()
             }
         }
-        binding?.cvSecondBack?.setOnClickListener { parentFragmentManager.popBackStack("first", 1) }
+        binding?.buttonSecondBack?.setOnClickListener { parentFragmentManager.popBackStack("first", 1) }
         symptomAdapter.updateSymptom(symptoms())
     }
 

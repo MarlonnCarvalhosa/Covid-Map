@@ -44,7 +44,7 @@ class ThirdSymptomSessionFragment : Fragment(R.layout.fragment_third_symptom_ses
             adapter = symptomAdapter
         }
 
-        binding?.cvThirdFinish?.setOnClickListener {
+        binding?.buttonThirdFinish?.setOnClickListener {
             quiz?.let {
                 it.thirdSynthoms = thirdSymptom
                 Log.d("QUIZ", Gson().toJson(quiz))
@@ -63,7 +63,7 @@ class ThirdSymptomSessionFragment : Fragment(R.layout.fragment_third_symptom_ses
                 }
             }
         }
-        binding?.cvThirdBack?.setOnClickListener { parentFragmentManager.popBackStack("second", 1) }
+        binding?.buttonThirdBack?.setOnClickListener { parentFragmentManager.popBackStack("second", 1) }
         symptomAdapter.updateThirdSymptom(symptoms())
 
     }
