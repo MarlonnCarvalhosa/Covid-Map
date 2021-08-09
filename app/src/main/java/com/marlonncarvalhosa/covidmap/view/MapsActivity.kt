@@ -63,10 +63,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         getSignInGoogle()
         firebaseAuth = FirebaseAuth.getInstance()
 
+
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
@@ -76,7 +80,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         openQuiz()
 
-        val fab = findViewById<FloatingActionButton>(R.id.fb_stats)
+        val fab = binding.fbStats
         fab.setOnClickListener {
             val intent = Intent(this, BrasilStatusCovidActivity::class.java)
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
@@ -132,7 +136,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun openQuiz() {
         if (firebaseAuth.currentUser != null) {
-            val fabQuiz = findViewById<FloatingActionButton>(R.id.fb_quiz)
+            val fabQuiz = binding.fbQuiz
             fabQuiz.setOnClickListener {
                 val intent = Intent(this, QuizActivity::class.java)
                 val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
