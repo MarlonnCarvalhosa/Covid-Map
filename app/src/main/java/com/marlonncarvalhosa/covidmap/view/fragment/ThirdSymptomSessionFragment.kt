@@ -1,11 +1,16 @@
  package com.marlonncarvalhosa.covidmap.view.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,14 +20,21 @@ import com.marlonncarvalhosa.covidmap.adapter.ThirdSymptomAdapter
 import com.marlonncarvalhosa.covidmap.databinding.FragmentThirdSymptomSessionBinding
 import com.marlonncarvalhosa.covidmap.model.QuizModel
 import com.marlonncarvalhosa.covidmap.model.ThirdSymptomModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
+import kotlin.coroutines.EmptyCoroutineContext.get
 
  class ThirdSymptomSessionFragment : Fragment(R.layout.fragment_third_symptom_session){
 
+    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "location")
     private var binding: FragmentThirdSymptomSessionBinding? = null
     private val symptomAdapter by lazy { ThirdSymptomAdapter(::onThirdSymtomSelectedListener, ::onThirdSymptomDesselectedListener) }
     private val symptom: HashMap<String, Boolean> = HashMap()
     private val thirdSymptom: HashMap<String, Boolean> = HashMap()
     private var quiz: QuizModel? = null
+     var teste = ""
+     val LAT_KEY = stringPreferencesKey("LATITUDE")
 
      override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,6 +68,13 @@ import com.marlonncarvalhosa.covidmap.model.ThirdSymptomModel
                         .replace(R.id.quiz_container, HighRiskContaminatedFragment())
                         .disallowAddToBackStack()
                         .commit()
+
+                    val getSound: Flow<Boolean>
+                    teste = context?.dataStore?.data?.map {
+                        it[LAT_KEY] ?: true
+                    }
+
+                    Log.d("LATITUDE", teste)
                 } else {
                     parentFragmentManager.beginTransaction()
                         .replace(R.id.quiz_container, LowRiskContaminatedFragment())
@@ -68,6 +87,13 @@ import com.marlonncarvalhosa.covidmap.model.ThirdSymptomModel
         symptomAdapter.updateThirdSymptom(symptoms())
 
     }
+
+
+     private suspend fun readData(key: String): String? {
+         val prefsKey = stringPreferencesKey(key)
+         val prefs = context?.dataStore?.data?.first()
+         return prefs!![prefsKey]
+     }
 
     private fun onThirdSymtomSelectedListener(thirdSymptomModel: ThirdSymptomModel) {
         thirdSymptom[thirdSymptomModel.thirdSymptomName] = true
