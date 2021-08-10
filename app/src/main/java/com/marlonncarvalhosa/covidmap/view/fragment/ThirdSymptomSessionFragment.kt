@@ -16,14 +16,15 @@ import com.marlonncarvalhosa.covidmap.databinding.FragmentThirdSymptomSessionBin
 import com.marlonncarvalhosa.covidmap.model.QuizModel
 import com.marlonncarvalhosa.covidmap.model.ThirdSymptomModel
 
-class ThirdSymptomSessionFragment : Fragment(R.layout.fragment_third_symptom_session){
+ class ThirdSymptomSessionFragment : Fragment(R.layout.fragment_third_symptom_session){
+
     private var binding: FragmentThirdSymptomSessionBinding? = null
     private val symptomAdapter by lazy { ThirdSymptomAdapter(::onThirdSymtomSelectedListener, ::onThirdSymptomDesselectedListener) }
     private val symptom: HashMap<String, Boolean> = HashMap()
     private val thirdSymptom: HashMap<String, Boolean> = HashMap()
     private var quiz: QuizModel? = null
 
-    override fun onCreateView(
+     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?

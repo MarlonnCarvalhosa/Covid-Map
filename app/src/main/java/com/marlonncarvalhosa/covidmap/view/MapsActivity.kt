@@ -15,7 +15,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
-import com.getbase.floatingactionbutton.FloatingActionButton
+import androidx.datastore.core.DataStore
+import androidx.datastore.dataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -35,15 +41,17 @@ import com.google.maps.android.heatmaps.WeightedLatLng
 import com.marlonncarvalhosa.covidmap.R
 import com.marlonncarvalhosa.covidmap.databinding.ActivityMapsBinding
 import com.marlonncarvalhosa.covidmap.dialog.DialogLogin
-import com.marlonncarvalhosa.covidmap.model.QuizModel
 import com.marlonncarvalhosa.covidmap.utils.FirebaseRepo
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_maps.*
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
+    private val dataStore: DataStore<Preferences> by preferencesDataStore("location")
     private var TAG = "MAPSACTIVITY"
     private lateinit var firebaseAuth: FirebaseAuth
     private val LOCATION_PERMISSION_REQUEST = 1
@@ -55,22 +63,23 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private var googleSignClient: GoogleSignInClient? = null
     private var dataMap = ArrayList<WeightedLatLng>()
     val firestore = FirebaseFirestore.getInstance()
+    companion object{
+        val LAT_KEY = stringPreferencesKey("LATITUDE")
+        val LONG_KEY = stringPreferencesKey("LOGITUDE")
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMapsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        binding = ActivityMapsBinding.inflate(layoutInflater).apply {
+            setContentView(root)
+        }
         getSignInGoogle()
         firebaseAuth = FirebaseAuth.getInstance()
-
-
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
-
-
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
@@ -93,6 +102,20 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             getLocationAccess()
             onMapReady(mMap)
         }
+    }
+
+    private suspend fun saveData(lat: String, long: String) {
+        dataStore.edit { settings ->
+            settings[LAT_KEY] = lat
+            settings[LONG_KEY] = long
+            Log.d("LOCATION", "Latitude ${settings[LAT_KEY].toString()}, Longitude ${settings[LONG_KEY].toString()}")
+        }
+    }
+
+    suspend fun readData(key: String): String? {
+        val prefsKey = stringPreferencesKey(key)
+        val prefs = dataStore.data.first()
+        return prefs[prefsKey]
     }
 
     private fun openProfile() {
@@ -145,6 +168,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 val fb = FirebaseRepo()
                 fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
                     if (location != null) {
+                        lifecycleScope.launch {
+                            val lat = location.latitude.toString()
+                            val long = location.longitude.toString()
+                            saveData(lat, long)
+                        }
+
                         val arr: Array<Double> = arrayOf(200.0, 150.0, 100.0, 50.0)
                         val nextValues = Random.nextInt(1, 4)
                         fb.postLocation(
