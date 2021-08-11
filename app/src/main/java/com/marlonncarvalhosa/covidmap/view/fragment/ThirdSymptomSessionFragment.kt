@@ -39,6 +39,8 @@ import java.util.prefs.Preferences
     private val fireRepo = FirebaseRepo()
      var teste = ""
      private val dataStoreManager by lazy { DataStoreManager(requireContext()) }
+     private var latitude = 0.0
+     private var longitude = 0.0
      override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -54,10 +56,13 @@ import java.util.prefs.Preferences
 
         dataStoreManager.getLatitudeFlow.asLiveData().observe(viewLifecycleOwner, Observer {
             Log.d("LOCATION", it.toString()) // latitude
+            this.latitude = it
         })
         dataStoreManager.getLongitudeFlow.asLiveData().observe(viewLifecycleOwner, Observer {
             Log.d("LOCATION", it.toString()) // longitude
+            this.longitude = it
         })
+
         binding?.rvThirdSymptom?.apply {
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             val gridLayout = GridLayoutManager(context, 2)
@@ -77,7 +82,7 @@ import java.util.prefs.Preferences
                         .disallowAddToBackStack()
                         .commit()
 
-                    fireRepo.postLocation(50.0, "-21.191971", "-41.9087798", quiz!!)
+                    fireRepo.postLocation(50.0, latitude, longitude, quiz!!)
                     Log.d("LATITUDE", teste)
                 } else {
                     parentFragmentManager.beginTransaction()

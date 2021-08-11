@@ -4,26 +4,27 @@ import android.util.Log
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.gson.Gson
 import com.marlonncarvalhosa.covidmap.model.QuizModel
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.HashMap
 
 class FirebaseRepo {
 
     var firestore = FirebaseFirestore.getInstance()
     private var mAuth = FirebaseAuth.getInstance().currentUser
 
-    fun postLocation(intensity: Double, lat: String, lon: String, hashSymptom: QuizModel) {
+    fun postLocation(intensity: Double, latitude: Double, longitude: Double, quiz: QuizModel) {
+            quiz.latitude = latitude
+            quiz.longitude = longitude
+            quiz.intensity= intensity
+            quiz.userId = mAuth?.uid.toString()
+            quiz.timeStamp = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.getDefault()).format(Date())
 
-        val item = createLocation(intensity, lat, lon)
-
-        //Array com os sintomas selecionados
-
-
-        //Pergunta se estar bem ou não
-
-        Log.i("NOTIFY_CREATE_FIREBASE", "CRIANDO NEWLIST")
-
-        firestore.collection("locations")
-            .add(item)
+        firestore.collection("respostas")
+            .document(mAuth?.uid.toString())
+            .set(quiz)
             .addOnSuccessListener {
                 Log.d("CREATE_FIREBASE", "OnSuccess Created Location Quiz")
 
