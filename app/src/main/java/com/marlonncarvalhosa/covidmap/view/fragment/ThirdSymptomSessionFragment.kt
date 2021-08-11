@@ -20,10 +20,7 @@ import com.marlonncarvalhosa.covidmap.adapter.ThirdSymptomAdapter
 import com.marlonncarvalhosa.covidmap.databinding.FragmentThirdSymptomSessionBinding
 import com.marlonncarvalhosa.covidmap.model.QuizModel
 import com.marlonncarvalhosa.covidmap.model.ThirdSymptomModel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.map
-import kotlin.coroutines.EmptyCoroutineContext.get
+import com.marlonncarvalhosa.covidmap.utils.FirebaseRepo
 
  class ThirdSymptomSessionFragment : Fragment(R.layout.fragment_third_symptom_session){
 
@@ -33,8 +30,9 @@ import kotlin.coroutines.EmptyCoroutineContext.get
     private val symptom: HashMap<String, Boolean> = HashMap()
     private val thirdSymptom: HashMap<String, Boolean> = HashMap()
     private var quiz: QuizModel? = null
-     var teste = ""
-     val LAT_KEY = stringPreferencesKey("LATITUDE")
+    private val fireRepo = FirebaseRepo()
+    var teste = ""
+    val LAT_KEY = stringPreferencesKey("LATITUDE")
 
      override fun onCreateView(
         inflater: LayoutInflater,
@@ -69,11 +67,7 @@ import kotlin.coroutines.EmptyCoroutineContext.get
                         .disallowAddToBackStack()
                         .commit()
 
-                    val getSound: Flow<Boolean>
-                    teste = context?.dataStore?.data?.map {
-                        it[LAT_KEY] ?: true
-                    }
-
+                    fireRepo.postLocation(50.0, "-21.191971", "-41.9087798", hashSetOf<String>(quiz.toString()))
                     Log.d("LATITUDE", teste)
                 } else {
                     parentFragmentManager.beginTransaction()
@@ -88,12 +82,11 @@ import kotlin.coroutines.EmptyCoroutineContext.get
 
     }
 
-
-     private suspend fun readData(key: String): String? {
-         val prefsKey = stringPreferencesKey(key)
-         val prefs = context?.dataStore?.data?.first()
-         return prefs!![prefsKey]
-     }
+//     private suspend fun readData(key: String): String? {
+//         val prefsKey = stringPreferencesKey(key)
+//         val prefs = context?.dataStore?.data?.first()
+//         return prefs!![prefsKey]
+//     }
 
     private fun onThirdSymtomSelectedListener(thirdSymptomModel: ThirdSymptomModel) {
         thirdSymptom[thirdSymptomModel.thirdSymptomName] = true

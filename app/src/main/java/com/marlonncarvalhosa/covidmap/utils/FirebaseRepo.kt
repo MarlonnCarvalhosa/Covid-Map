@@ -10,26 +10,16 @@ class FirebaseRepo {
     var firestore = FirebaseFirestore.getInstance()
     private var mAuth = FirebaseAuth.getInstance().currentUser
 
-    fun postLocation(intensity: Double, lat: String, lon: String) {
+    fun postLocation(intensity: Double, lat: String, lon: String, hashSymptom: HashSet<String>) {
 
         val item = createLocation(intensity, lat, lon)
 
         //documento do quiz
-        val quiz = hashMapOf<String, Any>()
+        val quiz = hashSymptom
         //Array com os sintomas selecionados
-        val sintomas = arrayListOf<String>()
 
-        sintomas.add("Dor de cabeça")
-        sintomas.add("Sem sintomas")
 
-        quiz["timestamp"] = Timestamp.now()
         //Pergunta se estar bem ou não
-        quiz["question1"] = true
-        //Se estivar mal pergunta os sitomas e marca eles
-        quiz["question2"] = sintomas
-        //Pergunta se esteve contato com alguem com covid-19
-        quiz["question3"] = false
-
 
         Log.i("NOTIFY_CREATE_FIREBASE", "CRIANDO NEWLIST")
 

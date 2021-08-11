@@ -16,7 +16,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.datastore.core.DataStore
-import androidx.datastore.dataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
@@ -176,11 +175,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
                         val arr: Array<Double> = arrayOf(200.0, 150.0, 100.0, 50.0)
                         val nextValues = Random.nextInt(1, 4)
-                        fb.postLocation(
-                            arr[nextValues],
-                            location.latitude.toString(),
-                            location.longitude.toString()
-                        )
+//                        fb.postLocation(
+//                            arr[nextValues],
+//                            location.latitude.toString(),
+//                            location.longitude.toString()
+//                        )
                     }
                 }
 
