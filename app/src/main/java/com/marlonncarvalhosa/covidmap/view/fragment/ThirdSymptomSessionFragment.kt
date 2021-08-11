@@ -8,10 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.dataStore
+import androidx.datastore.preferences.core.doublePreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.asLiveData
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
@@ -20,20 +23,22 @@ import com.marlonncarvalhosa.covidmap.adapter.ThirdSymptomAdapter
 import com.marlonncarvalhosa.covidmap.databinding.FragmentThirdSymptomSessionBinding
 import com.marlonncarvalhosa.covidmap.model.QuizModel
 import com.marlonncarvalhosa.covidmap.model.ThirdSymptomModel
+import com.marlonncarvalhosa.covidmap.utils.DataStoreManager
 import com.marlonncarvalhosa.covidmap.utils.FirebaseRepo
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
+import java.util.prefs.Preferences
 
  class ThirdSymptomSessionFragment : Fragment(R.layout.fragment_third_symptom_session){
 
-    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "location")
     private var binding: FragmentThirdSymptomSessionBinding? = null
     private val symptomAdapter by lazy { ThirdSymptomAdapter(::onThirdSymtomSelectedListener, ::onThirdSymptomDesselectedListener) }
     private val symptom: HashMap<String, Boolean> = HashMap()
     private val thirdSymptom: HashMap<String, Boolean> = HashMap()
     private var quiz: QuizModel? = null
     private val fireRepo = FirebaseRepo()
-    var teste = ""
-    val LAT_KEY = stringPreferencesKey("LATITUDE")
-
+     var teste = ""
+     private val dataStoreManager by lazy { DataStoreManager(requireContext()) }
      override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,8 +51,13 @@ import com.marlonncarvalhosa.covidmap.utils.FirebaseRepo
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         quiz = arguments?.getSerializable("quiz") as? QuizModel
-        Log.d("teste", Gson().toJson(quiz))
 
+        dataStoreManager.getLatitudeFlow.asLiveData().observe(viewLifecycleOwner, Observer {
+            Log.d("LOCATION", it.toString()) // latitude
+        })
+        dataStoreManager.getLongitudeFlow.asLiveData().observe(viewLifecycleOwner, Observer {
+            Log.d("LOCATION", it.toString()) // longitude
+        })
         binding?.rvThirdSymptom?.apply {
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             val gridLayout = GridLayoutManager(context, 2)
@@ -67,7 +77,7 @@ import com.marlonncarvalhosa.covidmap.utils.FirebaseRepo
                         .disallowAddToBackStack()
                         .commit()
 
-                    fireRepo.postLocation(50.0, "-21.191971", "-41.9087798", hashSetOf<String>(quiz.toString()))
+                    fireRepo.postLocation(50.0, "-21.191971", "-41.9087798", quiz!!)
                     Log.d("LATITUDE", teste)
                 } else {
                     parentFragmentManager.beginTransaction()
@@ -125,5 +135,10 @@ import com.marlonncarvalhosa.covidmap.utils.FirebaseRepo
             fragment.arguments = args
             return fragment
         }
+
+        private val LATITUDE = doublePreferencesKey("latitude")
+        private val LONGITUDE = doublePreferencesKey("longitude")
     }
+
+
 }

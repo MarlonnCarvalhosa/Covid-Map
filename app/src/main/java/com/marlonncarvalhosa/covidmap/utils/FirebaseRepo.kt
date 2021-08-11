@@ -4,18 +4,17 @@ import android.util.Log
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.marlonncarvalhosa.covidmap.model.QuizModel
 
 class FirebaseRepo {
 
     var firestore = FirebaseFirestore.getInstance()
     private var mAuth = FirebaseAuth.getInstance().currentUser
 
-    fun postLocation(intensity: Double, lat: String, lon: String, hashSymptom: HashSet<String>) {
+    fun postLocation(intensity: Double, lat: String, lon: String, hashSymptom: QuizModel) {
 
         val item = createLocation(intensity, lat, lon)
 
-        //documento do quiz
-        val quiz = hashSymptom
         //Array com os sintomas selecionados
 
 
@@ -28,7 +27,7 @@ class FirebaseRepo {
             .addOnSuccessListener {
                 Log.d("CREATE_FIREBASE", "OnSuccess Created Location Quiz")
 
-                createAwser(quiz, it.id)
+             /*   createAwser(quiz, it.id)*/
                 return@addOnSuccessListener
             }
             .addOnFailureListener { e ->

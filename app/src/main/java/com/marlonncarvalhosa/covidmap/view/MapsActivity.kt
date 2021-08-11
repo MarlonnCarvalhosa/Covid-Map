@@ -1,6 +1,7 @@
 package com.marlonncarvalhosa.covidmap.view
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
@@ -16,9 +17,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.doublePreferencesKey
 import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -40,17 +40,19 @@ import com.google.maps.android.heatmaps.WeightedLatLng
 import com.marlonncarvalhosa.covidmap.R
 import com.marlonncarvalhosa.covidmap.databinding.ActivityMapsBinding
 import com.marlonncarvalhosa.covidmap.dialog.DialogLogin
+import com.marlonncarvalhosa.covidmap.utils.DataStoreManager
 import com.marlonncarvalhosa.covidmap.utils.FirebaseRepo
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_maps.*
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import java.util.prefs.Preferences
 import kotlin.random.Random
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
-    private val dataStore: DataStore<Preferences> by preferencesDataStore("location")
     private var TAG = "MAPSACTIVITY"
     private lateinit var firebaseAuth: FirebaseAuth
     private val LOCATION_PERMISSION_REQUEST = 1
@@ -61,11 +63,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var locationCallback: LocationCallback
     private var googleSignClient: GoogleSignInClient? = null
     private var dataMap = ArrayList<WeightedLatLng>()
-    val firestore = FirebaseFirestore.getInstance()
-    companion object{
-        val LAT_KEY = stringPreferencesKey("LATITUDE")
-        val LONG_KEY = stringPreferencesKey("LOGITUDE")
-    }
+    private val firestore = FirebaseFirestore.getInstance()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -103,19 +102,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private suspend fun saveData(lat: String, long: String) {
-        dataStore.edit { settings ->
-            settings[LAT_KEY] = lat
-            settings[LONG_KEY] = long
-            Log.d("LOCATION", "Latitude ${settings[LAT_KEY].toString()}, Longitude ${settings[LONG_KEY].toString()}")
-        }
-    }
-
-    suspend fun readData(key: String): String? {
-        val prefsKey = stringPreferencesKey(key)
-        val prefs = dataStore.data.first()
-        return prefs[prefsKey]
-    }
 
     private fun openProfile() {
         if (FirebaseAuth.getInstance().currentUser != null) {
@@ -164,13 +150,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                     this, fabQuiz, fabQuiz.transitionName)
 
-                val fb = FirebaseRepo()
                 fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
                     if (location != null) {
                         lifecycleScope.launch {
-                            val lat = location.latitude.toString()
-                            val long = location.longitude.toString()
-                            saveData(lat, long)
+                            val lat = location.latitude
+                            val long = location.longitude
+                           val dataStore = DataStoreManager(context = this@MapsActivity)
+                            GlobalScope.launch {
+                                dataStore.saveLocation(lat, long)
+                            }
+
                         }
 
                         val arr: Array<Double> = arrayOf(200.0, 150.0, 100.0, 50.0)
@@ -341,6 +330,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 if (locationResult.locations.isNotEmpty()) {
                     val location = locationResult.lastLocation
                     val latLng = LatLng(location.latitude, location.longitude)
+                    Log.d("teste", latLng.latitude.toString())
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
                 }
             }
@@ -363,5 +353,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             locationCallback,
             null
         )
+    }
+
+    companion object {
+        private val LATITUDE = doublePreferencesKey("latitude")
+        private val LONGITUDE = doublePreferencesKey("longitude")
     }
 }
