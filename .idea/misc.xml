@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Matheus/Pictures/Covid-Map/app/src/main/res/layout/item_symptom.xml" value="0.35104166666666664" />
         <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/layout/activity_maps.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/layout/dialog_profile.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/layout/fragment_high_risk_contaminated.xml" value="0.33" />
