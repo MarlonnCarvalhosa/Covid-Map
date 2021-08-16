@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -18,9 +19,14 @@ import com.marlonncarvalhosa.covidmap.model.SecondSymptomModel
 
 class SecondSymptomSessionFragment : Fragment(R.layout.fragment_second_symptom_session) {
     private var binding: FragmentSecondSymptomSessionBinding? = null
-    private val symptomAdapter by lazy { SecondSymptomAdapter(::onSymtomSelectedListener, ::onSymptomDesselectedListener) }
-    private val symptom: HashMap<String,Boolean> = HashMap()
-    private var quiz : QuizModel? = null
+    private val symptomAdapter by lazy {
+        SecondSymptomAdapter(
+            ::onSymtomSelectedListener,
+            ::onSymptomDesselectedListener
+        )
+    }
+    private val symptom: HashMap<String, Boolean> = HashMap()
+    private var quiz: QuizModel? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,19 +42,24 @@ class SecondSymptomSessionFragment : Fragment(R.layout.fragment_second_symptom_s
         quiz = arguments?.getSerializable("quiz") as? QuizModel
         Log.d("teste", Gson().toJson(quiz))
         binding?.rvSecondSymptom?.apply {
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             val gridLayout = GridLayoutManager(context, 2)
             binding?.rvSecondSymptom!!.layoutManager = gridLayout
             adapter = symptomAdapter
         }
 
         binding?.buttonThirdFinish?.setOnClickListener {
-            quiz?.let {
-                it.secondSynthoms = symptom
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.quiz_container, ThirdSymptomSessionFragment.newInstance(it))
-                    .addToBackStack("second")
-                    .commit()
+            if (quiz?.secondSynthoms?.isNotEmpty() == true) {
+                quiz?.let {
+                    it.secondSynthoms = symptom
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.quiz_container, ThirdSymptomSessionFragment.newInstance(it))
+                        .addToBackStack("second")
+                        .commit()
+                }
+            } else {
+                Toast.makeText(requireContext(), "Marque ao menos uma opção.", Toast.LENGTH_SHORT).show()
             }
         }
         binding?.buttonSecondBack?.setOnClickListener { parentFragmentManager.popBackStack("first", 1) }
@@ -72,17 +83,19 @@ class SecondSymptomSessionFragment : Fragment(R.layout.fragment_second_symptom_s
         binding = null //retirar a referencia de view binding para evitar memory leak
     }
 
-    private fun symptoms() : List<SecondSymptomModel> {
-        return listOf(SecondSymptomModel("Febre"),
+    private fun symptoms(): List<SecondSymptomModel> {
+        return listOf(
+            SecondSymptomModel("Febre"),
             SecondSymptomModel("Arrepios ou tremores"),
             SecondSymptomModel("Tosse"),
             SecondSymptomModel("Falta de ar"),
             SecondSymptomModel("Perda de paladar/ofato"),
-            SecondSymptomModel("Nenhum desses sintomas"))
+            SecondSymptomModel("Nenhum desses sintomas")
+        )
     }
 
     companion object {
-        fun newInstance(quiz : QuizModel) : SecondSymptomSessionFragment {
+        fun newInstance(quiz: QuizModel): SecondSymptomSessionFragment {
             val args = Bundle()
             args.putSerializable("quiz", quiz)
             val fragment = SecondSymptomSessionFragment()

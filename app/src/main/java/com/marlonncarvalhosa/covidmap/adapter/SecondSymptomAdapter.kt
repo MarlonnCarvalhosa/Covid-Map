@@ -1,10 +1,8 @@
 package com.marlonncarvalhosa.covidmap.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CompoundButton
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.checkbox.MaterialCheckBox
 import com.marlonncarvalhosa.covidmap.R
@@ -48,7 +46,10 @@ class SecondSymptomAdapter(
     }
 
     private fun onRemoveAllSelected(compoundButton: CompoundButton?) {
-        holders.forEach { it.itemView.findViewById<MaterialCheckBox>(R.id.materialCheckBox).isChecked = false }
+        if (binding.materialCheckBox.isChecked) {
+            holders.forEach { it.itemView.findViewById<MaterialCheckBox>(R.id.materialCheckBox).isChecked = false }
+            compoundButton?.isChecked = true
+        }
     }
 
     private fun checkStatus(checked: Boolean, secondSymptomModel: SecondSymptomModel) {
@@ -56,13 +57,9 @@ class SecondSymptomAdapter(
             true -> onSymtomSelectedListener(secondSymptomModel)
             false -> onSymptomDesselectedListener(secondSymptomModel)
         }
-
     }
 
-
-
     override fun getItemCount(): Int = secondSymptomModel.size
-
 
     fun updateSymptom(secondSymptomModel: List<SecondSymptomModel>) {
         this.secondSymptomModel = secondSymptomModel
