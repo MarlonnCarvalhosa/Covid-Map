@@ -58,6 +58,7 @@ class SecondSymptomAdapter(
             compoundButton?.isChecked = true
             holders.forEach {
                 it.itemView.findViewById<MaterialCheckBox>(R.id.materialCheckBox).isEnabled = false
+                compoundButton?.isEnabled = true
             }
         } else {
             compoundButton?.isChecked = false
