@@ -65,7 +65,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private var dataMap = ArrayList<WeightedLatLng>()
     private val firestore = FirebaseFirestore.getInstance()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMapsBinding.inflate(layoutInflater).apply {
@@ -97,11 +96,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         ib_my_location.setOnClickListener {
-            getLocationAccess()
             onMapReady(mMap)
         }
     }
-
 
     private fun openProfile() {
         if (FirebaseAuth.getInstance().currentUser != null) {
@@ -161,14 +158,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                             }
 
                         }
-
-                        val arr: Array<Double> = arrayOf(200.0, 150.0, 100.0, 50.0)
-                        val nextValues = Random.nextInt(1, 4)
-//                        fb.postLocation(
-//                            arr[nextValues],
-//                            location.latitude.toString(),
-//                            location.longitude.toString()
-//                        )
                     }
                 }
 
@@ -248,14 +237,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
-
-        firestore.collection("locations")
+        firestore.collection("respostas")
             .get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
-
-                    val lat = document.data["lat"].toString().toDouble()
-                    val lon = document.data["lon"].toString().toDouble()
+                    val lat = document.data["latitude"].toString().toDouble()
+                    val lon = document.data["longitude"].toString().toDouble()
                     val density = document.data["intensity"].toString().toDouble()
 
                     // optional: remove edge cases like 0 population density values
@@ -321,8 +308,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun getLocationUpdates() {
         locationRequest = LocationRequest()
-        locationRequest.interval = 30000
-        locationRequest.fastestInterval = 20000
+        locationRequest.interval = 60000
+        locationRequest.fastestInterval = 60000
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
 
         locationCallback = object : LocationCallback() {

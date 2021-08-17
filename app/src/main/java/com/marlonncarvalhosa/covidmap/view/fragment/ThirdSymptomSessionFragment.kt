@@ -1,18 +1,13 @@
- package com.marlonncarvalhosa.covidmap.view.fragment
+package com.marlonncarvalhosa.covidmap.view.fragment
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.datastore.core.DataStore
-import androidx.datastore.dataStore
 import androidx.datastore.preferences.core.doublePreferencesKey
-import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
 import androidx.recyclerview.widget.GridLayoutManager
@@ -25,23 +20,25 @@ import com.marlonncarvalhosa.covidmap.model.QuizModel
 import com.marlonncarvalhosa.covidmap.model.ThirdSymptomModel
 import com.marlonncarvalhosa.covidmap.utils.DataStoreManager
 import com.marlonncarvalhosa.covidmap.utils.FirebaseRepo
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
-import java.util.prefs.Preferences
 
- class ThirdSymptomSessionFragment : Fragment(R.layout.fragment_third_symptom_session){
+class ThirdSymptomSessionFragment : Fragment(R.layout.fragment_third_symptom_session) {
 
     private var binding: FragmentThirdSymptomSessionBinding? = null
-    private val symptomAdapter by lazy { ThirdSymptomAdapter(::onThirdSymtomSelectedListener, ::onThirdSymptomDesselectedListener) }
+    private val symptomAdapter by lazy {
+        ThirdSymptomAdapter(
+            ::onThirdSymtomSelectedListener,
+            ::onThirdSymptomDesselectedListener
+        )
+    }
     private val symptom: HashMap<String, Boolean> = HashMap()
     private val thirdSymptom: HashMap<String, Boolean> = HashMap()
     private var quiz: QuizModel? = null
     private val fireRepo = FirebaseRepo()
-     var teste = ""
-     private val dataStoreManager by lazy { DataStoreManager(requireContext()) }
-     private var latitude = 0.0
-     private var longitude = 0.0
-     override fun onCreateView(
+    var teste = ""
+    private val dataStoreManager by lazy { DataStoreManager(requireContext()) }
+    private var latitude = 0.0
+    private var longitude = 0.0
+    override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -64,7 +61,8 @@ import java.util.prefs.Preferences
         })
 
         binding?.rvThirdSymptom?.apply {
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             val gridLayout = GridLayoutManager(context, 2)
             binding?.rvThirdSymptom!!.layoutManager = gridLayout
             adapter = symptomAdapter
@@ -76,13 +74,13 @@ import java.util.prefs.Preferences
                 Log.d("QUIZ", Gson().toJson(quiz))
                 if ((quiz?.contatoComInfectado == true) or (quiz?.positivoCovid == true) ||
                     (quiz?.secondSynthoms?.size!! >= 1) || (thirdSymptom.size >= 2)) {
-                        quiz?.possibleInfected = true
+                    quiz?.possibleInfected = true
                     parentFragmentManager.beginTransaction()
                         .replace(R.id.quiz_container, HighRiskContaminatedFragment())
                         .disallowAddToBackStack()
                         .commit()
 
-                    fireRepo.postLocation(50.0, latitude, longitude, quiz!!)
+                    fireRepo.postLocation(1.0, latitude, longitude, quiz!!)
                     Log.d("LATITUDE", teste)
                 } else {
                     parentFragmentManager.beginTransaction()
@@ -92,16 +90,14 @@ import java.util.prefs.Preferences
                 }
             }
         }
-        binding?.buttonThirdBack?.setOnClickListener { parentFragmentManager.popBackStack("second", 1) }
+        binding?.buttonThirdBack?.setOnClickListener {
+            parentFragmentManager.popBackStack(
+                "second",
+                1
+            )
+        }
         symptomAdapter.updateThirdSymptom(symptoms())
-
     }
-
-//     private suspend fun readData(key: String): String? {
-//         val prefsKey = stringPreferencesKey(key)
-//         val prefs = context?.dataStore?.data?.first()
-//         return prefs!![prefsKey]
-//     }
 
     private fun onThirdSymtomSelectedListener(thirdSymptomModel: ThirdSymptomModel) {
         thirdSymptom[thirdSymptomModel.thirdSymptomName] = true
@@ -120,8 +116,9 @@ import java.util.prefs.Preferences
         binding = null //retirar a referencia de view binding para evitar memory leak
     }
 
-    private fun symptoms() : List<ThirdSymptomModel> {
-        return listOf(ThirdSymptomModel("Dor de garganta"),
+    private fun symptoms(): List<ThirdSymptomModel> {
+        return listOf(
+            ThirdSymptomModel("Dor de garganta"),
             ThirdSymptomModel("Congestão nasal"),
             ThirdSymptomModel("Diarréia"),
             ThirdSymptomModel("Dores no corpo"),
@@ -129,7 +126,8 @@ import java.util.prefs.Preferences
             ThirdSymptomModel("Fadiga incomum"),
             ThirdSymptomModel("Vermelhidão nos olhos"),
             ThirdSymptomModel("Náusea ou vomito"),
-            ThirdSymptomModel("Nenhum desses sintomas"))
+            ThirdSymptomModel("Nenhum desses sintomas")
+        )
     }
 
     companion object {

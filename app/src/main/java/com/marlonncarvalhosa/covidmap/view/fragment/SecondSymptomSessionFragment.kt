@@ -1,12 +1,12 @@
 package com.marlonncarvalhosa.covidmap.view.fragment
 
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -43,6 +43,7 @@ class SecondSymptomSessionFragment : Fragment(R.layout.fragment_second_symptom_s
         super.onViewCreated(view, savedInstanceState)
         quiz = arguments?.getSerializable("quiz") as? QuizModel
         Log.d("teste", Gson().toJson(quiz))
+
         binding?.rvSecondSymptom?.apply {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -52,19 +53,20 @@ class SecondSymptomSessionFragment : Fragment(R.layout.fragment_second_symptom_s
         }
 
         binding?.buttonThirdFinish?.setOnClickListener {
-            if (quiz?.secondSynthoms?.isNotEmpty() == true) {
-                quiz?.let {
-                    it.secondSynthoms = symptom
-                    parentFragmentManager.beginTransaction()
-                        .replace(R.id.quiz_container, ThirdSymptomSessionFragment.newInstance(it))
-                        .addToBackStack("second")
-                        .commit()
-                }
-            } else {
-                Toast.makeText(requireContext(), "Marque ao menos uma opção.", Toast.LENGTH_SHORT).show()
+            quiz?.let {
+                it.secondSynthoms = symptom
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.quiz_container, ThirdSymptomSessionFragment.newInstance(it))
+                    .addToBackStack("second")
+                    .commit()
             }
         }
-        binding?.buttonSecondBack?.setOnClickListener { parentFragmentManager.popBackStack("first", 1) }
+        binding?.buttonSecondBack?.setOnClickListener {
+            parentFragmentManager.popBackStack(
+                "first",
+                1
+            )
+        }
         symptomAdapter.updateSymptom(symptoms())
     }
 
