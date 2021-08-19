@@ -3,10 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Marlonn/AndroidStudioProjects/Covid-Map/app/src/main/res/layout/fragment_second_symptom_session.xml" value="0.3416666666666667" />
         <entry key="..\:/Users/Matheus/Pictures/Covid-Map/app/src/main/res/layout/item_symptom.xml" value="0.35104166666666664" />
         <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/drawable/checkbox_checked.xml" value="0.3648148148148148" />
         <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/drawable/custom_checkbox_selector.xml" value="0.3648148148148148" />
+        <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/drawable/ic_covid.xml" value="0.5" />
+        <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/drawable/ic_mask.xml" value="0.362962962962963" />
         <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/layout/activity_maps.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/layout/dialog_profile.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/layout/fragment_high_risk_contaminated.xml" value="0.33" />
@@ -20,7 +21,7 @@
       <item index="0" class="java.lang.String" itemvalue="com.google.gson.annotations.SerializedName" />
     </list>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

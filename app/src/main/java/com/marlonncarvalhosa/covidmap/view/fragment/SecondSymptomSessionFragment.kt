@@ -1,7 +1,5 @@
 package com.marlonncarvalhosa.covidmap.view.fragment
 
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,7 +15,6 @@ import com.marlonncarvalhosa.covidmap.adapter.SecondSymptomAdapter
 import com.marlonncarvalhosa.covidmap.databinding.FragmentSecondSymptomSessionBinding
 import com.marlonncarvalhosa.covidmap.model.QuizModel
 import com.marlonncarvalhosa.covidmap.model.SecondSymptomModel
-import kotlinx.android.synthetic.main.item_symptom.*
 
 class SecondSymptomSessionFragment : Fragment(R.layout.fragment_second_symptom_session) {
     private var binding: FragmentSecondSymptomSessionBinding? = null
