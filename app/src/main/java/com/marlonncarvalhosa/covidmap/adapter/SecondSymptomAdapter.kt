@@ -1,12 +1,8 @@
 package com.marlonncarvalhosa.covidmap.adapter
 
-import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CompoundButton
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.checkbox.MaterialCheckBox
 import com.marlonncarvalhosa.covidmap.R
@@ -75,7 +71,6 @@ class SecondSymptomAdapter(
             true -> onSymtomSelectedListener(secondSymptomModel)
             false -> onSymptomDesselectedListener(secondSymptomModel)
         }
-
     }
 
     override fun getItemCount(): Int = secondSymptomModel.size
