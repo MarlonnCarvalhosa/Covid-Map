@@ -1,13 +1,18 @@
 package com.marlonncarvalhosa.covidmap.adapter
 
+import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CompoundButton
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.checkbox.MaterialCheckBox
 import com.marlonncarvalhosa.covidmap.R
 import com.marlonncarvalhosa.covidmap.databinding.ItemSymptomBinding
 import com.marlonncarvalhosa.covidmap.model.SecondSymptomModel
+import kotlin.coroutines.coroutineContext
 
 class SecondSymptomAdapter(
     private val onSymtomSelectedListener: (SecondSymptomModel) -> Unit,
