@@ -13,6 +13,7 @@
         android:layout_margin="4dp"
         android:padding="8dp"
         android:text="Symptom"
+        android:textColor="@drawable/selector_color_check"
         app:layout_constraintDimensionRatio="3"
         android:button="@null"
         android:background="@drawable/custom_checkbox_selector"
