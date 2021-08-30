@@ -1,8 +1,10 @@
 package com.marlonncarvalhosa.covidmap.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.transition.platform.MaterialArcMotion
@@ -37,7 +39,7 @@ class BrasilStatusCovidActivity : AppCompatActivity() {
         val remote = RetrofitClient.createService(ApiService::class.java)
         val call: Call<List<CountryModel>> = remote.list()
 
-        val response = call.enqueue(object : Callback<List<CountryModel>>{
+        call.enqueue(object : Callback<List<CountryModel>>{
             override fun onResponse(call: Call<List<CountryModel>>, response: Response<List<CountryModel>>) {
                 response.body()?.forEachIndexed { index, countryModel ->
                     if (response.body()!![index].country == "Brazil"){
@@ -47,20 +49,16 @@ class BrasilStatusCovidActivity : AppCompatActivity() {
                         tv_numero_mortes.text = NumberFormat.getInstance().format(Integer.parseInt(response.body()!![index].deaths))
                         tv_numero_populacao.text = NumberFormat.getInstance().format(Integer.parseInt(response.body()!![index].population))
 
-                        pieChart.addPieSlice(PieModel("Confirmados", response.body()!![index].cases.toFloat(), resources.getColor(
-                            R.color.yellow
-                        )))
-                        pieChart.addPieSlice(PieModel("Ativos", response.body()!![index].active.toFloat(), resources.getColor(
-                            R.color.blue
-                        )))
-                        pieChart.addPieSlice(PieModel("Recuperados", response.body()!![index].recovered.toFloat(), resources.getColor(
-                            R.color.green
-                        )))
-                        pieChart.addPieSlice(PieModel("Mortes", response.body()!![index].deaths.toFloat(), resources.getColor(
-                            R.color.red
-                        )))
+                        pieChart.addPieSlice(PieModel("Confirmados", response.body()!![index].cases.toFloat(),
+                            ContextCompat.getColor(applicationContext, R.color.yellow)))
+                        Log.d("TESTE", pieChart.toString())
+                        pieChart.addPieSlice(PieModel("Ativos", response.body()!![index].active.toFloat(),
+                            ContextCompat.getColor(applicationContext, R.color.blue)))
+                        pieChart.addPieSlice(PieModel("Recuperados", response.body()!![index].recovered.toFloat(),
+                            ContextCompat.getColor(applicationContext, R.color.green)))
+                        pieChart.addPieSlice(PieModel("Mortes", response.body()!![index].deaths.toFloat(),
+                            ContextCompat.getColor(applicationContext, R.color.red)))
                         pieChart.startAnimation()
-
                     }
                 }
             }
