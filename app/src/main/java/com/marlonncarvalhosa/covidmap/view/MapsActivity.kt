@@ -1,7 +1,6 @@
 package com.marlonncarvalhosa.covidmap.view
 
 import android.Manifest
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
@@ -16,10 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
-import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.doublePreferencesKey
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -41,15 +37,10 @@ import com.marlonncarvalhosa.covidmap.R
 import com.marlonncarvalhosa.covidmap.databinding.ActivityMapsBinding
 import com.marlonncarvalhosa.covidmap.dialog.DialogLogin
 import com.marlonncarvalhosa.covidmap.utils.DataStoreManager
-import com.marlonncarvalhosa.covidmap.utils.FirebaseRepo
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
-import kotlinx.android.synthetic.main.activity_maps.*
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import java.util.prefs.Preferences
-import kotlin.random.Random
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -58,7 +49,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private val LOCATION_PERMISSION_REQUEST = 1
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var mMap: GoogleMap
-    private lateinit var binding: ActivityMapsBinding
+    private  var binding: ActivityMapsBinding? = null
     private lateinit var locationRequest: LocationRequest
     private lateinit var locationCallback: LocationCallback
     private var googleSignClient: GoogleSignInClient? = null
@@ -80,22 +71,23 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
-        fb_profile.setOnClickListener {
+        binding?.fbProfile?.setOnClickListener {
             openProfile()
         }
 
-        openQuiz()
+        binding?.fbQuiz?.setOnClickListener {
+            openQuiz()
+        }
 
-        val fab = binding.fbStats
-        fab.setOnClickListener {
+        val fab = binding?.fbStats
+        fab?.setOnClickListener {
             val intent = Intent(this, BrasilStatusCovidActivity::class.java)
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                 this, fab, fab.transitionName)
-
             startActivity(intent, options.toBundle())
         }
 
-        ib_my_location.setOnClickListener {
+        binding?.ibMyLocation?.setOnClickListener {
             onMapReady(mMap)
         }
     }
@@ -105,7 +97,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             val builder = AlertDialog.Builder(this)
             val view = View.inflate(this, R.layout.dialog_profile, null)
             val messageView = view.findViewById<TextView>(R.id.tv_name_profile)
-            val civ_profile = view.findViewById<CircleImageView>(R.id.civ_profile)
+            val civProfile = view.findViewById<CircleImageView>(R.id.civ_profile)
 
             builder.setView(view)
 
@@ -120,7 +112,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
             messageView.text = nome
             Picasso.get().load(photo).fit().centerCrop()
-                .placeholder(R.drawable.ic_person).into(civ_profile)
+                .placeholder(R.drawable.ic_person).into(civProfile)
 
             view.findViewById<ImageButton>(R.id.iv_close_dialog).setOnClickListener {
                 dialog.dismiss()
@@ -128,7 +120,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             view.findViewById<ImageButton>(R.id.iv_exit_app).setOnClickListener {
                 messageView.text = R.string.nome_do_usuario.toString()
                 Picasso.get().load(R.drawable.ic_person).fit().centerCrop()
-                    .into(civ_profile)
+                    .into(civProfile)
 
                 signOutGoogle()
                 dialog.dismiss()
@@ -140,9 +132,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun openQuiz() {
-        if (firebaseAuth.currentUser != null) {
-            val fabQuiz = binding.fbQuiz
-            fabQuiz.setOnClickListener {
+        if (firebaseAuth.currentUser == null) {
+            val fabQuiz = binding?.fbQuiz
+            fabQuiz?.setOnClickListener {
                 val intent = Intent(this, QuizActivity::class.java)
                 val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
                     this, fabQuiz, fabQuiz.transitionName)
@@ -175,7 +167,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 return
             }
         } else {
-            authenticator()
+            //authenticator()
         }
     }
 

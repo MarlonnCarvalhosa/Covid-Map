@@ -102,7 +102,7 @@ class ThirdSymptomSessionFragment : Fragment(R.layout.fragment_third_symptom_ses
     private fun onThirdSymtomSelectedListener(thirdSymptomModel: ThirdSymptomModel) {
         thirdSymptom[thirdSymptomModel.thirdSymptomName] = true
         Log.d("teste", Gson().toJson(thirdSymptom))
-        //atualizar o firebase
+        //atualizar o firebase  
     }
 
     private fun onThirdSymptomDesselectedListener(thirdSymptomModel: ThirdSymptomModel) {

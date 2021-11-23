@@ -1,23 +1,26 @@
 package com.marlonncarvalhosa.covidmap.view.fragment
 
+import android.app.Fragment
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.fragment.app.Fragment
 import com.marlonncarvalhosa.covidmap.R
 import com.marlonncarvalhosa.covidmap.databinding.FragmentFirstSymptomSessionBinding
 import com.marlonncarvalhosa.covidmap.model.QuizModel
 
-class FirstSymptomSessionFragment: Fragment(), View.OnClickListener {
+class FirstSymptomSessionFragment: androidx.fragment.app.Fragment(), View.OnClickListener {
 
     // inicializar como null para utilizar o null safety e garantir que a aplicação não vá quebrar caso alguma view seja nula
     private var binding: FragmentFirstSymptomSessionBinding? = null
     private var contatoComInfectado  = false
     private var positivoCovid = false
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,6 +41,7 @@ class FirstSymptomSessionFragment: Fragment(), View.OnClickListener {
         }
         binding?.buttonFirstBack?.setOnClickListener { parentFragmentManager.popBackStack("start", 1) }
     }
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onClick(v: View?) {
         when (v?.id) {
             binding?.buttonPositiveCovid?.id -> {
