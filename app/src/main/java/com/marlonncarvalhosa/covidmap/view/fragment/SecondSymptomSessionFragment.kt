@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
@@ -41,30 +42,32 @@ class SecondSymptomSessionFragment : Fragment(R.layout.fragment_second_symptom_s
         quiz = arguments?.getSerializable("quiz") as? QuizModel
         Log.d("teste", Gson().toJson(quiz))
 
-        binding?.rvSecondSymptom?.apply {
-            layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-            val gridLayout = GridLayoutManager(context, 2)
-            binding?.rvSecondSymptom!!.layoutManager = gridLayout
-            adapter = symptomAdapter
-        }
+        initListSecondSymptom()
+        onClick()
 
+        symptomAdapter.updateSymptom(symptoms())
+    }
+
+    private fun onClick() {
         binding?.buttonThirdFinish?.setOnClickListener {
             quiz?.let {
                 it.secondSynthoms = symptom
                 parentFragmentManager.beginTransaction()
-                    .replace(R.id.quiz_container, ThirdSymptomSessionFragment.newInstance(it))
+                    .replace(R.id.fragmentContainerView, ThirdSymptomSessionFragment.newInstance(it))
                     .addToBackStack("second")
                     .commit()
             }
         }
         binding?.buttonSecondBack?.setOnClickListener {
-            parentFragmentManager.popBackStack(
-                "first",
-                1
-            )
+            findNavController().navigate(SecondSymptomSessionFragmentDirections.actionSecondSymptomSessionFragmentToFirstSymptomSessionFragment())
         }
-        symptomAdapter.updateSymptom(symptoms())
+    }
+
+    private fun initListSecondSymptom() {
+        binding?.rvSecondSymptom?.apply {
+            layoutManager = GridLayoutManager(context, 2)
+            adapter = symptomAdapter
+        }
     }
 
     private fun onSymtomSelectedListener(secondSymptomModel: SecondSymptomModel) {
@@ -77,11 +80,6 @@ class SecondSymptomSessionFragment : Fragment(R.layout.fragment_second_symptom_s
         symptom.remove(secondSymptomModel.secondSymptomName)
         Log.d("teste", Gson().toJson(symptom))
         //atualizar o firebase
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        binding = null //retirar a referencia de view binding para evitar memory leak
     }
 
     private fun symptoms(): List<SecondSymptomModel> {
@@ -103,5 +101,10 @@ class SecondSymptomSessionFragment : Fragment(R.layout.fragment_second_symptom_s
             fragment.arguments = args
             return fragment
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null //retirar a referencia de view binding para evitar memory leak
     }
 }

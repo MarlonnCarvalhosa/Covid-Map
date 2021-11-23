@@ -59,7 +59,7 @@
       android:fillType="nonZero"/>
   <path
       android:pathData="M6569.4,4222.1c464.7,-279.6 555.5,-1033.5 1446.6,-1176 -784.8,-702.8 -1868.5,393.9 -1446.6,1176z"
-      android:fillColor="@color/light_red"
+      android:fillColor="#294956"
       android:fillType="nonZero"/>
   <path
       android:pathData="M4188.6,6265.2l1737.7,-343.4c24.6,-4.9 49.3,18.4 54.7,51.7l63.6,388.6c5.4,33.3 -10.3,64.5 -35,69.5l-1712.1,338.2c-24.6,4.9 -49.2,-18.4 -54.7,-51.7l-89.1,-383.5c-5.4,-33.3 10.3,-64.6 34.9,-69.5z"

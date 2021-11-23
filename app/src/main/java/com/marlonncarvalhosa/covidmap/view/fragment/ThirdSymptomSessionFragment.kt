@@ -10,6 +10,7 @@ import androidx.datastore.preferences.core.doublePreferencesKey
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
@@ -34,10 +35,10 @@ class ThirdSymptomSessionFragment : Fragment(R.layout.fragment_third_symptom_ses
     private val thirdSymptom: HashMap<String, Boolean> = HashMap()
     private var quiz: QuizModel? = null
     private val fireRepo = FirebaseRepo()
-    var teste = ""
     private val dataStoreManager by lazy { DataStoreManager(requireContext()) }
     private var latitude = 0.0
     private var longitude = 0.0
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -51,52 +52,55 @@ class ThirdSymptomSessionFragment : Fragment(R.layout.fragment_third_symptom_ses
         super.onViewCreated(view, savedInstanceState)
         quiz = arguments?.getSerializable("quiz") as? QuizModel
 
+        onClick()
+        initListThirdSymptom()
+        getDataLatLong()
+
+        symptomAdapter.updateThirdSymptom(symptoms())
+    }
+
+    private fun getDataLatLong() {
         dataStoreManager.getLatitudeFlow.asLiveData().observe(viewLifecycleOwner, Observer {
-            Log.d("LOCATION", it.toString()) // latitude
             this.latitude = it
         })
         dataStoreManager.getLongitudeFlow.asLiveData().observe(viewLifecycleOwner, Observer {
-            Log.d("LOCATION", it.toString()) // longitude
             this.longitude = it
         })
+    }
 
+    private fun initListThirdSymptom() {
         binding?.rvThirdSymptom?.apply {
-            layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-            val gridLayout = GridLayoutManager(context, 2)
-            binding?.rvThirdSymptom!!.layoutManager = gridLayout
+            layoutManager = GridLayoutManager(context, 2)
             adapter = symptomAdapter
         }
+    }
 
+    private fun onClick() {
         binding?.buttonThirdFinish?.setOnClickListener {
             quiz?.let {
                 it.thirdSynthoms = thirdSymptom
                 Log.d("QUIZ", Gson().toJson(quiz))
                 if ((quiz?.contatoComInfectado == true) or (quiz?.positivoCovid == true) ||
-                    (quiz?.secondSynthoms?.size!! >= 1) || (thirdSymptom.size >= 2)) {
+                    (quiz?.secondSynthoms?.size!! >= 1) || (thirdSymptom.size >= 2)
+                ) {
                     quiz?.possibleInfected = true
                     parentFragmentManager.beginTransaction()
-                        .replace(R.id.quiz_container, HighRiskContaminatedFragment())
+                        .replace(R.id.fragmentContainerView, HighRiskContaminatedFragment())
                         .disallowAddToBackStack()
                         .commit()
 
                     fireRepo.postLocation(1.0, latitude, longitude, quiz!!)
-                    Log.d("LATITUDE", teste)
                 } else {
                     parentFragmentManager.beginTransaction()
-                        .replace(R.id.quiz_container, LowRiskContaminatedFragment())
+                        .replace(R.id.fragmentContainerView, LowRiskContaminatedFragment())
                         .disallowAddToBackStack()
                         .commit()
                 }
             }
         }
         binding?.buttonThirdBack?.setOnClickListener {
-            parentFragmentManager.popBackStack(
-                "second",
-                1
-            )
+            findNavController().navigate(ThirdSymptomSessionFragmentDirections.actionThirdSymptomSessionFragmentToSecondSymptomSessionFragment())
         }
-        symptomAdapter.updateThirdSymptom(symptoms())
     }
 
     private fun onThirdSymtomSelectedListener(thirdSymptomModel: ThirdSymptomModel) {
@@ -109,11 +113,6 @@ class ThirdSymptomSessionFragment : Fragment(R.layout.fragment_third_symptom_ses
         thirdSymptom.remove(thirdSymptomModel.thirdSymptomName)
         Log.d("teste", Gson().toJson(thirdSymptom))
         //atualizar o firebase
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        binding = null //retirar a referencia de view binding para evitar memory leak
     }
 
     private fun symptoms(): List<ThirdSymptomModel> {
@@ -143,5 +142,8 @@ class ThirdSymptomSessionFragment : Fragment(R.layout.fragment_third_symptom_ses
         private val LONGITUDE = doublePreferencesKey("longitude")
     }
 
-
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null //retirar a referencia de view binding para evitar memory leak
+    }
 }

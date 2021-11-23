@@ -1,15 +1,13 @@
 package com.marlonncarvalhosa.covidmap.view.fragment
 
-import android.app.Fragment
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.navigation.fragment.findNavController
 import com.marlonncarvalhosa.covidmap.R
 import com.marlonncarvalhosa.covidmap.databinding.FragmentFirstSymptomSessionBinding
 import com.marlonncarvalhosa.covidmap.model.QuizModel
@@ -20,28 +18,21 @@ class FirstSymptomSessionFragment: androidx.fragment.app.Fragment(), View.OnClic
     private var binding: FragmentFirstSymptomSessionBinding? = null
     private var contatoComInfectado  = false
     private var positivoCovid = false
-    @RequiresApi(Build.VERSION_CODES.O)
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): ConstraintLayout? {
-        binding = FragmentFirstSymptomSessionBinding.inflate(layoutInflater)
+        binding = FragmentFirstSymptomSessionBinding.inflate(inflater, container, false)
         return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setClickListeners()
-        binding?.buttonFirstNext?.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.quiz_container, SecondSymptomSessionFragment.newInstance(QuizModel(positivoCovid, contatoComInfectado, null, null)))
-                .addToBackStack("first")
-                .commit()
-        }
-        binding?.buttonFirstBack?.setOnClickListener { parentFragmentManager.popBackStack("start", 1) }
     }
-    @RequiresApi(Build.VERSION_CODES.M)
+
     override fun onClick(v: View?) {
         when (v?.id) {
             binding?.buttonPositiveCovid?.id -> {
@@ -67,6 +58,15 @@ class FirstSymptomSessionFragment: androidx.fragment.app.Fragment(), View.OnClic
             else -> {
             }
         }
+        binding?.buttonFirstNext?.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerView, SecondSymptomSessionFragment.newInstance(QuizModel(positivoCovid, contatoComInfectado, null, null)))
+                .addToBackStack("first")
+                .commit()
+
+            onDestroyView()
+        }
+        binding?.buttonFirstBack?.setOnClickListener { findNavController().navigate(FirstSymptomSessionFragmentDirections.actionFirstSymptomSessionFragmentToStartQuizFragment()) }
     }
 
     private fun setClickListeners() {
@@ -79,5 +79,10 @@ class FirstSymptomSessionFragment: androidx.fragment.app.Fragment(), View.OnClic
     override fun onDestroy() {
         super.onDestroy()
         binding = null //retirar a referencia de view binding para evitar memory leak
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }

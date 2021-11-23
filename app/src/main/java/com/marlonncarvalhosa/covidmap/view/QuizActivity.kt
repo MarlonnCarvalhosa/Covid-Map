@@ -9,30 +9,23 @@ import com.google.android.material.transition.platform.MaterialArcMotion
 import com.google.android.material.transition.platform.MaterialContainerTransform
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
 import com.marlonncarvalhosa.covidmap.R
-import com.marlonncarvalhosa.covidmap.view.fragment.StartQuizFragment
+import com.marlonncarvalhosa.covidmap.databinding.ActivityQuizBinding
 
 class QuizActivity : AppCompatActivity() {
 
-    private val manager = supportFragmentManager
+    private var binding: ActivityQuizBinding? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
-        setContentView(R.layout.activity_quiz)
+        super.onCreate(savedInstanceState)
+
+        binding = ActivityQuizBinding.inflate(layoutInflater).apply { setContentView(root) }
 
         setEnterSharedElementCallback(MaterialContainerTransformSharedElementCallback())
         window.sharedElementEnterTransition = buildTransitions()
         window.sharedElementExitTransition = buildTransitions()
         window.sharedElementReenterTransition = buildTransitions()
 
-        super.onCreate(savedInstanceState)
-
-        showFragment()
-    }
-
-    private fun showFragment() {
-        val transaction = manager.beginTransaction()
-        val fragment = StartQuizFragment()
-        transaction.replace(R.id.quiz_container, fragment)
-        transaction.commit()
     }
 
     private fun buildTransitions(): MaterialContainerTransform {
@@ -50,5 +43,10 @@ class QuizActivity : AppCompatActivity() {
             fadeMode = MaterialContainerTransform.FADE_MODE_IN
 
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
     }
 }

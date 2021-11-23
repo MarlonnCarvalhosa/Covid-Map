@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.marlonncarvalhosa.covidmap.R
 import com.marlonncarvalhosa.covidmap.databinding.FragmentStartQuizBinding
 
@@ -26,17 +27,11 @@ class StartQuizFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.cvSaudeBem?.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.quiz_container, LowRiskContaminatedFragment())
-                .disallowAddToBackStack()
-                .commit()
+            findNavController().navigate(StartQuizFragmentDirections.actionStartQuizFragmentToLowRiskContaminatedFragment())
         }
 
         binding?.cvSaudeMal?.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.quiz_container, FirstSymptomSessionFragment())
-                .addToBackStack("start")
-                .commit()
+            findNavController().navigate(StartQuizFragmentDirections.actionStartQuizFragmentToFirstSymptomSessionFragment())
         }
     }
 
@@ -44,5 +39,4 @@ class StartQuizFragment : Fragment() {
         super.onDestroy()
         binding = null
     }
-
 }

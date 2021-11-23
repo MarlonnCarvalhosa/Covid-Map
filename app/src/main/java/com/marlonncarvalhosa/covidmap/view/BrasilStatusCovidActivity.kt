@@ -84,8 +84,6 @@ class BrasilStatusCovidActivity : AppCompatActivity() {
             pathMotion = MaterialArcMotion()
             interpolator = FastOutSlowInInterpolator()
             fadeMode = MaterialContainerTransform.FADE_MODE_IN
-
         }
-
     }
 }
