@@ -28,8 +28,11 @@
         <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/drawable/ic_febre.xml" value="0.37222222222222223" />
         <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/drawable/ic_lave_as_maos.xml" value="0.37222222222222223" />
         <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/drawable/ic_mask.xml" value="0.362962962962963" />
+        <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/layout/activity_maps.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/layout/activity_quiz.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/layout/activity_splash.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/layout/dialog_login.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/layout/dialog_profile.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/layout/fragment_first_symptom_session.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/layout/fragment_high_risk_contaminated.xml" value="0.33" />

@@ -1,7 +1,9 @@
 package com.marlonncarvalhosa.covidmap.dialog
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings.Global.putString
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +18,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.marlonncarvalhosa.covidmap.R
+import com.marlonncarvalhosa.covidmap.view.MapsActivity
 
 @Suppress("DEPRECATION")
 class DialogLogin : DialogFragment() {
@@ -48,9 +51,16 @@ class DialogLogin : DialogFragment() {
         FirebaseAuth.getInstance().signInWithCredential(credencial).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 Toast.makeText(context, "Login efetuado com sucesso.", Toast.LENGTH_LONG).show()
+                startActivity(Intent(requireContext(), MapsActivity::class.java))
+                val sharedPref = activity?.getSharedPreferences("SharedPref", Context.MODE_PRIVATE)
+                val editor = sharedPref?.edit()
+                editor?.apply {
+                    putString("login", "logado")
+                }?.apply()
                 dialog?.dismiss()
             } else {
                 Toast.makeText(context, "Algo de errado no login", Toast.LENGTH_LONG).show()
+                startActivity(Intent(requireContext(), MapsActivity::class.java))
                 dialog?.dismiss()
             }
         }

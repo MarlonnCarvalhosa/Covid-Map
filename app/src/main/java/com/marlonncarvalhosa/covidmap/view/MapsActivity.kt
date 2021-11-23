@@ -58,10 +58,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMapsBinding.inflate(layoutInflater).apply {
-            setContentView(root)
-        }
+        binding = ActivityMapsBinding.inflate(layoutInflater).apply { setContentView(root) }
+
         getSignInGoogle()
+
         firebaseAuth = FirebaseAuth.getInstance()
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -71,6 +71,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
+        onClick()
+    }
+
+    private fun onClick() {
         binding?.fbProfile?.setOnClickListener {
             openProfile()
         }
@@ -79,11 +83,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             openQuiz()
         }
 
-        val fab = binding?.fbStats
-        fab?.setOnClickListener {
+        binding?.fbStats?.setOnClickListener {
             val intent = Intent(this, BrasilStatusCovidActivity::class.java)
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                this, fab, fab.transitionName)
+                this, binding?.fbStats!!, binding?.fbStats!!.transitionName
+            )
             startActivity(intent, options.toBundle())
         }
 
@@ -127,24 +131,25 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
 
         } else {
-            authenticator()
+            startActivity(Intent(this, LoginActivity::class.java))
         }
     }
 
     private fun openQuiz() {
-        if (firebaseAuth.currentUser == null) {
+        if (FirebaseAuth.getInstance().currentUser != null) {
             val fabQuiz = binding?.fbQuiz
             fabQuiz?.setOnClickListener {
                 val intent = Intent(this, QuizActivity::class.java)
                 val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                    this, fabQuiz, fabQuiz.transitionName)
+                    this, fabQuiz, fabQuiz.transitionName
+                )
 
                 fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
                     if (location != null) {
                         lifecycleScope.launch {
                             val lat = location.latitude
                             val long = location.longitude
-                           val dataStore = DataStoreManager(context = this@MapsActivity)
+                            val dataStore = DataStoreManager(context = this@MapsActivity)
                             GlobalScope.launch {
                                 dataStore.saveLocation(lat, long)
                             }
@@ -167,7 +172,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 return
             }
         } else {
-            //authenticator()
+            startActivity(Intent(this, LoginActivity::class.java))
         }
     }
 
