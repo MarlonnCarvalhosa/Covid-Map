@@ -25,7 +25,6 @@ class QuizActivity : AppCompatActivity() {
         window.sharedElementEnterTransition = buildTransitions()
         window.sharedElementExitTransition = buildTransitions()
         window.sharedElementReenterTransition = buildTransitions()
-
     }
 
     private fun buildTransitions(): MaterialContainerTransform {

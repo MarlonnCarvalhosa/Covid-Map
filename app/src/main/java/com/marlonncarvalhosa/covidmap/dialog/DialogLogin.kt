@@ -52,10 +52,10 @@ class DialogLogin : DialogFragment() {
             if (task.isSuccessful) {
                 Toast.makeText(context, "Login efetuado com sucesso.", Toast.LENGTH_LONG).show()
                 startActivity(Intent(requireContext(), MapsActivity::class.java))
-                val sharedPref = activity?.getSharedPreferences("SharedPref", Context.MODE_PRIVATE)
+                val sharedPref = activity?.getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
                 val editor = sharedPref?.edit()
                 editor?.apply {
-                    putString("login", "logado")
+                    putBoolean("login", true)
                 }?.apply()
                 dialog?.dismiss()
             } else {

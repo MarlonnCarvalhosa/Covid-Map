@@ -35,7 +35,6 @@ import com.google.maps.android.heatmaps.HeatmapTileProvider
 import com.google.maps.android.heatmaps.WeightedLatLng
 import com.marlonncarvalhosa.covidmap.R
 import com.marlonncarvalhosa.covidmap.databinding.ActivityMapsBinding
-import com.marlonncarvalhosa.covidmap.dialog.DialogLogin
 import com.marlonncarvalhosa.covidmap.utils.DataStoreManager
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
@@ -49,7 +48,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private val LOCATION_PERMISSION_REQUEST = 1
     lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var mMap: GoogleMap
-    private  var binding: ActivityMapsBinding? = null
+    private var binding: ActivityMapsBinding? = null
     private lateinit var locationRequest: LocationRequest
     private lateinit var locationCallback: LocationCallback
     private var googleSignClient: GoogleSignInClient? = null
@@ -131,35 +130,32 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
 
         } else {
-            startActivity(Intent(this, LoginActivity::class.java))
+            startActivity(Intent(this, IntroActivity::class.java))
         }
     }
 
     private fun openQuiz() {
         if (FirebaseAuth.getInstance().currentUser != null) {
-            val fabQuiz = binding?.fbQuiz
-            fabQuiz?.setOnClickListener {
-                val intent = Intent(this, QuizActivity::class.java)
-                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                    this, fabQuiz, fabQuiz.transitionName
-                )
+            val intent = Intent(this, QuizActivity::class.java)
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                this, binding?.fbQuiz!!, binding?.fbQuiz?.transitionName!!
+            )
 
-                fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
-                    if (location != null) {
-                        lifecycleScope.launch {
-                            val lat = location.latitude
-                            val long = location.longitude
-                            val dataStore = DataStoreManager(context = this@MapsActivity)
-                            GlobalScope.launch {
-                                dataStore.saveLocation(lat, long)
-                            }
-
+            fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
+                if (location != null) {
+                    lifecycleScope.launch {
+                        val lat = location.latitude
+                        val long = location.longitude
+                        val dataStore = DataStoreManager(context = this@MapsActivity)
+                        GlobalScope.launch {
+                            dataStore.saveLocation(lat, long)
                         }
                     }
                 }
-
-                startActivity(intent, options.toBundle())
             }
+
+            startActivity(intent, options.toBundle())
+
 
             if (ActivityCompat.checkSelfPermission(
                     this,
@@ -172,7 +168,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 return
             }
         } else {
-            startActivity(Intent(this, LoginActivity::class.java))
+            startActivity(Intent(this, IntroActivity::class.java))
         }
     }
 
@@ -190,11 +186,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             FirebaseAuth.getInstance().signOut()
             Toast.makeText(this, "Sign Out realizado!", Toast.LENGTH_SHORT).show()
         })
-    }
-
-    private fun authenticator() {
-        val dialog = DialogLogin()
-        dialog.show(supportFragmentManager, "DialogLogin")
     }
 
     override fun onRequestPermissionsResult(
