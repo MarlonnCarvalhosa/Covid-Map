@@ -31,7 +31,10 @@ class StartQuizFragment : Fragment() {
         }
 
         binding?.cvSaudeMal?.setOnClickListener {
-            findNavController().navigate(StartQuizFragmentDirections.actionStartQuizFragmentToFirstSymptomSessionFragment())
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerView, FirstSymptomSessionFragment())
+                .addToBackStack("start")
+                .commit()
         }
     }
 

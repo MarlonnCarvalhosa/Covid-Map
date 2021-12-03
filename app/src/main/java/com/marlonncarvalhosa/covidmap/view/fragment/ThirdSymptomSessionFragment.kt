@@ -99,7 +99,10 @@ class ThirdSymptomSessionFragment : Fragment(R.layout.fragment_third_symptom_ses
             }
         }
         binding?.buttonThirdBack?.setOnClickListener {
-            findNavController().navigate(ThirdSymptomSessionFragmentDirections.actionThirdSymptomSessionFragmentToSecondSymptomSessionFragment())
+            parentFragmentManager.popBackStack(
+                "second",
+                1
+            )
         }
     }
 
@@ -145,5 +148,10 @@ class ThirdSymptomSessionFragment : Fragment(R.layout.fragment_third_symptom_ses
     override fun onDestroy() {
         super.onDestroy()
         binding = null //retirar a referencia de view binding para evitar memory leak
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }

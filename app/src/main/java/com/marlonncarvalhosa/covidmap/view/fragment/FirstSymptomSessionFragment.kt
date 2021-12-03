@@ -32,6 +32,7 @@ class FirstSymptomSessionFragment: androidx.fragment.app.Fragment(), View.OnClic
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setClickListeners()
+        binding?.buttonFirstBack?.setOnClickListener { parentFragmentManager.popBackStack("start", 1) }
     }
 
     override fun onClick(v: View?) {
@@ -66,7 +67,6 @@ class FirstSymptomSessionFragment: androidx.fragment.app.Fragment(), View.OnClic
 
             onDestroyView()
         }
-        binding?.buttonFirstBack?.setOnClickListener { findNavController().navigate(FirstSymptomSessionFragmentDirections.actionFirstSymptomSessionFragmentToStartQuizFragment()) }
     }
 
     private fun setClickListeners() {

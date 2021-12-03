@@ -59,7 +59,10 @@ class SecondSymptomSessionFragment : Fragment(R.layout.fragment_second_symptom_s
             }
         }
         binding?.buttonSecondBack?.setOnClickListener {
-            findNavController().navigate(SecondSymptomSessionFragmentDirections.actionSecondSymptomSessionFragmentToFirstSymptomSessionFragment())
+            parentFragmentManager.popBackStack(
+                "first",
+                1
+            )
         }
     }
 
@@ -106,5 +109,10 @@ class SecondSymptomSessionFragment : Fragment(R.layout.fragment_second_symptom_s
     override fun onDestroy() {
         super.onDestroy()
         binding = null //retirar a referencia de view binding para evitar memory leak
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }
