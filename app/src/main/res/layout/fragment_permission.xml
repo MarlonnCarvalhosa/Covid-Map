@@ -95,6 +95,15 @@
         app:layout_constraintStart_toStartOf="@id/txt_info_data"
         app:layout_constraintTop_toBottomOf="@id/txt_info_data" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/txt_politic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Política de privacidade"
+        android:textColor="@color/dark_red"
+        app:layout_constraintStart_toStartOf="@id/txt_info_data"
+        app:layout_constraintTop_toBottomOf="@id/txt_general_terms" />
+
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/checkbox_general_terms"
         android:layout_width="20dp"
@@ -109,8 +118,8 @@
         android:textAlignment="textStart"
         android:textColor="#939393"
         android:textSize="13sp"
-        app:layout_constraintStart_toStartOf="@id/txt_general_terms"
-        app:layout_constraintTop_toBottomOf="@id/txt_general_terms"/>
+        app:layout_constraintStart_toStartOf="@id/txt_politic"
+        app:layout_constraintTop_toBottomOf="@id/txt_politic"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txt_aceppt_general_terms"
@@ -119,7 +128,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginEnd="24dp"
         android:fontFamily="@font/montserrat"
-        android:text="Li e aceito os termos e condições de uso."
+        android:text="Li e aceito os termos, condições de uso e a política de privacidade."
         android:textSize="11sp"
         app:layout_constraintBottom_toBottomOf="@id/checkbox_general_terms"
         app:layout_constraintEnd_toEndOf="parent"

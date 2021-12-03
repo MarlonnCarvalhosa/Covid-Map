@@ -26,7 +26,15 @@ class LowRiskContaminatedFragment : Fragment() {
                     "\n\nMantenha as condutas de precaução e prevenção, praticando a etiqueta respiratória.")
         binding?.txtLowRiskOrientation?.text = lowRiskOrientation
 
+        onClick()
+
         return binding?.root
+    }
+
+    private fun onClick() {
+        binding?.btnClose?.setOnClickListener {
+            activity?.finish()
+        }
     }
 
     override fun onDestroy() {

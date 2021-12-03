@@ -34,11 +34,10 @@ class SplashFragment : Fragment() {
             val sharedPref = activity?.getSharedPreferences("sharedPref", Context.MODE_PRIVATE)
             val getLogin = sharedPref?.getBoolean("login", false)
             val getPermission = sharedPref?.getBoolean("permission", false)
-            Toast.makeText(requireContext(), "permission $getPermission login $getLogin", Toast.LENGTH_LONG).show()
             if (getPermission != true && getLogin != true){
                 findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToPermissionFragment())
                 onDestroyView()
-            } else if (getPermission == true){
+            } else if (getPermission == true && getLogin == false){
                 findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToOnBoardingFragment())
                 onDestroyView()
             } else {

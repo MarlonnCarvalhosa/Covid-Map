@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.marlonncarvalhosa.covidmap.databinding.FragmentPermissionBinding
+import com.marlonncarvalhosa.covidmap.dialog.PoliticDialogFragment
 import com.marlonncarvalhosa.covidmap.dialog.TermsDialogFragment
 
 class PermissionFragment : Fragment() {
@@ -16,6 +17,7 @@ class PermissionFragment : Fragment() {
     private var binding: FragmentPermissionBinding? = null
 
     private val dialog = TermsDialogFragment()
+    private val dialogPolitic = PoliticDialogFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +35,9 @@ class PermissionFragment : Fragment() {
     private fun onClick() {
         binding?.txtGeneralTerms?.setOnClickListener {
             dialog.show(parentFragmentManager, dialog.tag)
+        }
+        binding?.txtPolitic?.setOnClickListener {
+            dialogPolitic.show(parentFragmentManager, dialog.tag)
         }
         binding?.btnFinishRegister?.setOnClickListener {
             if (binding?.checkboxLgdp?.isChecked!! && binding?.checkboxGeneralTerms?.isChecked!!){

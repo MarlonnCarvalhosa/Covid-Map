@@ -17,7 +17,26 @@
         android:backgroundTint="@color/primary_red"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btn_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:src="@drawable/ic_baseline_close_24"
+                android:tint="@color/white"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="20dp"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -84,7 +103,7 @@
                     android:id="@+id/txt_low_risk_orientation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="example"
+                    android:text="Baseado em suas respostas, é provável que essa situação não se enquadre com caso suspeito de sintomatico para Coronavírus 2019(COVID-19)."
                     android:paddingTop="16dp"
                     android:textAlignment="textStart"
                     android:textSize="16sp"
@@ -152,7 +171,7 @@
                     android:id="@+id/tv_distanciamento"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Mantenha o distanciamento mínimo"
+                    android:text="Mantenha o distanciamento mínimo. Evide cumprimentos com beijos e/ou apertos de mãos e lugares com aglomerações."
                     android:textSize="15sp"
                     app:layout_constraintBottom_toBottomOf="@+id/iv_distanciamento"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -176,7 +195,7 @@
                     android:id="@+id/tv_febre"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Caso tenha febre, mantenha em casa e procure um posto"
+                    android:text="Caso esteja com febre, mantenha-se em casa e procure um atendimento médico rapidamente."
                     android:textSize="15sp"
                     app:layout_constraintBottom_toBottomOf="@+id/iv_febre"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -200,7 +219,7 @@
                     android:id="@+id/tv_lave_as_maos"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Lave as mãos"
+                    android:text="Lave com frequência as mãos até a altura dos punhos, com água e sabão, ou então higienize com älcool em gel 70%."
                     android:textSize="15sp"
                     app:layout_constraintBottom_toBottomOf="@+id/iv_lave_as_maos"
                     app:layout_constraintEnd_toEndOf="parent"

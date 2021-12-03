@@ -6,6 +6,70 @@
     android:layout_height="match_parent"
     tools:context=".view.fragment.HighRiskContaminatedFragment">
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView_tool"
+        android:layout_width="match_parent"
+        android:layout_height="88dp"
+        android:layout_marginTop="-8dp"
+        app:cardCornerRadius="10dp"
+        android:backgroundTint="@color/primary_red"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btn_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:src="@drawable/ic_baseline_close_24"
+                android:tint="@color/white"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="20dp"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="0dp"
+        app:cardMaxElevation="10dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginHorizontal="16sp"
+        android:background="@color/white"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="3dp"
+        app:layout_constraintDimensionRatio="16:2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/orienta_es_sobre_o_covid_19_coronav_rus"
+                android:textColor="@color/primary_red"
+                android:textSize="17sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
     <ScrollView
         android:id="@+id/scroll_view"
         android:layout_width="match_parent"
@@ -14,44 +78,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView_tool"
         app:layout_constraintVertical_bias="0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_margin="16dp"
-                android:background="@color/white"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="3dp"
-                app:layout_constraintDimensionRatio="16:2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/orienta_es_sobre_o_covid_19_coronav_rus"
-                        android:textColor="@color/primary_red"
-                        android:textSize="17sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraint"
@@ -62,13 +94,13 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView"
                 app:layout_constraintVertical_bias="0">
 
                 <TextView
                     android:id="@+id/txt_high_risk_orientation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingTop="30dp"
                     android:text="@string/baseado_no_perfil_informado_em_suas_respostas_prov_vel_que_o_seu_caso_se_enquadre_como_caso_suspeito_ou_prov_vel_da_doen_a_coronav_rus_2019_covid_19_essa_avalia_o_tem_car_ter_informativo_e_n_o_considerada_como_um_diagn_stico"
                     android:textAlignment="textStart"
                     android:textSize="16sp"

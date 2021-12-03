@@ -35,6 +35,8 @@ import com.google.maps.android.heatmaps.HeatmapTileProvider
 import com.google.maps.android.heatmaps.WeightedLatLng
 import com.marlonncarvalhosa.covidmap.R
 import com.marlonncarvalhosa.covidmap.databinding.ActivityMapsBinding
+import com.marlonncarvalhosa.covidmap.dialog.PoliticDialogFragment
+import com.marlonncarvalhosa.covidmap.dialog.TermsDialogFragment
 import com.marlonncarvalhosa.covidmap.utils.DataStoreManager
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
@@ -54,6 +56,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private var googleSignClient: GoogleSignInClient? = null
     private var dataMap = ArrayList<WeightedLatLng>()
     private val firestore = FirebaseFirestore.getInstance()
+    private val dialogTerms = TermsDialogFragment()
+    private val dialogPolitic = PoliticDialogFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,6 +99,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+    override fun onRestart() {
+        super.onRestart()
+        onMapReady(mMap)
+    }
+
     private fun openProfile() {
         if (FirebaseAuth.getInstance().currentUser != null) {
             val builder = AlertDialog.Builder(this)
@@ -119,6 +128,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
             view.findViewById<ImageButton>(R.id.iv_close_dialog).setOnClickListener {
                 dialog.dismiss()
+            }
+            view.findViewById<ImageButton>(R.id.btn_privacy).setOnClickListener {
+                dialogPolitic.show(supportFragmentManager, dialogPolitic.tag)
+            }
+            view.findViewById<ImageButton>(R.id.btn_terms).setOnClickListener {
+                dialogTerms.show(supportFragmentManager, dialogTerms.tag)
             }
             view.findViewById<ImageButton>(R.id.iv_exit_app).setOnClickListener {
                 messageView.text = R.string.nome_do_usuario.toString()

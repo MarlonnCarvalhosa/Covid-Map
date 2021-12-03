@@ -21,7 +21,14 @@ class HighRiskContaminatedFragment : Fragment() {
         binding = FragmentHighRiskContaminatedBinding.inflate(layoutInflater)
         openCall()
         openWhatsapp()
+        onClick()
         return binding?.root
+    }
+
+    private fun onClick() {
+        binding?.btnClose?.setOnClickListener {
+            activity?.finish()
+        }
     }
 
     private fun openCall() {

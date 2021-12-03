@@ -34,18 +34,9 @@
                 android:layout_margin="16dp"
                 android:background="@drawable/ripple_effect"
                 android:backgroundTint="@color/primary_red"
+                app:tint="@color/white"
                 android:src="@drawable/ic_baseline_close_24"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageButton
-                android:id="@+id/iv_exit_app"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:background="@drawable/ripple_effect"
-                android:src="@drawable/ic_logout_black_24dp"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -78,27 +69,73 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/iv_historico"
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/btn_privacy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/historico"
-                    android:layout_margin="8dp"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
+                    android:src="@drawable/ic_privacy_menu"
+                    android:background="@color/transparent"
+                    android:layout_margin="10dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"/>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_historico"
-                    android:layout_margin="8dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/iv_historico"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="POLÍTICA DE PRIVACIDADE"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toTopOf="@+id/btn_privacy"
+                    app:layout_constraintBottom_toBottomOf="@+id/btn_privacy"
+                    app:layout_constraintStart_toEndOf="@+id/btn_privacy"
+                    android:layout_marginStart="16dp"
+                    android:textSize="14sp"/>
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/btn_terms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_use_term_menu"
+                    android:background="@color/transparent"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="@id/btn_privacy"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_privacy"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TERMOS E CONDIÇÕES GERAIS"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toTopOf="@+id/btn_terms"
+                    app:layout_constraintBottom_toBottomOf="@+id/btn_terms"
+                    app:layout_constraintStart_toEndOf="@+id/btn_terms"
+                    android:layout_marginStart="16dp"
+                    android:textSize="14sp"/>
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/iv_exit_app"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_exit_account"
+                    android:background="@color/transparent"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="@id/btn_terms"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_terms"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SAIR"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toTopOf="@+id/iv_exit_app"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_exit_app"
+                    app:layout_constraintStart_toEndOf="@+id/iv_exit_app"
+                    android:layout_marginStart="16dp"
+                    android:textSize="14sp"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

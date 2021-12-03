@@ -9,9 +9,9 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
-        android:icon="@mipmap/ic_icon_app_red"
+        android:icon="@mipmap/ic_icone"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_icon_app_red_round"
+        android:roundIcon="@mipmap/ic_icone"
         android:supportsRtl="true"
         android:theme="@style/Theme.CovidMap">
         <activity
