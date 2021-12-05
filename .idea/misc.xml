@@ -29,6 +29,8 @@
         <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/drawable-v24/checkbox_unchecked.xml" value="0.20925925925925926" />
         <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/drawable-v24/drawable_background_dialog.xml" value="0.3828125" />
         <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/drawable-v24/ic_baseline_check_circle_white.xml" value="0.262037037037037" />
+        <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/drawable-v24/ic_cancel_white_24dp.xml" value="0.3277777777777778" />
+        <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/drawable-v24/ic_check_white.xml" value="0.3277777777777778" />
         <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/drawable/bg_bottom_border_red.xml" value="0.262037037037037" />
         <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/drawable/bg_buttom_radius.xml" value="0.262037037037037" />
         <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/drawable/checkbox_check.xml" value="0.262037037037037" />
@@ -36,6 +38,7 @@
         <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/drawable/checkbox_not_checked.xml" value="0.262037037037037" />
         <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/drawable/custom_checkbox_selector.xml" value="0.3648148148148148" />
         <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/drawable/ic_baseline_check_24.xml" value="0.20925925925925926" />
+        <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/drawable/ic_baseline_check_circle_outline_24.xml" value="0.3277777777777778" />
         <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/drawable/ic_covid.xml" value="0.5" />
         <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/drawable/ic_exit_account.xml" value="0.337037037037037" />
         <entry key="..\:/Users/marlo/AndroidStudioProjects/Covid-Map/app/src/main/res/drawable/ic_febre.xml" value="0.37222222222222223" />

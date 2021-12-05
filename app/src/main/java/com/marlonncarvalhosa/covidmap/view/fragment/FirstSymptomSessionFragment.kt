@@ -1,5 +1,6 @@
 package com.marlonncarvalhosa.covidmap.view.fragment
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.navigation.fragment.findNavController
 import com.marlonncarvalhosa.covidmap.R
 import com.marlonncarvalhosa.covidmap.databinding.FragmentFirstSymptomSessionBinding
 import com.marlonncarvalhosa.covidmap.model.QuizModel
@@ -39,22 +39,19 @@ class FirstSymptomSessionFragment: androidx.fragment.app.Fragment(), View.OnClic
         when (v?.id) {
             binding?.buttonPositiveCovid?.id -> {
                 positivoCovid = true
-                binding?.tvPositiveCovid?.text = "teste"
+                covidPositiveClick()
             }
             binding?.buttonNegativeCovid?.id -> {
                 positivoCovid = false
-                Log.d("teste", "negative click")
-                Toast.makeText(context, "negative click", Toast.LENGTH_LONG).show()
+                covidNegativeClick()
             }
             binding?.buttonPositiveContactCovid?.id -> {
                 contatoComInfectado = true
-                Log.d("teste", "positive contact click")
-                Toast.makeText(context, "positive contact click", Toast.LENGTH_LONG).show()
+                contactPositiveClick()
             }
             binding?.buttonNegativeContactCovid?.id -> {
                 contatoComInfectado = false
-                Log.d("teste", "negative contact click")
-                Toast.makeText(context, "negative contact click", Toast.LENGTH_LONG).show()
+                contactNegativeClick()
             }
             else -> {
             }
@@ -67,6 +64,46 @@ class FirstSymptomSessionFragment: androidx.fragment.app.Fragment(), View.OnClic
 
             onDestroyView()
         }
+    }
+
+    private fun covidPositiveClick(){
+        binding?.buttonPositiveCovid?.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.dark_red))
+        binding?.tvPositiveCovid?.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+        binding?.ivPositiveCovid?.setImageResource(R.drawable.ic_check_white)
+
+        binding?.buttonNegativeCovid?.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.gray))
+        binding?.tvNegativeCovid?.setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
+        binding?.ivNegativeCovid?.setImageResource(R.drawable.ic_cancel_red_24dp)
+    }
+
+    private fun covidNegativeClick(){
+        binding?.buttonNegativeCovid?.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.dark_red))
+        binding?.tvNegativeCovid?.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+        binding?.ivNegativeCovid?.setImageResource(R.drawable.ic_cancel_white_24dp)
+
+        binding?.buttonPositiveCovid?.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.gray))
+        binding?.tvPositiveCovid?.setTextColor(ContextCompat.getColor(requireContext(), R.color.green))
+        binding?.ivPositiveCovid?.setImageResource(R.drawable.ic_baseline_check_circle_outline_24)
+    }
+
+    private fun contactPositiveClick(){
+        binding?.buttonPositiveContactCovid?.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.dark_red))
+        binding?.tvPositiveContactCovid?.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+        binding?.ivPositiveContactCovid?.setImageResource(R.drawable.ic_check_white)
+
+        binding?.buttonNegativeContactCovid?.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.gray))
+        binding?.tvNegativeContactCovid?.setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
+        binding?.ivNegativeContactCovid?.setImageResource(R.drawable.ic_cancel_red_24dp)
+    }
+
+    private fun contactNegativeClick(){
+        binding?.buttonNegativeContactCovid?.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.dark_red))
+        binding?.tvNegativeContactCovid?.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+        binding?.ivNegativeContactCovid?.setImageResource(R.drawable.ic_cancel_white_24dp)
+
+        binding?.buttonPositiveContactCovid?.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.gray))
+        binding?.tvPositiveContactCovid?.setTextColor(ContextCompat.getColor(requireContext(), R.color.green))
+        binding?.ivPositiveContactCovid?.setImageResource(R.drawable.ic_baseline_check_circle_outline_24)
     }
 
     private fun setClickListeners() {
